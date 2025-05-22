@@ -1,0 +1,139 @@
+/* FolderManage Styles */
+.folder-manage {
+  font-family: 'Bai Jamjuree', sans-serif;
+  padding: 20px;
+  background-color: #F7EBEB;
+}
+
+.folder-manage h1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #D34670;
+  margin-bottom: 20px;
+}
+
+.add-folder {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.add-folder input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #D34670;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.add-button {
+  background-color: #D34670;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.add-button:hover {
+  background-color: #b0305a;
+}
+
+.folder-list {
+  list-style: none;
+  padding: 0;
+}
+
+.folder-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+.folder-icon {
+  color: #D34670;
+  margin-right: 10px;
+}
+
+.delete-icon {
+  color: #D34670;
+  cursor: pointer;
+}
+
+.delete-icon:hover {
+  color: #b0305a;
+}
+
+.categories {
+  margin-bottom: 20px; /* Add spacing below categories */
+  display: flex;
+  gap: 10px; /* Add space between category buttons */
+}
+
+.category {
+  background-color: var(--primary); /* Change background color to primary */
+  color: white; /* Ensure text is readable */
+  padding: 10px 15px;
+  border: none;
+  border-radius: 20px; /* Make buttons rounded */
+  cursor: pointer;
+  font-size: calc(100% - 2px); /* Reduce font size by 2px */
+}
+
+.category:hover {
+  background-color: #b0305a; /* Slightly darker shade on hover */
+}
+
+.item-card {
+  background-color: white; /* Set background color */
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+  overflow: hidden; /* Ensure content stays within rounded corners */
+  text-align: center; /* Center align text */
+  padding: 10px; /* Add padding inside the card */
+  margin-top: 20px; /* Ensure spacing above item card */
+}
+
+.item-image {
+  width: 100%; /* Make image responsive */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 10px; /* Slightly round image corners */
+}
+
+.item-details {
+  margin-top: 10px; /* Add spacing between image and details */
+}
+
+.item-name {
+  font-size: 1.2rem; /* Adjust font size */
+  font-weight: bold; /* Make text bold */
+  color: #333; /* Set text color */
+}
+
+.item-expiry, .item-quantity {
+  font-size: 0.9rem; /* Adjust font size */
+  color: #666; /* Set text color */
+  margin: 5px 0; /* Add spacing between lines */
+}
+
+.header {
+  display: flex; /* Align items in a row */
+  align-items: center; /* Vertically center items */
+  justify-content: space-between; /* Add space between title and icon */
+  padding: 0 10px; /* Add padding for better alignment */
+}
+
+.header h1 {
+  margin: 0; /* Remove default margin */
+  font-size: 2rem; /* Adjust font size */
+  font-weight: bold; /* Ensure bold text */
+  color: var(--primary); /* Use primary color */
+}

@@ -1,0 +1,195 @@
+/* Global font import */
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;500;600&display=swap');
+
+/* Global Colors */
+:root {
+  --primary: #D34670; /* สีหลัก */
+  --secondary: #E6B4B5; /* สีรอง */
+  --background: #F7EBEB; /* สีพื้นหลัง */
+  --border: #D9D9D9; /* สีขอบ */
+}
+
+/* General Styles */
+.recipe-detail {
+  font-family: 'Bai Jamjuree', sans-serif; /* Updated font to Bai Jamjuree */
+  background-color: var(--background); /* Use background color from root */
+  padding: 20px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Bai Jamjuree', sans-serif; /* Ensure consistent font in header */
+  font-size: px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 36px !important; /* Ensure the font size is applied */
+  font-weight: bold !important; /* Ensure the bold style is applied */
+  color: var(--primary) !important; /* Ensure the color is applied */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2) !important; /* Ensure the shadow is applied */
+}
+
+.notification-icon {
+  font-size: 20px;
+  color: var(--primary); /* Use primary color from root */
+  cursor: pointer;
+}
+
+/* Notification Icon */
+.notification-icon.large-icon {
+  font-size: 28px;
+}
+
+/* Back Icon */
+.back-icon {
+  font-size: 20px;
+  color: #d81b60;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+/* ปรับปรุง Search Bar */
+.search-container-recipedetail {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 25px; /* เพิ่มความโค้งมน */
+  padding: 8px 12px; /* ลด Padding ให้เล็กลง */
+  margin-bottom: 20px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); /* เพิ่มเงาให้ดูเด่นขึ้น */
+  border: 1px solid var(--primary);
+  width: 90%; /* ลดความกว้างลงเพื่อให้มีพื้นที่รอบๆ */
+  max-width: 600px; /* กำหนดความกว้างสูงสุด */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-icon-recipedetail {
+  margin-right: 5px; /* ลดระยะห่างระหว่างไอคอนและช่องค้นหาให้ใกล้กันมากขึ้น */
+  color: var(--primary);
+  font-size: 20px;
+  display: flex;
+  align-items: center; /* จัดให้อยู่กึ่งกลางแนวตั้ง */
+}
+
+.search-bar-recipedetail {
+  flex: 1;
+  font-family: 'Bai Jamjuree', sans-serif;
+  border: none;
+  outline: none;
+  font-size: 16px; /* ลดขนาดฟอนต์เล็กน้อย */
+  color: #333;
+  padding: 5px;
+  display: flex;
+  align-items: center; /* จัดให้อยู่กึ่งกลางแนวตั้ง */
+  margin-top: 16px;
+}
+
+.clear-icon {
+  color: var(--primary);
+  cursor: pointer;
+  font-size: 20px;
+  margin-left: 5px; /* ลดระยะห่างระหว่างไอคอนลบและช่องค้นหา */
+  margin-right: 7px;
+  display: flex;
+  align-items: center; /* จัดให้อยู่กึ่งกลางแนวตั้ง */
+}
+
+/* Add Button */
+.add-item {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.add-item-btn {
+  background-color: var(--primary); /* Use primary color from root */
+  font-family: 'Bai Jamjuree', sans-serif; /* Updated font for add button */
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Adjust the add-item section specifically for RecipeDetail */
+.add-item-recipedetail {
+  text-align: left; /* Align text to the left */
+  margin-left: 0; /* Remove any centering margin */
+  margin-bottom: 20px;
+}
+
+/* Items List */
+.items-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.item-card {
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.item-card:hover {
+  transform: scale(1.05); /* Slightly enlarge the card */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add a more prominent shadow */
+  background-color: var(--primary); /* Change background color on hover */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Smooth transition */
+}
+
+.item-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.item-info {
+  padding: 10px;
+}
+
+.item-name {
+  font-family: 'Bai Jamjuree', sans-serif; /* Updated font for item names */
+  font-size: 16px;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+.item-expiry,
+.item-quantity {
+  font-family: 'Bai Jamjuree', sans-serif; /* Updated font for item details */
+  font-size: 14px;
+  color: var(--secondary); /* Use secondary color from root */
+}
+
+/* Footer Navigation */
+.footer-nav {
+  display: flex;
+  justify-content: space-around;
+  background-color: var(--primary); /* Use primary color from root */
+  color: #fff;
+  padding: 10px 0;
+  border-radius: 20px;
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+}
+
+.footer-nav button {
+  background: none;
+  border: none;
+  font-family: 'Bai Jamjuree', sans-serif; /* Updated font for footer navigation */
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}

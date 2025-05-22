@@ -1,8 +1,12 @@
-const AWS = require('aws-sdk');
+const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient({
-    region: process.env.DYNAMODB_REGION,
-    endpoint: process.env.DYNAMODB_ENDPOINT,
+const dynamoDb = new DynamoDBClient({
+  region: "us-east-1",
+  endpoint: "http://localhost:8000",
+  credentials: {
+    accessKeyId: "dummy",
+    secretAccessKey: "dummy",
+  },
 });
 
 module.exports = dynamoDb;

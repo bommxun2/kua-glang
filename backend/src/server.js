@@ -16,6 +16,7 @@ app.use(foodRoutes);
 
 app.use("/share", require("./routes/share.route"));
 app.use("/profile", require("./routes/profile.route"))
+app.use("/history", require("./routes/history.route"))
 
 app.get("/", (req, res) => {
   res.json({

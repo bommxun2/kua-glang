@@ -14,7 +14,8 @@ app.use(express.json());
 app.use(folderRoutes);
 app.use(foodRoutes);
 
-app.use("/share", require("./routes/share.route"));
+app.use("/post", require("./routes/post.route"))
+app.use("/share", require("./routes/share.route"))
 app.use("/profile", require("./routes/profile.route"))
 app.use("/history", require("./routes/history.route"))
 app.use("/ranking", require("./routes/rank.route"))

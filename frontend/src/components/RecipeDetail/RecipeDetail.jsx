@@ -2,16 +2,29 @@ import React, { useState } from 'react';
 import './RecipeDetail.css';
 import { FaSearch, FaTimes, FaBell, FaArrowLeft, FaShareAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import MenuBar from '../MenuBar/MenuBar.jsx';
+import onionImg from '../../assets/onion.png';
+import tomatoImg from '../../assets/tomato.png';
+import porkImg from '../../assets/pork.png';
+import senspaghettiImg from '../../assets/senspaghetti.png';
+
+const categories = [
+  { label: 'ทั้งหมด', value: 'all' },
+  { label: 'เครื่องดื่ม', value: 'drink' },
+  { label: 'ของหวาน', value: 'dessert' },
+  { label: 'อาหารแช่แข็ง', value: 'frozen' },
+];
 
 const RecipeDetail = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState('all');
   const navigate = useNavigate();
 
   const items = [
-    { id: 1, name: "มะเขือเทศลูกโตๆ", category: "ทั้งหมด", quantity: "6 ลูก", expiry: "08 มกราคม 2025", img: "https://via.placeholder.com/150" },
-    { id: 2, name: "เส้นสปาเก็ตตี้", category: "ทั้งหมด", quantity: "4 กรัม", expiry: "08 มกราคม 2025", img: "https://via.placeholder.com/150" },
-    { id: 3, name: "หมูชิ้นๆ", category: "ทั้งหมด", quantity: "2 กิโลกรัม", expiry: "09 มกราคม 2025", img: "https://via.placeholder.com/150" },
-    { id: 4, name: "หัวหอมแต่หอมไม่สู้แก้มเธอ", category: "ทั้งหมด", quantity: "3 ลูก", expiry: "09 มกราคม 2025", img: "https://via.placeholder.com/150" },
+    { id: 1, name: "มะเขือเทศลูกโตๆ", category: "ทั้งหมด", quantity: "6 ลูก", expiry: "08 มกราคม 2025", img: tomatoImg },
+    { id: 2, name: "เส้นสปาเก็ตตี้", category: "ทั้งหมด", quantity: "4 กรัม", expiry: "08 มกราคม 2025", img: senspaghettiImg },
+    { id: 3, name: "หมูชิ้นๆ", category: "ทั้งหมด", quantity: "2 กิโลกรัม", expiry: "09 มกราคม 2025", img: porkImg },
+    { id: 4, name: "หัวหอมแต่หอมไม่สู้แก้มเธอ", category: "ทั้งหมด", quantity: "3 ลูก", expiry: "09 มกราคม 2025", img: onionImg },
   ];
 
   const handleSearchChange = (e) => {
@@ -46,7 +59,7 @@ const RecipeDetail = () => {
       </div>
 
       {/* Search Bar */}
-      <div className="search-container" onClick={() => console.log('Search container clicked!')}>
+      <div className="search-container">
         <FaSearch className="search-icon-recipedetail" />
         <input
           type="text"
@@ -54,6 +67,7 @@ const RecipeDetail = () => {
           placeholder="ค้นหา"
           value={searchQuery}
           onChange={handleSearchChange}
+          style={{ background: '#fff', color: '#333' }}
         />
         {searchQuery && <FaTimes className="clear-icon" onClick={handleClearSearch} />}
       </div>
@@ -61,7 +75,20 @@ const RecipeDetail = () => {
       {/* Add Button */}
       <div className="add-item-recipedetail">
         <button className="add-item-btn" onClick={handleAddItem}>+ เพิ่ม</button>
-        <FaShareAlt className="share-icon" style={{ marginLeft: '15px' }} /> {/* Adjusted to align to the right of the button */}
+        <FaShareAlt className="share-icon" style={{ marginLeft: '15px', color: 'var(--primary)' }} /> {/* Adjusted to align to the right of the button */}
+      </div>
+
+      {/* Category Filter */}
+      <div className="category-filter">
+        {categories.map((cat) => (
+          <button
+            key={cat.value}
+            className={`category-btn${selectedCategory === cat.value ? ' selected' : ''}`}
+            onClick={() => setSelectedCategory(cat.value)}
+          >
+            {cat.label}
+          </button>
+        ))}
       </div>
 
       {/* Items List */}
@@ -83,6 +110,7 @@ const RecipeDetail = () => {
             </div>
           ))}
       </div>
+      <MenuBar />
     </div>
   );
 };

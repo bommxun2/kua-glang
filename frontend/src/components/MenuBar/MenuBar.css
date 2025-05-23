@@ -1,4 +1,4 @@
-/* MenuBar Styles */
+/* MenuBar Styles -ลอย */
 .menu-bar {
   display: flex;
   justify-content: space-around;
@@ -10,6 +10,12 @@
   bottom: 10px;
   left: 10px;
   right: 10px;
+  width: auto;
+  max-width: 430px;
+  margin: 0 auto;
+  z-index: 100;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  border: 2px solid #fff2;
 }
 
 .menu-item {
@@ -20,6 +26,7 @@
   color: white;
   font-family: 'Bai Jamjuree', sans-serif;
   font-size: 14px;
+  width: 20%;
 }
 
 .menu-item:hover {
@@ -29,4 +36,42 @@
 .menu-icon {
   font-size: 24px;
   margin-bottom: 5px;
+}
+
+.menu-icon.active {
+  color: #fff;
+  /* หรือใช้ var(--primary) ถ้าต้องการ */
+}
+
+.menu-icon.inactive {
+  color: #e0e0e0;
+  opacity: 0.7;
+}
+
+.menu-label.active {
+  color: #fff;
+  font-weight: 600;
+  font-family: 'Bai Jamjuree', sans-serif;
+}
+
+.menu-label.inactive {
+  color: #e0e0e0;
+  font-weight: 400;
+  font-family: 'Bai Jamjuree', sans-serif;
+}
+
+@media (max-width: 430px) {
+  .menu-bar {
+    max-width: 98vw;
+    left: 1vw;
+    right: 1vw;
+    border-radius: 20px;
+    bottom: 8px;
+  }
+  .menu-item {
+    font-size: 13px;
+  }
+  .menu-icon {
+    font-size: 22px;
+  }
 }

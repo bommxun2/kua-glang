@@ -19,12 +19,19 @@
 /* Header */
 .header {
   display: flex;
+  flex-direction: row;
+  align-items: flex-start; /* Start with top alignment */
   justify-content: space-between;
-  align-items: center;
   font-family: 'Bai Jamjuree', sans-serif; /* Ensure consistent font in header */
-  font-size: px;
   font-weight: bold;
   margin-bottom: 20px;
+  padding-top: 10px;
+}
+
+.header-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
 }
 
 .header h1 {
@@ -33,12 +40,19 @@
   font-weight: bold !important; /* Ensure the bold style is applied */
   color: var(--primary) !important; /* Ensure the color is applied */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2) !important; /* Ensure the shadow is applied */
+  line-height: 1;
+  padding-top: 2px; /* เพิ่ม padding-top เล็กน้อยให้ h1 ขยับลงมา */
+  display: flex;
+  align-items: center;
 }
 
 .notification-icon {
-  font-size: 20px;
+  font-size: 28px;
   color: var(--primary); /* Use primary color from root */
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 36px; /* ปรับให้มีความสูงเท่ากัน */
 }
 
 /* Notification Icon */
@@ -48,10 +62,13 @@
 
 /* Back Icon */
 .back-icon {
-  font-size: 20px;
+  font-size: 28px;
   color: #d81b60;
   cursor: pointer;
   margin-right: 10px;
+  display: flex;
+  align-items: center;
+  height: 36px; /* ปรับให้มีความสูงเท่ากัน */
 }
 
 /* ปรับปรุง Search Bar */
@@ -162,13 +179,14 @@
   font-size: 16px;
   font-weight: bold;
   margin: 5px 0;
+  color: #222 !important; /* เปลี่ยนชื่อวัตถุดิบเป็นดำ */
 }
 
 .item-expiry,
 .item-quantity {
   font-family: 'Bai Jamjuree', sans-serif; /* Updated font for item details */
   font-size: 14px;
-  color: var(--secondary); /* Use secondary color from root */
+  color: #222 !important; /* เปลี่ยนวันหมดอายุและปริมาณเป็นดำ */
 }
 
 /* Footer Navigation */
@@ -192,4 +210,221 @@
   color: #fff;
   font-size: 14px;
   cursor: pointer;
+}
+
+/* Category Filter */
+.category-filter {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.category-btn {
+  font-family: 'Bai Jamjuree', sans-serif;
+  background-color: var(--secondary);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 18px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.category-btn.selected, .category-btn.active {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.category-btn:not(.selected):hover {
+  background-color: #fff;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+/* ฟอร์มแก้ไขอาหาร (Edit Ingredient) */
+.edit-ingredient-container {
+  background: var(--secondary);
+  border-radius: 32px;
+  box-shadow: 0 4px 16px rgba(211, 70, 112, 0.10);
+  padding: 32px 24px 24px 24px;
+  max-width: 430px;
+  margin: 40px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.edit-ingredient-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.edit-ingredient-label {
+  font-family: 'Bai Jamjuree', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: #222;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.edit-ingredient-label .required {
+  color: #e53935;
+  font-size: 20px;
+  margin-left: 2px;
+}
+
+.edit-ingredient-input,
+.edit-ingredient-select {
+  font-family: 'Bai Jamjuree', sans-serif;
+  font-size: 17px;
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  padding: 10px 16px;
+  background: #fff;
+  color: #222;
+  outline: none;
+  margin-bottom: 0;
+  transition: border 0.2s;
+}
+.edit-ingredient-input:focus,
+.edit-ingredient-select:focus {
+  border: 1.5px solid var(--primary);
+}
+
+.edit-ingredient-photo-btn {
+  background: var(--primary);
+  color: #fff;
+  font-family: 'Bai Jamjuree', sans-serif;
+  font-size: 20px;
+  border: none;
+  border-radius: 24px;
+  padding: 10px 32px;
+  margin: 0 auto 10px auto;
+  box-shadow: 0 2px 6px rgba(211, 70, 112, 0.10);
+  cursor: pointer;
+  transition: background 0.2s;
+  display: block;
+}
+.edit-ingredient-photo-btn:hover {
+  background: #b92c5c;
+}
+
+.edit-ingredient-image-preview {
+  width: 100%;
+  max-width: 370px;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 18px;
+  margin: 0 auto 18px auto;
+  box-shadow: 0 2px 8px rgba(211, 70, 112, 0.13);
+  display: block;
+}
+
+.edit-ingredient-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 30px;
+}
+
+.edit-ingredient-btn-back {
+  background: #fff;
+  color: #111;
+  font-family: 'Bai Jamjuree', sans-serif;
+  font-size: 22px;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 32px;
+  box-shadow: 0 2px 6px rgba(211, 70, 112, 0.10);
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s, color 0.2s;
+}
+.edit-ingredient-btn-back:hover {
+  background: #f3e6e6;
+}
+
+.edit-ingredient-btn-save {
+  background: var(--primary);
+  color: #fff;
+  font-family: 'Bai Jamjuree', sans-serif;
+  font-size: 22px;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 32px;
+  box-shadow: 0 2px 6px rgba(211, 70, 112, 0.10);
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+.edit-ingredient-btn-save:hover {
+  background: #b92c5c;
+}
+
+.edit-ingredient-btn-delete {
+  background: #e53935;
+  color: #fff;
+  font-family: 'Bai Jamjuree', sans-serif;
+  font-size: 22px;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 32px;
+  box-shadow: 0 2px 6px rgba(211, 70, 112, 0.10);
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+.edit-ingredient-btn-delete:hover {
+  background: #b71c1c;
+}
+
+@media (min-width: 0px) {
+  .header, .header-left {
+    align-items: center !important;
+  }
+  .header h1 {
+    margin: 0;
+    font-size: 36px !important;
+    font-weight: bold !important;
+    color: var(--primary) !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2) !important;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+  }
+  .back-icon, .notification-icon {
+    display: flex;
+    align-items: center;
+    height: 36px;
+  }
+}
+
+@media (max-width: 600px) {
+  .edit-ingredient-container {
+    padding: 18px 4vw 18px 4vw;
+    max-width: 98vw;
+  }
+  .edit-ingredient-image-preview {
+    max-width: 95vw;
+    height: 120px;
+  }
+  .edit-ingredient-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .edit-ingredient-btn-back,
+  .edit-ingredient-btn-save,
+  .edit-ingredient-btn-delete {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 20px;
+  }
 }

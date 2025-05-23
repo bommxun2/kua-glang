@@ -11,7 +11,7 @@
 
 /* Global Styles */
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Bai Jamjuree', sans-serif;
   margin: 0;
   padding: 0;
   background-color: var(--background); /* ใช้สีพื้นหลัง */
@@ -38,8 +38,35 @@ body {
 }
 
 .location {
-  margin-left: 20px;
-  margin-top: 10px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  color: #7a3a4c;
+  min-width: 120px;
+  font-family: 'Bai Jamjuree', sans-serif;
+}
+
+.location-label {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  color: var(--primary);
+  font-weight: 600;
+  z-index: 1;
+  background: transparent;
+  pointer-events: none;
+}
+
+.location-dropdown {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
 }
 
 .location-dropdown {
@@ -79,7 +106,7 @@ body {
 .search-container {
   display: flex;
   align-items: center;
-  background-color: #fff;
+  background-color: var(--background); /* เปลี่ยนเป็นสีเดียวกับ background */
   border-radius: 25px;
   padding: 8px 12px; /* ลด Padding ให้เล็กลงอีก */
   margin-bottom: 20px;
@@ -110,6 +137,7 @@ body {
   display: flex;
   align-items: center; /* จัดให้อยู่กึ่งกลางแนวตั้ง */
   margin-top: 12px;
+  background: var(--background); /* เปลี่ยนเป็นสีเดียวกับ background */
 }
 
 .clear-icon {
@@ -188,17 +216,24 @@ body {
 }
 
 .recipe-img-wrapper {
-  width: 100px;
-  height: 100px;
-  border-radius: 10px;
+  width: 110px;
+  height: 110px;
+  border-radius: 18px;
   overflow: hidden;
-  margin-right: 15px;
+  margin-right: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .recipe-img {
   width: 100%;
   height: 100%;
+  aspect-ratio: 1/1;
   object-fit: cover;
+  border-radius: 18px;
+  display: block;
 }
 
 .recipe-details {
@@ -228,6 +263,71 @@ body {
   right: 15px;
   top: 50%;
   transform: translateY(-50%);
+}
+
+/* Header HomePage */
+.header-homepage {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background: var(--background, #F7EBEB);
+  padding: 32px 20px 12px 20px;
+  border-radius: 0 0 20px 20px;
+  margin-bottom: 0;
+  box-shadow: none;
+  position: relative;
+}
+
+.header-homepage .user-name {
+  font-size: 2.8rem;
+  font-weight: bold;
+  color: var(--primary);
+  margin: 0 0 8px 0;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.header-homepage .location {
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  color: #7a3a4c;
+  min-width: 120px;
+  font-family: 'Bai Jamjuree', sans-serif;
+  margin-bottom: 0;
+  margin-left: 0;
+}
+
+.header-homepage .logout-btn {
+  position: absolute;
+  left: unset;
+  right: 20px;
+  top: 32px;
+  transform: translateY(0); /* reset */
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  cursor: pointer;
+}
+
+.header-homepage .logout-btn svg {
+  font-size: 2.4rem;
+}
+
+.header-divider {
+  border: none;
+  border-top: 2px solid var(--primary);
+  margin: 0 0 18px 0;
 }
 
 /* Responsive Layout */

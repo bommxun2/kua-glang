@@ -1,3 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;500;600&display=swap');
+
+/* ลบ global style ที่มาจาก Vite/React เดิม เหลือแค่ reset พื้นฐาน */
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: var(--background, #F7EBEB);
+  width: 100vw;
+  min-height: 100vh;
+
+  font-family: 'Bai Jamjuree', sans-serif;
+}
+
+/* สามารถเพิ่ม global style ที่จำเป็นของโปรเจกต์ที่นี่ */
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -28,6 +44,13 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+}
+
+#root {
+  width: 100vw;
+  min-height: 100vh;
+  padding: 0 0.5rem 6rem 0.5rem; /* เผื่อพื้นที่เมนูบาร์ล่างเท่านั้น ไม่ต้อง padding-top */
+  box-sizing: border-box;
 }
 
 h1 {

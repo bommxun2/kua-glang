@@ -30,7 +30,7 @@ services:
 
   dynamodb:
     image: amazon/dynamodb-local
-    container_name: dynamodb
+    container_name: kua-dynamodb
     ports:
       - "8000:8000"
     volumes:
@@ -51,6 +51,18 @@ services:
       - dynamodb
     networks:
       - backend-net
+
+  initdb:
+    build: 
+      context: ./init-db
+      dockerfile: Dockerfile
+    container_name: kua-init-db
+    depends_on:
+      - dynamodb
+    networks:
+      - backend-net
+    volumes:
+      - ./init-db:/app
 
 networks:
   app-network:

@@ -8,6 +8,7 @@ const server = awsServerlessExpress.createServer(app);
 app.use(express.json());
 
 app.use("/share", require("./routes/share.route"));
+app.use("/profile", require("./routes/profile.route"))
 
 app.get("/", (req, res) => {
   res.json({

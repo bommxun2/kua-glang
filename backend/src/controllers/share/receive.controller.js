@@ -61,11 +61,9 @@ const receive = async (req, res) => {
       const foodData = unmarshall(food.Items[0]);
 
       result.push({
-        shareId: shareId,
         username: userData.username,
-        create_at: shareData.created_at,
+        accepted_at: recv.accepted_at.S,
         foodName: foodData.foodName,
-        foodId: foodId,
         img_url: foodData.img_url,
         expired_at: foodData.expired_at,
         quantity: shareData.quantity,

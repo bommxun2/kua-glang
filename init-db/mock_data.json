@@ -1,0 +1,1190 @@
+[
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user000"
+        },
+        "SK": {
+          "S": "PROFILE"
+        },
+        "username": {
+          "S": "user_user000"
+        },
+        "email": {
+          "S": "user000@example.com"
+        },
+        "phone_num": {
+          "S": "0884145308"
+        },
+        "line_id": {
+          "S": "line_user000"
+        },
+        "password": {
+          "S": "af4d4589e83546d1983095fc480416ed"
+        },
+        "profile_url": {
+          "S": "https://picsum.photos/id/68/200/300"
+        },
+        "bio": {
+          "S": "Love sharing food"
+        },
+        "score": {
+          "N": "234"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user000"
+        },
+        "SK": {
+          "S": "STAT"
+        },
+        "share_quantity": {
+          "N": "95"
+        },
+        "reduce_foodwaste": {
+          "N": "31"
+        },
+        "no_expired": {
+          "N": "88"
+        },
+        "updated_at": {
+          "S": "2025-05-23T11:54:43.634896"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user000"
+        },
+        "SK": {
+          "S": "FOLDER#folderc5c09904"
+        },
+        "folderName": {
+          "S": "My Folder"
+        },
+        "description": {
+          "S": "A folder for storing food"
+        },
+        "created_at": {
+          "S": "2025-05-23T11:54:43.635001"
+        },
+        "quantity": {
+          "N": "3"
+        },
+        "img_url": {
+          "S": "https://picsum.photos/id/200/200/300"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "FOLDER#folderc5c09904"
+        },
+        "SK": {
+          "S": "FOOD#foodad24c785"
+        },
+        "foodName": {
+          "S": "Banana"
+        },
+        "created_at": {
+          "S": "2025-05-23T11:54:43.635074"
+        },
+        "expired_at": {
+          "S": "2025-05-30T11:54:43.635079"
+        },
+        "unit": {
+          "S": "pcs"
+        },
+        "quantity": {
+          "N": "5"
+        },
+        "img_url": {
+          "S": "https://picsum.photos/id/300/200/300"
+        },
+        "category": {
+          "S": "Fruit"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user000"
+        },
+        "SK": {
+          "S": "SHARE#share1c618915"
+        },
+        "avaliable_time": {
+          "S": "08:00-12:00"
+        },
+        "status": {
+          "S": "pending"
+        },
+        "foodId": {
+          "S": "foodad24c785"
+        },
+        "quantity": {
+          "N": "2"
+        },
+        "latitude": {
+          "N": "13.7563"
+        },
+        "longtitude": {
+          "N": "100.5018"
+        },
+        "created_at": {
+          "S": "2025-05-23T11:54:43.635242"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "SHARE#share1c618915"
+        },
+        "SK": {
+          "S": "RECEIVE#user000"
+        },
+        "accepted_at": {
+          "S": "2025-05-23T11:54:43.635252"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "SHARE#share1c618915"
+        },
+        "SK": {
+          "S": "INTEREST#user000"
+        },
+        "interested_at": {
+          "S": "2025-05-23T11:54:43.635257"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user000"
+        },
+        "SK": {
+          "S": "POST#post263cc235"
+        },
+        "caption": {
+          "S": "Sharing is caring"
+        },
+        "img_url": {
+          "S": "https://picsum.photos/id/400/200/300"
+        },
+        "created_at": {
+          "S": "2025-05-23T11:54:43.635316"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "POST#post263cc235"
+        },
+        "SK": {
+          "S": "COMMENT#cded7e145"
+        },
+        "userId": {
+          "S": "user000"
+        },
+        "content": {
+          "S": "Great post!"
+        },
+        "comment_at": {
+          "S": "2025-05-23T11:54:43.635364"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "POST#post263cc235"
+        },
+        "SK": {
+          "S": "LIKE#user000"
+        },
+        "liked_At": {
+          "S": "2025-05-23T11:54:43.635370"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "COMMENT#cded7e145"
+        },
+        "SK": {
+          "S": "LIKE#user000"
+        },
+        "liked_At": {
+          "S": "2025-05-23T11:54:43.635380"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user000"
+        },
+        "SK": {
+          "S": "FOLLOWING#user999"
+        },
+        "followed_At": {
+          "S": "2025-05-23T11:54:43.635385"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user000"
+        },
+        "SK": {
+          "S": "FOLLOWER#user999"
+        },
+        "followed_At": {
+          "S": "2025-05-23T11:54:43.635943"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "QUEST#questaa7debd8"
+        },
+        "SK": {
+          "S": "DETAILS"
+        },
+        "title": {
+          "S": "Share food 5 times"
+        },
+        "description": {
+          "S": "Get reward by sharing food"
+        },
+        "create_at": {
+          "S": "2025-05-23T11:54:43.636051"
+        },
+        "reward_pointt": {
+          "N": "50"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user000"
+        },
+        "SK": {
+          "S": "QUEST#questaa7debd8"
+        },
+        "success_at": {
+          "S": "2025-05-23T11:54:43.636059"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user000"
+        },
+        "SK": {
+          "S": "RANKING#share"
+        },
+        "updated_at": {
+          "S": "2025-05-23T11:54:43.636068"
+        },
+        "position": {
+          "N": "1"
+        },
+        "quantity": {
+          "N": "15"
+        },
+        "unit": {
+          "S": "times"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user000"
+        },
+        "SK": {
+          "S": "RANKING#waste"
+        },
+        "updated_at": {
+          "S": "2025-05-23T11:54:43.636076"
+        },
+        "position": {
+          "N": "2"
+        },
+        "quantity": {
+          "N": "10"
+        },
+        "unit": {
+          "S": "kg"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user000"
+        },
+        "SK": {
+          "S": "RANKING#engagement"
+        },
+        "updated_at": {
+          "S": "2025-05-23T11:54:43.636083"
+        },
+        "position": {
+          "N": "3"
+        },
+        "quantity": {
+          "N": "200"
+        },
+        "unit": {
+          "S": "points"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user001"
+        },
+        "SK": {
+          "S": "PROFILE"
+        },
+        "username": {
+          "S": "user_user001"
+        },
+        "email": {
+          "S": "user001@example.com"
+        },
+        "phone_num": {
+          "S": "0820710631"
+        },
+        "line_id": {
+          "S": "line_user001"
+        },
+        "password": {
+          "S": "3b8339fc8a24443eb1c474aec37f7f73"
+        },
+        "profile_url": {
+          "S": "https://picsum.photos/id/66/200/300"
+        },
+        "bio": {
+          "S": "Love sharing food"
+        },
+        "score": {
+          "N": "921"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user001"
+        },
+        "SK": {
+          "S": "STAT"
+        },
+        "share_quantity": {
+          "N": "77"
+        },
+        "reduce_foodwaste": {
+          "N": "39"
+        },
+        "no_expired": {
+          "N": "78"
+        },
+        "updated_at": {
+          "S": "2025-05-23T11:54:43.636195"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user001"
+        },
+        "SK": {
+          "S": "FOLDER#folder42eae03e"
+        },
+        "folderName": {
+          "S": "My Folder"
+        },
+        "description": {
+          "S": "A folder for storing food"
+        },
+        "created_at": {
+          "S": "2025-05-23T11:54:43.636249"
+        },
+        "quantity": {
+          "N": "3"
+        },
+        "img_url": {
+          "S": "https://picsum.photos/id/200/200/300"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "FOLDER#folder42eae03e"
+        },
+        "SK": {
+          "S": "FOOD#food23d49a04"
+        },
+        "foodName": {
+          "S": "Banana"
+        },
+        "created_at": {
+          "S": "2025-05-23T11:54:43.636307"
+        },
+        "expired_at": {
+          "S": "2025-05-30T11:54:43.636312"
+        },
+        "unit": {
+          "S": "pcs"
+        },
+        "quantity": {
+          "N": "5"
+        },
+        "img_url": {
+          "S": "https://picsum.photos/id/300/200/300"
+        },
+        "category": {
+          "S": "Fruit"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user001"
+        },
+        "SK": {
+          "S": "SHARE#share9d502418"
+        },
+        "avaliable_time": {
+          "S": "08:00-12:00"
+        },
+        "status": {
+          "S": "pending"
+        },
+        "foodId": {
+          "S": "food23d49a04"
+        },
+        "quantity": {
+          "N": "2"
+        },
+        "latitude": {
+          "N": "13.7563"
+        },
+        "longtitude": {
+          "N": "100.5018"
+        },
+        "created_at": {
+          "S": "2025-05-23T11:54:43.636365"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "SHARE#share9d502418"
+        },
+        "SK": {
+          "S": "RECEIVE#user001"
+        },
+        "accepted_at": {
+          "S": "2025-05-23T11:54:43.636370"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "SHARE#share9d502418"
+        },
+        "SK": {
+          "S": "INTEREST#user001"
+        },
+        "interested_at": {
+          "S": "2025-05-23T11:54:43.636374"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user001"
+        },
+        "SK": {
+          "S": "POST#post68386d2f"
+        },
+        "caption": {
+          "S": "Sharing is caring"
+        },
+        "img_url": {
+          "S": "https://picsum.photos/id/400/200/300"
+        },
+        "created_at": {
+          "S": "2025-05-23T11:54:43.636421"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "POST#post68386d2f"
+        },
+        "SK": {
+          "S": "COMMENT#cda840c20"
+        },
+        "userId": {
+          "S": "user001"
+        },
+        "content": {
+          "S": "Great post!"
+        },
+        "comment_at": {
+          "S": "2025-05-23T11:54:43.636463"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "POST#post68386d2f"
+        },
+        "SK": {
+          "S": "LIKE#user001"
+        },
+        "liked_At": {
+          "S": "2025-05-23T11:54:43.636467"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "COMMENT#cda840c20"
+        },
+        "SK": {
+          "S": "LIKE#user001"
+        },
+        "liked_At": {
+          "S": "2025-05-23T11:54:43.636470"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user001"
+        },
+        "SK": {
+          "S": "FOLLOWING#user999"
+        },
+        "followed_At": {
+          "S": "2025-05-23T11:54:43.636472"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user001"
+        },
+        "SK": {
+          "S": "FOLLOWER#user999"
+        },
+        "followed_At": {
+          "S": "2025-05-23T11:54:43.636475"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "QUEST#quest326eb995"
+        },
+        "SK": {
+          "S": "DETAILS"
+        },
+        "title": {
+          "S": "Share food 5 times"
+        },
+        "description": {
+          "S": "Get reward by sharing food"
+        },
+        "create_at": {
+          "S": "2025-05-23T11:54:43.636610"
+        },
+        "reward_pointt": {
+          "N": "50"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user001"
+        },
+        "SK": {
+          "S": "QUEST#quest326eb995"
+        },
+        "success_at": {
+          "S": "2025-05-23T11:54:43.636616"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user001"
+        },
+        "SK": {
+          "S": "RANKING#share"
+        },
+        "updated_at": {
+          "S": "2025-05-23T11:54:43.636619"
+        },
+        "position": {
+          "N": "1"
+        },
+        "quantity": {
+          "N": "15"
+        },
+        "unit": {
+          "S": "times"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user001"
+        },
+        "SK": {
+          "S": "RANKING#waste"
+        },
+        "updated_at": {
+          "S": "2025-05-23T11:54:43.636623"
+        },
+        "position": {
+          "N": "2"
+        },
+        "quantity": {
+          "N": "10"
+        },
+        "unit": {
+          "S": "kg"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user001"
+        },
+        "SK": {
+          "S": "RANKING#engagement"
+        },
+        "updated_at": {
+          "S": "2025-05-23T11:54:43.636628"
+        },
+        "position": {
+          "N": "3"
+        },
+        "quantity": {
+          "N": "200"
+        },
+        "unit": {
+          "S": "points"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user002"
+        },
+        "SK": {
+          "S": "PROFILE"
+        },
+        "username": {
+          "S": "user_user002"
+        },
+        "email": {
+          "S": "user002@example.com"
+        },
+        "phone_num": {
+          "S": "0830271256"
+        },
+        "line_id": {
+          "S": "line_user002"
+        },
+        "password": {
+          "S": "88de69fadab24e1a8bff52f015e4b777"
+        },
+        "profile_url": {
+          "S": "https://picsum.photos/id/78/200/300"
+        },
+        "bio": {
+          "S": "Love sharing food"
+        },
+        "score": {
+          "N": "1895"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user002"
+        },
+        "SK": {
+          "S": "STAT"
+        },
+        "share_quantity": {
+          "N": "24"
+        },
+        "reduce_foodwaste": {
+          "N": "29"
+        },
+        "no_expired": {
+          "N": "22"
+        },
+        "updated_at": {
+          "S": "2025-05-23T11:54:43.636721"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user002"
+        },
+        "SK": {
+          "S": "FOLDER#folderfbce8bd9"
+        },
+        "folderName": {
+          "S": "My Folder"
+        },
+        "description": {
+          "S": "A folder for storing food"
+        },
+        "created_at": {
+          "S": "2025-05-23T11:54:43.636768"
+        },
+        "quantity": {
+          "N": "3"
+        },
+        "img_url": {
+          "S": "https://picsum.photos/id/200/200/300"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "FOLDER#folderfbce8bd9"
+        },
+        "SK": {
+          "S": "FOOD#food8092ebd8"
+        },
+        "foodName": {
+          "S": "Banana"
+        },
+        "created_at": {
+          "S": "2025-05-23T11:54:43.636809"
+        },
+        "expired_at": {
+          "S": "2025-05-30T11:54:43.636812"
+        },
+        "unit": {
+          "S": "pcs"
+        },
+        "quantity": {
+          "N": "5"
+        },
+        "img_url": {
+          "S": "https://picsum.photos/id/300/200/300"
+        },
+        "category": {
+          "S": "Fruit"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user002"
+        },
+        "SK": {
+          "S": "SHARE#sharea44337f6"
+        },
+        "avaliable_time": {
+          "S": "08:00-12:00"
+        },
+        "status": {
+          "S": "pending"
+        },
+        "foodId": {
+          "S": "food8092ebd8"
+        },
+        "quantity": {
+          "N": "2"
+        },
+        "latitude": {
+          "N": "13.7563"
+        },
+        "longtitude": {
+          "N": "100.5018"
+        },
+        "created_at": {
+          "S": "2025-05-23T11:54:43.636860"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "SHARE#sharea44337f6"
+        },
+        "SK": {
+          "S": "RECEIVE#user002"
+        },
+        "accepted_at": {
+          "S": "2025-05-23T11:54:43.636867"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "SHARE#sharea44337f6"
+        },
+        "SK": {
+          "S": "INTEREST#user002"
+        },
+        "interested_at": {
+          "S": "2025-05-23T11:54:43.636873"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user002"
+        },
+        "SK": {
+          "S": "POST#post02463395"
+        },
+        "caption": {
+          "S": "Sharing is caring"
+        },
+        "img_url": {
+          "S": "https://picsum.photos/id/400/200/300"
+        },
+        "created_at": {
+          "S": "2025-05-23T11:54:43.636932"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "POST#post02463395"
+        },
+        "SK": {
+          "S": "COMMENT#c4eb2f880"
+        },
+        "userId": {
+          "S": "user002"
+        },
+        "content": {
+          "S": "Great post!"
+        },
+        "comment_at": {
+          "S": "2025-05-23T11:54:43.636981"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "POST#post02463395"
+        },
+        "SK": {
+          "S": "LIKE#user002"
+        },
+        "liked_At": {
+          "S": "2025-05-23T11:54:43.636987"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "COMMENT#c4eb2f880"
+        },
+        "SK": {
+          "S": "LIKE#user002"
+        },
+        "liked_At": {
+          "S": "2025-05-23T11:54:43.636990"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user002"
+        },
+        "SK": {
+          "S": "FOLLOWING#user999"
+        },
+        "followed_At": {
+          "S": "2025-05-23T11:54:43.636994"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user002"
+        },
+        "SK": {
+          "S": "FOLLOWER#user999"
+        },
+        "followed_At": {
+          "S": "2025-05-23T11:54:43.636997"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "QUEST#quest13f39484"
+        },
+        "SK": {
+          "S": "DETAILS"
+        },
+        "title": {
+          "S": "Share food 5 times"
+        },
+        "description": {
+          "S": "Get reward by sharing food"
+        },
+        "create_at": {
+          "S": "2025-05-23T11:54:43.637042"
+        },
+        "reward_pointt": {
+          "N": "50"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user002"
+        },
+        "SK": {
+          "S": "QUEST#quest13f39484"
+        },
+        "success_at": {
+          "S": "2025-05-23T11:54:43.637046"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user002"
+        },
+        "SK": {
+          "S": "RANKING#share"
+        },
+        "updated_at": {
+          "S": "2025-05-23T11:54:43.637049"
+        },
+        "position": {
+          "N": "1"
+        },
+        "quantity": {
+          "N": "15"
+        },
+        "unit": {
+          "S": "times"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user002"
+        },
+        "SK": {
+          "S": "RANKING#waste"
+        },
+        "updated_at": {
+          "S": "2025-05-23T11:54:43.637054"
+        },
+        "position": {
+          "N": "2"
+        },
+        "quantity": {
+          "N": "10"
+        },
+        "unit": {
+          "S": "kg"
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "PK": {
+          "S": "USER#user002"
+        },
+        "SK": {
+          "S": "RANKING#engagement"
+        },
+        "updated_at": {
+          "S": "2025-05-23T11:54:43.637058"
+        },
+        "position": {
+          "N": "3"
+        },
+        "quantity": {
+          "N": "200"
+        },
+        "unit": {
+          "S": "points"
+        }
+      }
+    }
+  }
+]

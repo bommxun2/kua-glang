@@ -15,11 +15,11 @@ const getFriendsAndSuggestions = require("../controllers/post/getFriendsAndSugge
 const unfollowUser = require("../controllers/post/unfollowUser.controller");
 const followUser = require("../controllers/post/followUser.controller");
 
-router.get('/', getAllPosts);
-router.get('/:userId', getPostsFromFollowing);
 router.post('/:userId', createPost);
 router.put('/:userId/:postId', updatePost);
 router.delete('/:userId/:postId', deletePost);
+router.get('/', getAllPosts);
+router.get('/:userId', getPostsFromFollowing);
 router.post('/like/:userId/:postId', likePost);
 router.post('/post/:postId/comment/:userId', commentPost);
 router.post('/post/:cid/comment/:userId', likeComment);

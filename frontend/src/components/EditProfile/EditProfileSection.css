@@ -1,0 +1,22 @@
+.edit-options-box {
+  background-color: #FBDDE4;
+  border-radius: 16px;
+  padding: 8px 0;
+  color: #D34670;
+}
+
+.edit-option-btn {
+  background: none;
+  border: none;
+  width: 100%;
+  padding: 14px 20px;
+  text-align: left;
+  font-weight: bold;
+  border-bottom: 1px solid #f3c5ce;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.edit-option-btn:last-child {
+  border-bottom: none;
+}

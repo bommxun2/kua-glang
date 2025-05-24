@@ -1,0 +1,187 @@
+.stat-pic {
+    width: 120px;
+    height: 120px;
+}
+
+.profile-header {
+    font-family: 'Bai Jamjuree', sans-serif;
+}
+
+.period-selector {
+    font-family: 'Bai Jamjuree', sans-serif;
+
+}
+
+.profile-stats {
+    font-family: 'Bai Jamjuree', sans-serif;
+}
+
+.toggle-container {
+  display: flex;
+  background-color: #E6B4B5;
+  color: #E6B4B5;
+  border-radius: 20px;
+  padding: 4px;
+  width: fit-content;
+  margin: 16px auto;
+}
+
+.toggle-btn {
+  border: none;
+  outline: none;
+  background-color: #E6B4B5;
+  color: #D34670;
+  padding: 8px 24px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.toggle-btn.active {
+  background-color: #D34670;
+  color: white;
+  box-shadow: 0 2px 6px #E6B4B5;
+}
+
+body {
+  font-family: 'Bai Jamjuree', sans-serif;
+  background-color: #F7EBEB;
+  margin: 0;
+}
+
+.profile-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 12px;
+  padding-left: 8px;
+}
+
+.profile-header {
+  text-align: center;
+}
+
+.profile-img {
+  width: 96px;
+  height: 96px;
+  background-color: #ccc;
+  border-radius: 50%;
+  margin: 0 auto 8px;
+}
+
+.profile-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.profile-bio {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.line-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.tab-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.tab-buttons button {
+  flex: 1;
+  padding: 10px;
+  background: #E6B4B5;
+  color: white;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.tab-buttons .active {
+  background: #D34670;
+  color: white;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.period-selector {
+  display: flex;
+  gap: 8px;
+  justify-content: space-around;
+  margin: 16px 0;
+}
+
+.period-selector button {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid #D34670;
+  background: white;
+  color: #D34670;
+}
+
+.period-selector .active {
+  background: #D34670;
+  color: white;
+}
+
+.stats-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+.stats-row {
+  display: flex;
+  gap: 16px;
+}
+
+.stat-card {
+  flex: 1;
+  background-color: white;
+  border-radius: 16px;
+  padding: 20px 16px 16px 16px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.stat-full {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-top: 16px; /* ✅ เพิ่มระยะห่างจากกล่องบน */
+  margin-bottom: 16px;
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 12px;
+}
+
+.stat-icon-large {
+  width: 123px;
+  height: 65px;
+  margin-bottom: 12px;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 1rem;
+  color: #333;
+}
+

@@ -1,15 +1,15 @@
-const dynamoDb = require('../utils/database');
+const dynamoDb = require("../../utils/database");
 
-const TABLE_NAME = 'kua-main';
+const TABLE_NAME = "kua-main";
 
 exports.listFoods = async (req, res) => {
   const { folderid } = req.params;
   const params = {
     TableName: TABLE_NAME,
-    KeyConditionExpression: 'PK = :pk and begins_with(SK, :sk)',
+    KeyConditionExpression: "PK = :pk and begins_with(SK, :sk)",
     ExpressionAttributeValues: {
-      ':pk': `FOLDER#${folderid}`,
-      ':sk': 'FOOD#',
+      ":pk": `FOLDER#${folderid}`,
+      ":sk": "FOOD#",
     },
   };
   try {
@@ -17,9 +17,9 @@ exports.listFoods = async (req, res) => {
     res.json(data.Items);
   } catch (err) {
     res.status(500).json({
-      error: 'Failed to list foods',
+      error: "Failed to list foods",
       details: err.message,
-      params
+      params,
     });
   }
 };
@@ -41,9 +41,9 @@ exports.addFood = async (req, res) => {
     res.status(201).json(item);
   } catch (err) {
     res.status(500).json({
-      error: 'Failed to add food',
+      error: "Failed to add food",
       details: err.message,
-      params
+      params,
     });
   }
 };
@@ -57,25 +57,26 @@ exports.updateFood = async (req, res) => {
       PK: `FOLDER#${folderid}`,
       SK: `FOOD#${foodid}`,
     },
-    UpdateExpression: 'set foodName = :n, unit = :u, expired_at = :e, quantity = :q, category = :c, img_url = :i',
+    UpdateExpression:
+      "set foodName = :n, unit = :u, expired_at = :e, quantity = :q, category = :c, img_url = :i",
     ExpressionAttributeValues: {
-      ':n': foodName,
-      ':u': unit,
-      ':e': expired_at,
-      ':q': quantity,
-      ':c': category,
-      ':i': img_url,
+      ":n": foodName,
+      ":u": unit,
+      ":e": expired_at,
+      ":q": quantity,
+      ":c": category,
+      ":i": img_url,
     },
-    ReturnValues: 'ALL_NEW',
+    ReturnValues: "ALL_NEW",
   };
   try {
     const data = await dynamoDb.update(params).promise();
     res.json(data.Attributes);
   } catch (err) {
     res.status(500).json({
-      error: 'Failed to update food',
+      error: "Failed to update food",
       details: err.message,
-      params
+      params,
     });
   }
 };

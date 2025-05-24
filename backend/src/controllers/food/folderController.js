@@ -1,13 +1,7 @@
-<<<<<<<< HEAD:backend/src/controllers/food/folderController.js
 const dynamoDb = require('../../utils/database');
 const { PutItemCommand, QueryCommand } = require("@aws-sdk/client-dynamodb");
 
 const TABLE_NAME = 'kua-glang';
-========
-const dynamoDb = require("../../utils/database");
-
-const TABLE_NAME = "kua-main";
->>>>>>>> develop:backend/src/controllers/folder/folder.controller.js
 
 exports.listFolders = async (req, res) => {
   const { userId } = req.params;
@@ -15,13 +9,8 @@ exports.listFolders = async (req, res) => {
     TableName: TABLE_NAME,
     KeyConditionExpression: "PK = :pk and begins_with(SK, :sk)",
     ExpressionAttributeValues: {
-<<<<<<<< HEAD:backend/src/controllers/food/folderController.js
       ':pk': { S: `USER#${userId}` },
       ':sk': { S: 'FOLDER#' },
-========
-      ":pk": `USER#${userid}`,
-      ":sk": "FOLDER#",
->>>>>>>> develop:backend/src/controllers/folder/folder.controller.js
     },
   };
   try {
@@ -66,14 +55,9 @@ exports.addFolder = async (req, res) => {
     await dynamoDb.send(new PutItemCommand(params));
     res.status(201).json(item);
   } catch (err) {
-<<<<<<<< HEAD:backend/src/controllers/food/folderController.js
     console.error('Failed to add folder', err);
     res.status(500).json({ 
       error: 'Failed to add folder',
-========
-    res.status(500).json({
-      error: "Failed to add folder",
->>>>>>>> develop:backend/src/controllers/folder/folder.controller.js
       details: err.message,
       params,
     });

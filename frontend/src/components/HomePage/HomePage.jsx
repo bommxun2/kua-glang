@@ -16,7 +16,7 @@ const HomePage = () => {
     // TODO: เปลี่ยน userId ให้เหมาะสม (mock เป็น 1)
     const userId = 1;
     axios.get(`/folder/${userId}`)
-      .then(res => setRecipes(res.data))
+      .then(res => setRecipes(Array.isArray(res.data) ? res.data : []))
       .catch(err => console.error('fetch error', err));
   }, []);
 

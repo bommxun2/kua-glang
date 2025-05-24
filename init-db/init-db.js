@@ -7,7 +7,7 @@ const {
 
 const dynamoDb = new DynamoDBClient({
   region: "us-east-1",
-  endpoint: "http://dynamodb:8000",
+  endpoint: "http://kua-dynamodb:8000",
   credentials: {
     accessKeyId: "dummy",
     secretAccessKey: "dummy",
@@ -15,7 +15,7 @@ const dynamoDb = new DynamoDBClient({
 });
 
 const params = {
-  TableName: "kua-glang",
+  TableName: "kua-glang", // เปลี่ยนกลับเป็น kua-glang
   AttributeDefinitions: [
     { AttributeName: "PK", AttributeType: "S" },
     { AttributeName: "SK", AttributeType: "S" },

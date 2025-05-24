@@ -1,12 +1,6 @@
-<<<<<<<< HEAD:backend/src/controllers/food/foodController.js
 const dynamoDb = require('../../utils/database');
 
 const TABLE_NAME = 'kua-glang';
-========
-const dynamoDb = require("../../utils/database");
-
-const TABLE_NAME = "kua-main";
->>>>>>>> develop:backend/src/controllers/food/food.controller.js
 
 exports.listFoods = async (req, res) => {
   const { folderid } = req.params;

@@ -1,37 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './EditIngredient.css';
 import MenuBar from '../MenuBar/MenuBar.jsx';
 
-const EditIngredient = () => {
+const CreateRecipe = () => {
   const [formData, setFormData] = useState({
-    foodName: '',
+    name: '',
     category: '',
-    expired_at: '',
-    quntity: '',
+    expirationDate: '',
+    quantity: '',
     unit: '',
-    img_url: '',
+    image: null,
   });
-  const [imagePreview, setImagePreview] = useState(null);
+
+  const [imagePreview, setImagePreview] = useState(null); // State for image preview
+
   const navigate = useNavigate();
-  const { folderId, foodId } = useParams();
 
-  useEffect(() => {
-    if (folderId && foodId) {
-      axios.get(`/food/${folderId}`)
-        .then(res => {
-          const food = res.data.find(f => f.foodId === foodId);
-          if (food) {
-            setFormData(food);
-            setImagePreview(food.img_url);
-          }
-        })
-        .catch(err => console.error('fetch error', err));
-    }
-  }, [folderId, foodId]);
-
+  // หมวดหมู่เดียวกับหน้า RecipeDetail
+  const categories = [
+    'ผักและผลไม้',
+    'เนื้อสัตว์',
+    'อาหารแห้ง',
+    'เครื่องปรุง',
+    'อาหารแช่แข็ง',
+    'อื่นๆ'
+  ];
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -39,44 +34,34 @@ const EditIngredient = () => {
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
+    setFormData({ ...formData, image: file });
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImagePreview(reader.result);
-        setFormData({ ...formData, img_url: reader.result });
+        setImagePreview(reader.result); // Set preview URL
       };
       reader.readAsDataURL(file);
     } else {
-      setImagePreview(null);
-      setFormData({ ...formData, img_url: '' });
+      setImagePreview(null); // Clear preview if no file
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleTakePhoto = () => {
+    alert('ฟังก์ชันถ่ายภาพยังไม่พร้อมใช้งานในขณะนี้');
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      await axios.put(`/foods/${folderId}/${foodId}`, formData);
-      alert('บันทึกสำเร็จ!');
-      navigate(-1);
-    } catch (err) {
-      console.error(err);
-      alert('เกิดข้อผิดพลาดในการบันทึก');
-    }
-  };
-
-  const handleDelete = async () => {
-    try {
-      await axios.delete(`/food/${foodId}`);
-      alert('ลบวัตถุดิบเรียบร้อยแล้ว!');
-      navigate(-1);
-    } catch (err) {
-      console.error(err);
-      alert('เกิดข้อผิดพลาดในการลบ');
-    }
+    console.log('Form Data:', formData);
+    alert('สูตรอาหารถูกบันทึกเรียบร้อยแล้ว!');
   };
 
   const handleGoBack = () => {
     navigate(-1); // กลับไปหน้าก่อนหน้า (เช่น recipe)
+  };
+
+  const handleDelete = () => {
+    alert('ลบวัตถุดิบเรียบร้อยแล้ว!');
   };
 
   return (
@@ -97,8 +82,8 @@ const EditIngredient = () => {
             ชื่อ*:
             <input
               type="text"
-              name="foodName"
-              value={formData.foodName}
+              name="name"
+              value={formData.name}
               onChange={handleInputChange}
               required
               style={{ background: '#fff', color: '#333' }}
@@ -108,8 +93,8 @@ const EditIngredient = () => {
             วันหมดอายุ*:
             <input
               type="date"
-              name="expired_at"
-              value={formData.expired_at}
+              name="expirationDate"
+              value={formData.expirationDate}
               onChange={handleInputChange}
               required
               style={{ background: '#fff', color: '#333' }}
@@ -119,8 +104,8 @@ const EditIngredient = () => {
             ปริมาณ:
             <input
               type="number"
-              name="quntity"
-              value={formData.quntity}
+              name="quantity"
+              value={formData.quantity}
               onChange={handleInputChange}
               style={{ background: '#fff', color: '#333' }}
             />
@@ -145,16 +130,14 @@ const EditIngredient = () => {
               required
             >
               <option value="" disabled>เลือกหมวดหมู่</option>
-              <option value="ผักและผลไม้">ผักและผลไม้</option>
-              <option value="เนื้อสัตว์">เนื้อสัตว์</option>
-              <option value="อาหารแห้ง">อาหารแห้ง</option>
-              <option value="เครื่องปรุง">เครื่องปรุง</option>
-              <option value="อาหารแช่แข็ง">อาหารแช่แข็ง</option>
-              <option value="อื่นๆ">อื่นๆ</option>
+              {categories.map((cat) => (
+                <option key={cat} value={cat}>{cat}</option>
+              ))}
             </select>
           </div>
           <label>
             รูปภาพ:
+            <button type="button" className="upload-label" onClick={handleTakePhoto}>ถ่ายภาพ</button>
             <label className="upload-label">
               อัปโหลดรูปภาพจากเครื่อง
               <input
@@ -183,4 +166,4 @@ const EditIngredient = () => {
   );
 };
 
-export default EditIngredient;
+export default CreateRecipe;

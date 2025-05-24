@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import './HomePage.css';
 import { FaSignOutAlt, FaSearch, FaTimes } from 'react-icons/fa'; // ไอคอนจาก React Icons
 import { useNavigate } from 'react-router-dom'; // เพิ่ม useNavigate
 import '@fontsource/bai-jamjuree'; // Add Bai Jamjuree font import
 import MenuBar from '../MenuBar/MenuBar.jsx';
+import spaghettiImg from '../../assets/spaghetti.png';
+import salapaoImg from '../../assets/salapao.png';
+import chinesetableImg from '../../assets/chinesetable.png';
 
 const HomePage = () => {
   const [selectedLocation, setSelectedLocation] = useState("Accom park");
   const [searchQuery, setSearchQuery] = useState("");
-  const [recipes, setRecipes] = useState([]); // ใช้ state สำหรับข้อมูลจริง
   const navigate = useNavigate(); // ใช้ useNavigate สำหรับการนำทาง
 
+<<<<<<< HEAD
   useEffect(() => {
     // TODO: เปลี่ยน userId ให้เหมาะสม (mock เป็น 1)
     const userId = 1;
@@ -19,6 +21,13 @@ const HomePage = () => {
       .then(res => setRecipes(Array.isArray(res.data) ? res.data : []))
       .catch(err => console.error('fetch error', err));
   }, []);
+=======
+  const recipes = [
+    { id: 1, name: "สปาเก็ตตี้สูตรเหล่ากง", img: spaghettiImg, date: "07 มกราคม 2025", quantity: "8", description: "วัตถุดิบสำหรับทำสปาเก็ตตี้ซอสมะเขือเทศ🍅" },
+    { id: 2, name: "ซาลาเปากลมๆ", img: salapaoImg, date: "14 มีนาคม 2025", quantity: "4", description: "ติ่มซำสูตรโบราณจากอาม่า" },
+    { id: 3, name: "อาหารไหว้เจ้าแต่เรากิน", img: chinesetableImg, date: "14 มีนาคม 2025", quantity: "12", description: "แม่หิ้วมาจากบ้านอาม่าแช่ตู้เย็นในทัปเปอร์แวร์" },
+  ];
+>>>>>>> 73d5cc3 (rank)
 
   const handleLocationChange = (e) => {
     setSelectedLocation(e.target.value);
@@ -42,7 +51,7 @@ const HomePage = () => {
 
   // Filter recipes based on searchQuery
   const filteredRecipes = recipes.filter((recipe) =>
-    recipe.folderName.toLowerCase().includes(searchQuery.toLowerCase()) // กรองข้อมูลตาม query
+    recipe.name.toLowerCase().includes(searchQuery.toLowerCase()) // กรองข้อมูลตาม query
   );
 
   return (
@@ -94,13 +103,13 @@ const HomePage = () => {
       {/* Recipe List Section */}
       <div className="recipe-container">
         {filteredRecipes.map((recipe) => (
-          <div key={recipe.folderId} className="recipe-item" onClick={() => handleRecipeClick(recipe.folderId)}>
+          <div key={recipe.id} className="recipe-item" onClick={() => handleRecipeClick(recipe.id)}>
             <div className="recipe-img-wrapper">
-              <img src={recipe.img_url} alt={recipe.folderName} className="recipe-img" />
+              <img src={recipe.img} alt={recipe.name} className="recipe-img" />
             </div>
             <div className="recipe-details">
-              <h3 className="recipe-name">{recipe.folderName} <span style={{float:'right',fontWeight:400}}>{recipe.quantity?.padStart(2,'0')}</span></h3>
-              <p className="recipe-date" style={{color:'#888',margin:'4px 0 0 0',fontWeight:400,fontSize:'1rem'}}>สร้างเมื่อ {recipe.created_at ? new Date(recipe.created_at).toLocaleDateString('th-TH', { year: 'numeric', month: 'long', day: '2-digit' }) : ''}</p>
+              <h3 className="recipe-name">{recipe.name} <span style={{float:'right',fontWeight:400}}>{recipe.quantity.padStart(2,'0')}</span></h3>
+              <p className="recipe-date" style={{color:'#888',margin:'4px 0 0 0',fontWeight:400,fontSize:'1rem'}}>สร้างเมื่อ {recipe.date}</p>
               <p className="recipe-description" style={{ color: '#111', margin:'4px 0 0 0' }}>{recipe.description}</p>
             </div>
             <div className="arrow">

@@ -1,7 +1,6 @@
-const client = require("../../utils/database");
 const { DynamoDBDocumentClient, QueryCommand } = require("@aws-sdk/lib-dynamodb");
+const docClient = require("../../utils/database");
 
-const docClient = DynamoDBDocumentClient.from(client);
 const TABLE_NAME = 'kua-glang';
 
 const getPostsFromFollowing = async (req, res) => {

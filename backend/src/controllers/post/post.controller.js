@@ -42,43 +42,4 @@ const createPost = async (req, res) => {
   }
 };
 
-const receive = async (req, res) => {
-  const { userId } = req.params;
-  res.status(200).json({ message: `รับโพสต์ของ userId ${userId}` });
-};
-
-
-
-const updatePost = async (req, res) => {
-  const { userId, postId } = req.params;
-  const { caption, img_url } = req.body;
-
-  if (!caption || !img_url) {
-    return res.status(400).json({ error: 'caption and img_url are required' });
-  }
-
-  // (ใส่ logic UpdateItemCommand จริงภายหลังได้)
-  res.status(200).json({
-    message: 'Post updated successfully',
-    userId,
-    postId,
-    caption,
-    img_url
-  });
-};
-
-const deletePost = async (req, res) => {
-  const { userId, postId } = req.params;
-
-  // (ใส่ logic DeleteItemCommand จริงภายหลังได้)
-  res.status(200).json({
-    message: `Post ${postId} of user ${userId} deleted successfully`
-  });
-};
-
-module.exports = {
-  receive,
-  createPost,
-  updatePost, // ✅ เพิ่มตรงนี้
-  deletePost
-};
+module.exports = createPost;

@@ -1,6 +1,5 @@
-const { DynamoDBDocumentClient, QueryCommand, GetCommand } = require('@aws-sdk/lib-dynamodb');
-const client = require("../../utils/database"); 
-const docClient = DynamoDBDocumentClient.from(client);
+const { QueryCommand, GetCommand } = require('@aws-sdk/lib-dynamodb');
+const docClient = require("../../utils/database");
 
 
 const getShareInterest = async (req, res) => {

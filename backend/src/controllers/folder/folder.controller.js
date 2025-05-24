@@ -1,7 +1,20 @@
 const dynamoDb = require("../../utils/database");
-const { PutItemCommand, QueryCommand } = require("@aws-sdk/client-dynamodb");
+const { PutItemCommand, QueryCommand, UpdateItemCommand, DeleteItemCommand } = require("@aws-sdk/client-dynamodb");
 
 const TABLE_NAME = "kua-glang";
+
+// Helper function to convert DynamoDB AttributeValue to plain JS object
+function parseDynamoItem(item) {
+  return {
+    quantity: item.quantity ? Number(item.quantity.N) : undefined,
+    img_url: item.img_url?.S,
+    folderId: item.SK?.S?.replace("FOLDER#", ""),
+    description: item.description?.S,
+    created_at: item.created_at?.S,
+    userId: item.PK?.S?.replace("USER#", ""),
+    folderName: item.folderName?.S,
+  };
+}
 
 exports.listFolders = async (req, res) => {
   const { userId } = req.params;
@@ -16,7 +29,9 @@ exports.listFolders = async (req, res) => {
   try {
     const command = new QueryCommand(params);
     const data = await dynamoDb.send(command);
-    res.json(data.Items);
+    // แปลงข้อมูลก่อนส่งออก
+    const folders = (data.Items || []).map(parseDynamoItem);
+    res.json(folders);
   } catch (err) {
     res.status(500).json({
       error: "Failed to list folders",
@@ -27,7 +42,6 @@ exports.listFolders = async (req, res) => {
 };
 
 exports.addFolder = async (req, res) => {
-  // ใช้ userId ให้ตรงกับ route (userId ไม่ใช่ userid)
   const { userId } = req.params;
   const folderId = Date.now().toString();
 
@@ -35,7 +49,11 @@ exports.addFolder = async (req, res) => {
   console.log("addFolder params:", req.params);
   console.log("addFolder body:", req.body);
 
-  let quntity = req.body.quntity || req.body.quantity || "00";
+  // รับ quantity หรือ quntity (รองรับทั้งสอง)
+  let quantity = req.body.quantity || req.body.quntity || "00";
+
+  // ใช้ created_at จาก body ถ้ามี ไม่งั้นใช้เวลาปัจจุบัน
+  const created_at = req.body.created_at || new Date().toISOString();
 
   // แปลงค่าทุก field เป็นรูปแบบ DynamoDB
   const item = {
@@ -45,15 +63,23 @@ exports.addFolder = async (req, res) => {
     userId: { S: userId },
     folderName: { S: req.body.folderName || "" },
     description: { S: req.body.description || "" },
-    quntity: { S: quntity },
+    quantity: { S: quantity },
     img_url: { S: req.body.img_url || "" },
-    created_at: { S: new Date().toISOString() },
+    created_at: { S: created_at },
   };
 
   const params = { TableName: TABLE_NAME, Item: item };
   try {
     await dynamoDb.send(new PutItemCommand(params));
-    res.status(201).json(item);
+    // ส่ง response กลับแบบอ่านง่าย
+    res.status(201).json({
+      folderId: folderId,
+      folderName: req.body.folderName || "",
+      description: req.body.description || "",
+      created_at: created_at,
+      quantity: quantity,
+      img_url: req.body.img_url || ""
+    });
   } catch (err) {
     console.error("Failed to add folder", err);
     res.status(500).json({
@@ -65,28 +91,34 @@ exports.addFolder = async (req, res) => {
 };
 
 exports.updateFolder = async (req, res) => {
-  const { userid, folderid } = req.params;
+  const { userId, folderId } = req.params;
   // รับ quntity (ไม่ใช่ quantity) ตาม API
   const { folderName, description, quntity, img_url } = req.body;
   const params = {
     TableName: TABLE_NAME,
     Key: {
-      PK: `USER#${userid}`,
-      SK: `FOLDER#${folderid}`,
+      PK: { S: `USER#${userId}` },
+      SK: { S: `FOLDER#${folderId}` },
     },
     UpdateExpression:
       "set folderName = :n, description = :d, quntity = :q, img_url = :i",
     ExpressionAttributeValues: {
-      ":n": folderName,
-      ":d": description,
-      ":q": quntity,
-      ":i": img_url,
+      ":n": { S: folderName },
+      ":d": { S: description },
+      ":q": { S: quntity },
+      ":i": { S: img_url },
     },
     ReturnValues: "ALL_NEW",
   };
   try {
-    const data = await dynamoDb.update(params).promise();
-    res.json(data.Attributes);
+    const data = await dynamoDb.send(new UpdateItemCommand(params));
+    // ส่ง response กลับแบบอ่านง่าย
+    res.json({
+      folderName: folderName,
+      description: description,
+      quntity: quntity,
+      img_url: img_url
+    });
   } catch (err) {
     res.status(500).json({
       error: "Failed to update folder",
@@ -97,16 +129,16 @@ exports.updateFolder = async (req, res) => {
 };
 
 exports.deleteFolder = async (req, res) => {
-  const { userid, folderid } = req.params;
+  const { userId, folderId } = req.params;
   const params = {
     TableName: TABLE_NAME,
     Key: {
-      PK: `USER#${userid}`,
-      SK: `FOLDER#${folderid}`,
+      PK: { S: `USER#${userId}` },
+      SK: { S: `FOLDER#${folderId}` },
     },
   };
   try {
-    await dynamoDb.delete(params).promise();
+    await dynamoDb.send(new DeleteItemCommand(params));
     res.json({ message: "delete folder success" });
   } catch (err) {
     res.status(500).json({

@@ -1,7 +1,5 @@
 const { QueryCommand, TransactWriteCommand } = require('@aws-sdk/lib-dynamodb');
-const { DynamoDBDocumentClient } = require('@aws-sdk/lib-dynamodb');
-const client = require('../../utils/database');
-const docClient = DynamoDBDocumentClient.from(client);
+const docClient = require('../../utils/database');
 
 const receiveShare = async (req, res) => {
   const { shareId } = req.params;

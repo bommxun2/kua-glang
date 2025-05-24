@@ -1,7 +1,5 @@
 const { PutCommand } = require('@aws-sdk/lib-dynamodb');
-const { DynamoDBDocumentClient } = require('@aws-sdk/lib-dynamodb');
-const client = require('../../utils/database');
-const docClient = DynamoDBDocumentClient.from(client);
+const docClient = require('../../utils/database');
 
 const addInterest = async (req, res) => {
   const { shareId, userId } = req.params;

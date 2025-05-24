@@ -2,12 +2,12 @@ const express = require("express");
 const router = express.Router();
 
 const foodController = require("../controllers/food/food.controller");
-const deleteFood = require("../controllers/food/deleteFood.controller");
+const deleteFood = require("../controllers/food/food.controller").deleteFood;
 const updateFoodStatus = require("../controllers/food/updateFoodStatus.controller");
 
-router.get("/:folderid", foodController.listFoods);
-router.post("/:folderid", foodController.addFood);
-router.put("/:folderid/:foodid", foodController.updateFood);
+router.get("/:folder/:folderId", foodController.listFoods);
+router.post("/:folder/:folderId", foodController.addFood);
+router.put("/:folderId/:foodId", foodController.updateFood);
 router.delete("/:foodId", deleteFood);
 router.put("/:foodId", updateFoodStatus);
 

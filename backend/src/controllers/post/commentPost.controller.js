@@ -1,8 +1,7 @@
-
 const { nanoid } = require('nanoid');
-const { DynamoDBDocumentClient } = require("@aws-sdk/lib-dynamodb");
 const client = require("../../utils/database");
-const dynamoDB = DynamoDBDocumentClient.from(client);
+const { PutCommand } = require("@aws-sdk/lib-dynamodb");
+
 const TABLE_NAME = 'kua-glang'; 
 
 const commentPost = async (req, res) => {
@@ -16,7 +15,7 @@ const commentPost = async (req, res) => {
   const cId = nanoid(4);
   const comment_at = new Date().toISOString();
 
-  const params = {
+  const command = new PutCommand({
     TableName: TABLE_NAME,
     Item: {
       PK: `POST#${postId}`,
@@ -25,10 +24,10 @@ const commentPost = async (req, res) => {
       caption,
       comment_at
     }
-  };
+  });
 
   try {
-    await dynamoDB.put(params).promise();
+    await client.send(command);
     res.status(200).json({
       cId,
       message: 'comment success',

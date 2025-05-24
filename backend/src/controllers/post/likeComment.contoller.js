@@ -1,31 +1,32 @@
-const AWS = require('aws-sdk');
 
-const dynamoDB = new AWS.DynamoDB.DocumentClient();
-const TABLE_NAME = 'kua-glang'; 
+const client = require("../../utils/database");
+const { PutCommand } = require('@aws-sdk/lib-dynamodb');
+
+const TABLE_NAME = 'kua-glang';
 
 const likeComment = async (req, res) => {
-  const { cid, userId } = req.params;
+  const { cId, userId } = req.params;
   const liked_At = new Date().toISOString();
 
-  if (!cid) {
-    return res.status(400).json({ message: 'cid (comment ID) is required' });
+  if (!cId) {
+    return res.status(400).json({ message: 'cId (comment ID) is required' });
   }
 
-  const params = {
+  const command = new PutCommand({
     TableName: TABLE_NAME,
     Item: {
-      PK: `COMMENT#${cid}`,
+      PK: `COMMENT#${cId}`,
       SK: `LIKE#${userId}`,
       liked_At
     },
     ConditionExpression: 'attribute_not_exists(PK) AND attribute_not_exists(SK)'
-  };
+  });
 
   try {
-    await dynamoDB.put(params).promise();
-    res.status(200).json({ message: 'like post success' });
+    await client.send(command);
+    res.status(200).json({ message: 'like comment success' });
   } catch (error) {
-    if (error.code === 'ConditionalCheckFailedException') {
+    if (error.name === 'ConditionalCheckFailedException') {
       res.status(400).json({ message: 'You already liked this comment.' });
     } else {
       console.error(error);

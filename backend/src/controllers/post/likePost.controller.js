@@ -1,11 +1,11 @@
-const AWS = require('aws-sdk');
 const client = require("../../utils/database");
+const { PutCommand } = require('@aws-sdk/lib-dynamodb');
 
 const likePost = async (req, res) => {
   const { userId, postId } = req.params;
   const like_at = new Date().toISOString();
 
-  const params = {
+  const command = new PutCommand({
     TableName: 'kua-glang',
     Item: {
       PK: `POST#${postId}`,
@@ -13,13 +13,13 @@ const likePost = async (req, res) => {
       like_at
     },
     ConditionExpression: 'attribute_not_exists(PK) AND attribute_not_exists(SK)'
-  };
+  });
 
   try {
-    await client.put(params).promise();
+    await client.send(command);
     res.json({ message: 'like post success' });
   } catch (error) {
-    if (error.code === 'ConditionalCheckFailedException') {
+    if (error.name === 'ConditionalCheckFailedException') {
       res.status(400).json({ message: 'You already liked this post.' });
     } else {
       console.error(error);
@@ -28,4 +28,4 @@ const likePost = async (req, res) => {
   }
 };
 
-module.exports =  likePost ;
+module.exports = likePost;

@@ -1,18 +1,18 @@
 const client = require("../../utils/database");
-const { DynamoDBDocumentClient, QueryCommand, ScanCommand } = require("@aws-sdk/lib-dynamodb");
+const { DynamoDBDocumentClient, QueryCommand } = require("@aws-sdk/lib-dynamodb");
 
 const docClient = DynamoDBDocumentClient.from(client);
-const TABLE_NAME = "kua-glang";
+const TABLE_NAME = 'kua-glang';
 
 const getPostsFromFollowing = async (req, res) => {
   try {
-    const { userId } = req.query;
+    const { userId } = req.params;
+
     if (!userId) {
       return res.status(400).json({ message: "Missing userId" });
     }
 
-
-    const followingRes = await client.send(new QueryCommand({
+    const followingRes = await docClient.send(new QueryCommand({
       TableName: TABLE_NAME,
       KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",
       ExpressionAttributeValues: {
@@ -30,21 +30,42 @@ const getPostsFromFollowing = async (req, res) => {
 
     const allPosts = [];
 
-    for (const follow_id of friendUserIds) {
-      const postRes = await client.send(new QueryCommand({
+    for (const followId of friendUserIds) {
+      const postRes = await docClient.send(new QueryCommand({
         TableName: TABLE_NAME,
         KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",
         ExpressionAttributeValues: {
-          ":pk": `USER#${follow_id}`,
+          ":pk": `USER#${followId}`,
           ":sk": "POST#"
         }
       }));
-
       allPosts.push(...(postRes.Items || []));
     }
 
-    const fullPosts = await Promise.all(allPosts.map(async (post) => {
+
+    const userCache = new Map();
+
+    const getUsername = async (uid) => {
+      if (userCache.has(uid)) return userCache.get(uid);
+      const res = await docClient.send(new QueryCommand({
+        TableName: TABLE_NAME,
+        KeyConditionExpression: "PK = :pk AND SK = :sk",
+        ExpressionAttributeValues: {
+          ":pk": `USER#${uid}`,
+          ":sk": "PROFILE"
+        }
+      }));
+      const username = res.Items?.[0]?.username || "Unknown";
+      userCache.set(uid, username);
+      return username;
+    };
+
+    const fullPosts = [];
+
+    for (const post of allPosts) {
       const postId = post.SK.split("#")[1];
+      const userId = post.PK.split("#")[1];
+      const postUsername = await getUsername(post.userId);
 
       const commentRes = await docClient.send(new QueryCommand({
         TableName: TABLE_NAME,
@@ -55,8 +76,11 @@ const getPostsFromFollowing = async (req, res) => {
         }
       }));
 
-      const comments = await Promise.all((commentRes.Items || []).map(async (comment) => {
+      const comments = [];
+
+      for (const comment of (commentRes.Items || [])) {
         const cid = comment.SK.split("#")[1];
+        const commentUsername = await getUsername(comment.userId);
 
         const likeCountRes = await docClient.send(new QueryCommand({
           TableName: TABLE_NAME,
@@ -67,16 +91,16 @@ const getPostsFromFollowing = async (req, res) => {
           }
         }));
 
-        return {
+        comments.push({
           cid: cid,
-          username: comment.username,
+          username: commentUsername,
           caption: comment.caption,
           comment_at: comment.comment_at,
-          like_count: (likeCountRes.Items || []).length,
-        };
-      }));
+          like_count: (likeCountRes.Items || []).length
+        });
+      }
 
-      const likeRes = await client.send(new QueryCommand({
+      const likeRes = await docClient.send(new QueryCommand({
         TableName: TABLE_NAME,
         KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",
         ExpressionAttributeValues: {
@@ -85,22 +109,25 @@ const getPostsFromFollowing = async (req, res) => {
         }
       }));
 
-      const likes = (likeRes.Items || []).map(like => ({
-        username: like.username
-      }));
+      const likes = [];
+      for (const like of (likeRes.Items || [])) {
+        const likedUserId = like.SK.split("#")[1];
+        const likedUsername = await getUsername(likedUserId);
+        likes.push({ username: likedUsername });
+      }
 
-      return {
+      fullPosts.push({
         postId: postId,
-        userId: post.userId,
-        username: post.username,
+        userId: userId,
+        username: postUsername,
         caption: post.caption,
         created_at: post.created_at,
         img_url: post.img_url,
         like: likes,
         comment: comments
-      };
-    }));
-
+      });
+    }
+    console.log(fullPosts)
     res.json(fullPosts);
 
   } catch (err) {

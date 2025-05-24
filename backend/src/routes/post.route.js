@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-
 const createPost = require("../controllers/post/post.controller")
 const updatePost = require("../controllers/post/updatePost.controller")
 const deletePost = require("../controllers/post/deletePost.controller")
@@ -29,6 +28,5 @@ router.put("/:postId/comment/:cId", updateComment);
 router.get("/friend/:userId", getFriendsAndSuggestions);
 router.post("/friend/:userId/:followId", followUser);
 router.delete("/friend/:userId/:followId", unfollowUser);
-
 
 module.exports = router;

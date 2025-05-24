@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;500;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 /* ลบ global style ที่มาจาก Vite/React เดิม เหลือแค่ reset พื้นฐาน */
 body {
   margin: 0;

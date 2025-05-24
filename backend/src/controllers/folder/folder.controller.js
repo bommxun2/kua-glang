@@ -1,13 +1,7 @@
-<<<<<<<< HEAD:backend/src/controllers/food/folderController.js
-const dynamoDb = require('../../utils/database');
+const dynamoDb = require("../../utils/database");
 const { PutItemCommand, QueryCommand } = require("@aws-sdk/client-dynamodb");
 
-const TABLE_NAME = 'kua-glang';
-========
-const dynamoDb = require("../../utils/database");
-
-const TABLE_NAME = "kua-main";
->>>>>>>> develop:backend/src/controllers/folder/folder.controller.js
+const TABLE_NAME = "kua-glang";
 
 exports.listFolders = async (req, res) => {
   const { userId } = req.params;
@@ -15,13 +9,8 @@ exports.listFolders = async (req, res) => {
     TableName: TABLE_NAME,
     KeyConditionExpression: "PK = :pk and begins_with(SK, :sk)",
     ExpressionAttributeValues: {
-<<<<<<<< HEAD:backend/src/controllers/food/folderController.js
-      ':pk': { S: `USER#${userId}` },
-      ':sk': { S: 'FOLDER#' },
-========
-      ":pk": `USER#${userid}`,
-      ":sk": "FOLDER#",
->>>>>>>> develop:backend/src/controllers/folder/folder.controller.js
+      ":pk": { S: `USER#${userId}` },
+      ":sk": { S: "FOLDER#" },
     },
   };
   try {
@@ -43,8 +32,8 @@ exports.addFolder = async (req, res) => {
   const folderId = Date.now().toString();
 
   // Debug log
-  console.log('addFolder params:', req.params);
-  console.log('addFolder body:', req.body);
+  console.log("addFolder params:", req.params);
+  console.log("addFolder body:", req.body);
 
   let quntity = req.body.quntity || req.body.quantity || "00";
 
@@ -58,7 +47,7 @@ exports.addFolder = async (req, res) => {
     description: { S: req.body.description || "" },
     quntity: { S: quntity },
     img_url: { S: req.body.img_url || "" },
-    created_at: { S: new Date().toISOString() }
+    created_at: { S: new Date().toISOString() },
   };
 
   const params = { TableName: TABLE_NAME, Item: item };
@@ -66,14 +55,9 @@ exports.addFolder = async (req, res) => {
     await dynamoDb.send(new PutItemCommand(params));
     res.status(201).json(item);
   } catch (err) {
-<<<<<<<< HEAD:backend/src/controllers/food/folderController.js
-    console.error('Failed to add folder', err);
-    res.status(500).json({ 
-      error: 'Failed to add folder',
-========
+    console.error("Failed to add folder", err);
     res.status(500).json({
       error: "Failed to add folder",
->>>>>>>> develop:backend/src/controllers/folder/folder.controller.js
       details: err.message,
       params,
     });

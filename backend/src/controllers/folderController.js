@@ -31,10 +31,15 @@ exports.addFolder = async (req, res) => {
     PK: `USER#${userid}`,
     SK: `FOLDER#${folderId}`,
     folderId,
-    userId: userid,
+    userId: userid, // ใช้ userId (I ตัวใหญ่) ให้ตรงกับ API spec
     ...req.body,
     created_at: new Date().toISOString(),
   };
+  // ensure field quntity (ไม่ใช่ quantity) ตาม API
+  if (item.quantity && !item.quntity) {
+    item.quntity = item.quantity;
+    delete item.quantity;
+  }
   const params = { TableName: TABLE_NAME, Item: item };
   try {
     await dynamoDb.put(params).promise();
@@ -50,18 +55,19 @@ exports.addFolder = async (req, res) => {
 
 exports.updateFolder = async (req, res) => {
   const { userid, folderid } = req.params;
-  const { folderName, description, quantity, img_url } = req.body;
+  // รับ quntity (ไม่ใช่ quantity) ตาม API
+  const { folderName, description, quntity, img_url } = req.body;
   const params = {
     TableName: TABLE_NAME,
     Key: {
       PK: `USER#${userid}`,
       SK: `FOLDER#${folderid}`,
     },
-    UpdateExpression: 'set folderName = :n, description = :d, quantity = :q, img_url = :i',
+    UpdateExpression: 'set folderName = :n, description = :d, quntity = :q, img_url = :i',
     ExpressionAttributeValues: {
       ':n': folderName,
       ':d': description,
-      ':q': quantity,
+      ':q': quntity,
       ':i': img_url,
     },
     ReturnValues: 'ALL_NEW',

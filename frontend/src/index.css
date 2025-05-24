@@ -1,15 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;500;600&display=swap');
-
 /* ลบ global style ที่มาจาก Vite/React เดิม เหลือแค่ reset พื้นฐาน */
-html, body {
+body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background: var(--background, #F7EBEB);
   width: 100vw;
   min-height: 100vh;
-
-  font-family: 'Bai Jamjuree', sans-serif;
 }
 
 /* สามารถเพิ่ม global style ที่จำเป็นของโปรเจกต์ที่นี่ */

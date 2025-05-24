@@ -1,4 +1,4 @@
-/* MenuBar Styles -ลอย */
+/* MenuBar Styles - ขนาดเท่าเดิม (แบบแรก) และลอย แต่ไม่กระทบส่วนอื่น */
 .menu-bar {
   display: flex;
   justify-content: space-around;

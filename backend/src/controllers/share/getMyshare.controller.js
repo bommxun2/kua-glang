@@ -1,8 +1,5 @@
-const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
-const { DynamoDBDocumentClient, QueryCommand, GetCommand } = require('@aws-sdk/lib-dynamodb');
-
-const client = require("../../utils/database");
-const ddb = DynamoDBDocumentClient.from(client);
+const { QueryCommand, GetCommand } = require('@aws-sdk/lib-dynamodb');
+const ddb = require("../../utils/database");
 const TABLE_NAME = 'kua-glang';
 
 const getSharesByUser = async (req, res) => {

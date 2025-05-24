@@ -1,6 +1,7 @@
 const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+const { DynamoDBDocumentClient } = require("@aws-sdk/lib-dynamodb");
 
-const dynamoDb = new DynamoDBClient({
+const dynamoDbClient = new DynamoDBClient({
   region: "us-east-1",
   endpoint: "http://kua-dynamodb:8000",
   credentials: {
@@ -9,4 +10,6 @@ const dynamoDb = new DynamoDBClient({
   },
 });
 
-module.exports = dynamoDb;
+const docClient = DynamoDBDocumentClient.from(dynamoDbClient);
+
+module.exports = docClient;

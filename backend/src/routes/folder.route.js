@@ -3,9 +3,9 @@ const router = express.Router();
 
 const folderController = require("../controllers/folder/folder.controller");
 
-router.get("/:userid", folderController.listFolders);
-router.post("/folder/:userid", folderController.addFolder);
-router.put("/:userid/:folderid", folderController.updateFolder);
-router.delete("/:userid/:folderid", folderController.deleteFolder);
+router.get("/:userId", folderController.listFolders);
+router.post("/:userId", folderController.addFolder);
+router.put("/:userId/:folderId", folderController.updateFolder);
+router.delete("/:userId/:folderId", folderController.deleteFolder);
 
 module.exports = router;

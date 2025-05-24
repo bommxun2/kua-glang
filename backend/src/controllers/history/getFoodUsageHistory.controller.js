@@ -27,7 +27,10 @@ const getFoodUsageHistory = async (req, res) => {
         new QueryCommand({
           TableName: "kua-glang",
           KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",
-          FilterExpression: "status IN (:used, :expired)",
+          FilterExpression: "#status IN (:used, :expired)",
+          ExpressionAttributeNames: {
+            "#status": "status",
+          },
           ExpressionAttributeValues: {
             ":pk": { S: `FOLDER#${folderId}` },
             ":sk": { S: "FOOD#" },

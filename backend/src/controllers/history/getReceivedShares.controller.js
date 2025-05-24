@@ -25,9 +25,9 @@ const getReceivedShares = async (req, res) => {
         const sharePostRes = await dynamoDb.send(
           new QueryCommand({
             TableName: "kua-glang",
-            KeyConditionExpression: "PK = :pk AND SK = :sk",
+            IndexName: "SKIndex",
+            KeyConditionExpression: "SK = :sk",
             ExpressionAttributeValues: {
-              ":pk": { S: `USER#${shareId.split("-")[0]}` },
               ":sk": { S: `SHARE#${shareId}` },
             },
           })

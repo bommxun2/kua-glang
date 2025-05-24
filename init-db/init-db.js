@@ -49,16 +49,10 @@ const createTable = async () => {
     }
   }
 
-  insertDataInBatches(formattedItems);
+  insertDataInBatches(items);
 };
 
-createTable();
-
-const items = JSON.parse(readFileSync("./mock_dynamodb_data.json", "utf8"));
-
-const formattedItems = items.map((item) => ({
-  PutRequest: { Item: item },
-}));
+const items = JSON.parse(readFileSync("./mock_data.json", "utf8"));
 
 const insertDataInBatches = async (items, batchSize = 25) => {
   for (let i = 0; i < items.length; i += batchSize) {
@@ -80,3 +74,5 @@ const insertDataInBatches = async (items, batchSize = 25) => {
     }
   }
 };
+
+createTable();

@@ -1,0 +1,1101 @@
+[
+  {
+    "PK": {
+      "S": "USER#ea5a957c-bb3b-48cb-9df3-245dca3e288e"
+    },
+    "SK": {
+      "S": "PROFILE"
+    },
+    "Type": {
+      "S": "User"
+    },
+    "username": {
+      "S": "user_e288e"
+    },
+    "email": {
+      "S": "e288e@example.com"
+    },
+    "phone_num": {
+      "S": "0867342196"
+    },
+    "line_id": {
+      "S": "line_e288e"
+    },
+    "password": {
+      "S": "hashedpassword"
+    },
+    "profile_url": {
+      "S": "https://example.com/profile.jpg"
+    },
+    "bio": {
+      "S": "Mock user bio"
+    },
+    "score": {
+      "N": "25"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#ea5a957c-bb3b-48cb-9df3-245dca3e288e"
+    },
+    "SK": {
+      "S": "STAT"
+    },
+    "Type": {
+      "S": "Stat"
+    },
+    "share_quantity": {
+      "N": "10"
+    },
+    "reduce_foodwaste": {
+      "N": "26"
+    },
+    "no_expired": {
+      "N": "29"
+    },
+    "updated_at": {
+      "S": "2024-09-26T08:05:14.801622"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#ea5a957c-bb3b-48cb-9df3-245dca3e288e"
+    },
+    "SK": {
+      "S": "FOLDER#414ccafb-50a8-4b6d-aced-fe04e10e6b35"
+    },
+    "Type": {
+      "S": "Folder"
+    },
+    "folderName": {
+      "S": "Folder_6b35"
+    },
+    "description": {
+      "S": "Sample folder"
+    },
+    "created_at": {
+      "S": "2024-12-06T08:05:14.801720"
+    },
+    "quantity": {
+      "N": "3"
+    },
+    "img_url": {
+      "S": "https://example.com/folder.jpg"
+    }
+  },
+  {
+    "PK": {
+      "S": "FOLDER#414ccafb-50a8-4b6d-aced-fe04e10e6b35"
+    },
+    "SK": {
+      "S": "FOOD#98da4e96-5b09-4ce4-8e43-f1eb41a62a0b"
+    },
+    "Type": {
+      "S": "Food"
+    },
+    "foodName": {
+      "S": "Food_2a0b"
+    },
+    "created_at": {
+      "S": "2024-10-30T08:05:14.801786"
+    },
+    "expired_at": {
+      "S": "2025-06-22T08:05:14.801797"
+    },
+    "unit": {
+      "S": "ชิ้น"
+    },
+    "quantity": {
+      "N": "8"
+    },
+    "img_url": {
+      "S": "https://example.com/food.jpg"
+    },
+    "category": {
+      "S": "ผลไม้"
+    },
+    "use_at": {
+      "S": "2024-12-09T08:05:14.801811"
+    },
+    "status": {
+      "S": "ใช้ไปแล้ว"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#ea5a957c-bb3b-48cb-9df3-245dca3e288e"
+    },
+    "SK": {
+      "S": "SHARE#ed751297-8555-424b-ade0-1e306710ea5b"
+    },
+    "Type": {
+      "S": "SharePost"
+    },
+    "available_time": {
+      "S": "2024-07-25T08:05:14.801853"
+    },
+    "status": {
+      "S": "สำเร็จ"
+    },
+    "foodId": {
+      "S": "FOOD#98da4e96-5b09-4ce4-8e43-f1eb41a62a0b"
+    },
+    "quantity": {
+      "N": "2"
+    },
+    "latitude": {
+      "S": "13.82739"
+    },
+    "longtitude": {
+      "S": "100.563003"
+    },
+    "created_at": {
+      "S": "2024-10-04T08:05:14.801889"
+    }
+  },
+  {
+    "PK": {
+      "S": "SHARE#ed751297-8555-424b-ade0-1e306710ea5b"
+    },
+    "SK": {
+      "S": "RECEIVE#USER#9d3f26fc-ed80-40f0-92ca-d2b6bec611c8"
+    },
+    "Type": {
+      "S": "Receiver"
+    },
+    "accepted_at": {
+      "S": "2024-08-16T08:05:14.801906"
+    }
+  },
+  {
+    "PK": {
+      "S": "SHARE#ed751297-8555-424b-ade0-1e306710ea5b"
+    },
+    "SK": {
+      "S": "INTEREST#USER#9d3f26fc-ed80-40f0-92ca-d2b6bec611c8"
+    },
+    "Type": {
+      "S": "Interested"
+    },
+    "interested_at": {
+      "S": "2024-12-10T08:05:14.801916"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#ea5a957c-bb3b-48cb-9df3-245dca3e288e"
+    },
+    "SK": {
+      "S": "POST#784aa789-1437-4f3d-867e-a3942dbda449"
+    },
+    "Type": {
+      "S": "Post"
+    },
+    "caption": {
+      "S": "Sample post caption"
+    },
+    "img_url": {
+      "S": "https://example.com/post.jpg"
+    },
+    "created_at": {
+      "S": "2025-03-10T08:05:14.801959"
+    }
+  },
+  {
+    "PK": {
+      "S": "POST#784aa789-1437-4f3d-867e-a3942dbda449"
+    },
+    "SK": {
+      "S": "COMMENT#74ed0948-98d4-44a3-909f-74e54b8fa04a"
+    },
+    "Type": {
+      "S": "Comment"
+    },
+    "userId": {
+      "S": "USER#9d3f26fc-ed80-40f0-92ca-d2b6bec611c8"
+    },
+    "content": {
+      "S": "Nice!"
+    },
+    "comment_at": {
+      "S": "2025-02-12T08:05:14.802001"
+    }
+  },
+  {
+    "PK": {
+      "S": "POST#784aa789-1437-4f3d-867e-a3942dbda449"
+    },
+    "SK": {
+      "S": "LIKE#USER#ea5a957c-bb3b-48cb-9df3-245dca3e288e"
+    },
+    "Type": {
+      "S": "Like"
+    },
+    "liked_At": {
+      "S": "2024-10-30T08:05:14.802013"
+    }
+  },
+  {
+    "PK": {
+      "S": "COMMENT#74ed0948-98d4-44a3-909f-74e54b8fa04a"
+    },
+    "SK": {
+      "S": "LIKE#USER#ea5a957c-bb3b-48cb-9df3-245dca3e288e"
+    },
+    "Type": {
+      "S": "Like"
+    },
+    "liked_At": {
+      "S": "2024-06-01T08:05:14.802021"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#ea5a957c-bb3b-48cb-9df3-245dca3e288e"
+    },
+    "SK": {
+      "S": "FOLLOWING#USER#9d3f26fc-ed80-40f0-92ca-d2b6bec611c8"
+    },
+    "Type": {
+      "S": "Follow"
+    },
+    "followed_At": {
+      "S": "2024-09-06T08:05:14.802037"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#ea5a957c-bb3b-48cb-9df3-245dca3e288e"
+    },
+    "SK": {
+      "S": "FOLLOWER#USER#a64ffa47-85ce-47fa-b9ca-4b00be6694d6"
+    },
+    "Type": {
+      "S": "Follow"
+    },
+    "followed_At": {
+      "S": "2024-09-10T08:05:14.802044"
+    }
+  },
+  {
+    "PK": {
+      "S": "QUEST#d8657405-280b-4274-816d-664598ef7d87"
+    },
+    "SK": {
+      "S": "DETAILS"
+    },
+    "Type": {
+      "S": "Quest"
+    },
+    "title": {
+      "S": "Quest Title"
+    },
+    "description": {
+      "S": "Complete this challenge"
+    },
+    "create_at": {
+      "S": "2024-06-21T08:05:14.802082"
+    },
+    "reward_pointt": {
+      "N": "58"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#ea5a957c-bb3b-48cb-9df3-245dca3e288e"
+    },
+    "SK": {
+      "S": "QUEST#QUEST#d8657405-280b-4274-816d-664598ef7d87"
+    },
+    "Type": {
+      "S": "Quest"
+    },
+    "success_at": {
+      "S": "2024-08-09T08:05:14.802093"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#f4013afd-130e-4aa9-b9e6-715e3380eee6"
+    },
+    "SK": {
+      "S": "PROFILE"
+    },
+    "Type": {
+      "S": "User"
+    },
+    "username": {
+      "S": "user_0eee6"
+    },
+    "email": {
+      "S": "0eee6@example.com"
+    },
+    "phone_num": {
+      "S": "0824391912"
+    },
+    "line_id": {
+      "S": "line_0eee6"
+    },
+    "password": {
+      "S": "hashedpassword"
+    },
+    "profile_url": {
+      "S": "https://example.com/profile.jpg"
+    },
+    "bio": {
+      "S": "Mock user bio"
+    },
+    "score": {
+      "N": "55"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#f4013afd-130e-4aa9-b9e6-715e3380eee6"
+    },
+    "SK": {
+      "S": "STAT"
+    },
+    "Type": {
+      "S": "Stat"
+    },
+    "share_quantity": {
+      "N": "49"
+    },
+    "reduce_foodwaste": {
+      "N": "76"
+    },
+    "no_expired": {
+      "N": "13"
+    },
+    "updated_at": {
+      "S": "2024-06-28T08:05:14.802111"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#f4013afd-130e-4aa9-b9e6-715e3380eee6"
+    },
+    "SK": {
+      "S": "FOLDER#cfa4c3e6-f212-4641-af9f-5000fa96bcf8"
+    },
+    "Type": {
+      "S": "Folder"
+    },
+    "folderName": {
+      "S": "Folder_bcf8"
+    },
+    "description": {
+      "S": "Sample folder"
+    },
+    "created_at": {
+      "S": "2024-07-06T08:05:14.802148"
+    },
+    "quantity": {
+      "N": "5"
+    },
+    "img_url": {
+      "S": "https://example.com/folder.jpg"
+    }
+  },
+  {
+    "PK": {
+      "S": "FOLDER#cfa4c3e6-f212-4641-af9f-5000fa96bcf8"
+    },
+    "SK": {
+      "S": "FOOD#3f3fc630-5d84-43f9-81f5-9901f0a50c94"
+    },
+    "Type": {
+      "S": "Food"
+    },
+    "foodName": {
+      "S": "Food_0c94"
+    },
+    "created_at": {
+      "S": "2025-03-10T08:05:14.802188"
+    },
+    "expired_at": {
+      "S": "2025-06-16T08:05:14.802195"
+    },
+    "unit": {
+      "S": "ชิ้น"
+    },
+    "quantity": {
+      "N": "2"
+    },
+    "img_url": {
+      "S": "https://example.com/food.jpg"
+    },
+    "category": {
+      "S": "ผลไม้"
+    },
+    "use_at": {
+      "S": "2025-02-02T08:05:14.802205"
+    },
+    "status": {
+      "S": "หมดอายุ"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#f4013afd-130e-4aa9-b9e6-715e3380eee6"
+    },
+    "SK": {
+      "S": "SHARE#35749882-c078-47e0-ac71-fd26c33eb5ea"
+    },
+    "Type": {
+      "S": "SharePost"
+    },
+    "available_time": {
+      "S": "2025-03-23T08:05:14.802241"
+    },
+    "status": {
+      "S": "สำเร็จ"
+    },
+    "foodId": {
+      "S": "FOOD#3f3fc630-5d84-43f9-81f5-9901f0a50c94"
+    },
+    "quantity": {
+      "N": "2"
+    },
+    "latitude": {
+      "S": "13.744922"
+    },
+    "longtitude": {
+      "S": "100.456128"
+    },
+    "created_at": {
+      "S": "2024-06-25T08:05:14.802263"
+    }
+  },
+  {
+    "PK": {
+      "S": "SHARE#35749882-c078-47e0-ac71-fd26c33eb5ea"
+    },
+    "SK": {
+      "S": "RECEIVE#USER#ea5a957c-bb3b-48cb-9df3-245dca3e288e"
+    },
+    "Type": {
+      "S": "Receiver"
+    },
+    "accepted_at": {
+      "S": "2025-03-02T08:05:14.802279"
+    }
+  },
+  {
+    "PK": {
+      "S": "SHARE#35749882-c078-47e0-ac71-fd26c33eb5ea"
+    },
+    "SK": {
+      "S": "INTEREST#USER#a64ffa47-85ce-47fa-b9ca-4b00be6694d6"
+    },
+    "Type": {
+      "S": "Interested"
+    },
+    "interested_at": {
+      "S": "2024-10-25T08:05:14.802287"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#f4013afd-130e-4aa9-b9e6-715e3380eee6"
+    },
+    "SK": {
+      "S": "POST#711a541a-77c1-4ec0-8534-cecd73ab8db0"
+    },
+    "Type": {
+      "S": "Post"
+    },
+    "caption": {
+      "S": "Sample post caption"
+    },
+    "img_url": {
+      "S": "https://example.com/post.jpg"
+    },
+    "created_at": {
+      "S": "2024-10-06T08:05:14.802332"
+    }
+  },
+  {
+    "PK": {
+      "S": "POST#711a541a-77c1-4ec0-8534-cecd73ab8db0"
+    },
+    "SK": {
+      "S": "COMMENT#daaadac3-2274-48d1-a6b1-a98d54b62811"
+    },
+    "Type": {
+      "S": "Comment"
+    },
+    "userId": {
+      "S": "USER#6baa4731-1c2c-4cf9-88a2-27f017d967fc"
+    },
+    "content": {
+      "S": "Nice!"
+    },
+    "comment_at": {
+      "S": "2025-04-17T08:05:14.802353"
+    }
+  },
+  {
+    "PK": {
+      "S": "POST#711a541a-77c1-4ec0-8534-cecd73ab8db0"
+    },
+    "SK": {
+      "S": "LIKE#USER#f4013afd-130e-4aa9-b9e6-715e3380eee6"
+    },
+    "Type": {
+      "S": "Like"
+    },
+    "liked_At": {
+      "S": "2024-10-29T08:05:14.802362"
+    }
+  },
+  {
+    "PK": {
+      "S": "COMMENT#daaadac3-2274-48d1-a6b1-a98d54b62811"
+    },
+    "SK": {
+      "S": "LIKE#USER#f4013afd-130e-4aa9-b9e6-715e3380eee6"
+    },
+    "Type": {
+      "S": "Like"
+    },
+    "liked_At": {
+      "S": "2025-01-04T08:05:14.802369"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#f4013afd-130e-4aa9-b9e6-715e3380eee6"
+    },
+    "SK": {
+      "S": "FOLLOWING#USER#9d3f26fc-ed80-40f0-92ca-d2b6bec611c8"
+    },
+    "Type": {
+      "S": "Follow"
+    },
+    "followed_At": {
+      "S": "2024-09-08T08:05:14.802383"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#f4013afd-130e-4aa9-b9e6-715e3380eee6"
+    },
+    "SK": {
+      "S": "FOLLOWER#USER#6baa4731-1c2c-4cf9-88a2-27f017d967fc"
+    },
+    "Type": {
+      "S": "Follow"
+    },
+    "followed_At": {
+      "S": "2025-04-15T08:05:14.802391"
+    }
+  },
+  {
+    "PK": {
+      "S": "QUEST#4385b42a-3333-4df2-b4ff-a591a18b6fd8"
+    },
+    "SK": {
+      "S": "DETAILS"
+    },
+    "Type": {
+      "S": "Quest"
+    },
+    "title": {
+      "S": "Quest Title"
+    },
+    "description": {
+      "S": "Complete this challenge"
+    },
+    "create_at": {
+      "S": "2025-01-23T08:05:14.802433"
+    },
+    "reward_pointt": {
+      "N": "11"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#f4013afd-130e-4aa9-b9e6-715e3380eee6"
+    },
+    "SK": {
+      "S": "QUEST#QUEST#4385b42a-3333-4df2-b4ff-a591a18b6fd8"
+    },
+    "Type": {
+      "S": "Quest"
+    },
+    "success_at": {
+      "S": "2024-09-19T08:05:14.802444"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#6baa4731-1c2c-4cf9-88a2-27f017d967fc"
+    },
+    "SK": {
+      "S": "PROFILE"
+    },
+    "Type": {
+      "S": "User"
+    },
+    "username": {
+      "S": "user_967fc"
+    },
+    "email": {
+      "S": "967fc@example.com"
+    },
+    "phone_num": {
+      "S": "0871640759"
+    },
+    "line_id": {
+      "S": "line_967fc"
+    },
+    "password": {
+      "S": "hashedpassword"
+    },
+    "profile_url": {
+      "S": "https://example.com/profile.jpg"
+    },
+    "bio": {
+      "S": "Mock user bio"
+    },
+    "score": {
+      "N": "73"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#6baa4731-1c2c-4cf9-88a2-27f017d967fc"
+    },
+    "SK": {
+      "S": "STAT"
+    },
+    "Type": {
+      "S": "Stat"
+    },
+    "share_quantity": {
+      "N": "17"
+    },
+    "reduce_foodwaste": {
+      "N": "80"
+    },
+    "no_expired": {
+      "N": "23"
+    },
+    "updated_at": {
+      "S": "2025-01-19T08:05:14.802460"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#6baa4731-1c2c-4cf9-88a2-27f017d967fc"
+    },
+    "SK": {
+      "S": "FOLDER#c3b0e0f4-f959-408b-9f19-76a66b6bc92d"
+    },
+    "Type": {
+      "S": "Folder"
+    },
+    "folderName": {
+      "S": "Folder_c92d"
+    },
+    "description": {
+      "S": "Sample folder"
+    },
+    "created_at": {
+      "S": "2025-02-23T08:05:14.802502"
+    },
+    "quantity": {
+      "N": "3"
+    },
+    "img_url": {
+      "S": "https://example.com/folder.jpg"
+    }
+  },
+  {
+    "PK": {
+      "S": "FOLDER#c3b0e0f4-f959-408b-9f19-76a66b6bc92d"
+    },
+    "SK": {
+      "S": "FOOD#e2acec1a-ca92-410f-ba66-5e01044f1133"
+    },
+    "Type": {
+      "S": "Food"
+    },
+    "foodName": {
+      "S": "Food_1133"
+    },
+    "created_at": {
+      "S": "2024-09-02T08:05:14.802541"
+    },
+    "expired_at": {
+      "S": "2025-05-31T08:05:14.802550"
+    },
+    "unit": {
+      "S": "ชิ้น"
+    },
+    "quantity": {
+      "N": "10"
+    },
+    "img_url": {
+      "S": "https://example.com/food.jpg"
+    },
+    "category": {
+      "S": "เนื้อ"
+    },
+    "use_at": {
+      "S": "2024-09-04T08:05:14.802560"
+    },
+    "status": {
+      "S": "ยังไม่ถูกใช้"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#6baa4731-1c2c-4cf9-88a2-27f017d967fc"
+    },
+    "SK": {
+      "S": "SHARE#63fad379-99a2-4387-82af-ba66d7037b1d"
+    },
+    "Type": {
+      "S": "SharePost"
+    },
+    "available_time": {
+      "S": "2025-03-31T08:05:14.802701"
+    },
+    "status": {
+      "S": "รอดำเนินการ"
+    },
+    "foodId": {
+      "S": "FOOD#e2acec1a-ca92-410f-ba66-5e01044f1133"
+    },
+    "quantity": {
+      "N": "5"
+    },
+    "latitude": {
+      "S": "13.801985"
+    },
+    "longtitude": {
+      "S": "100.480583"
+    },
+    "created_at": {
+      "S": "2024-12-14T08:05:14.802749"
+    }
+  },
+  {
+    "PK": {
+      "S": "SHARE#63fad379-99a2-4387-82af-ba66d7037b1d"
+    },
+    "SK": {
+      "S": "RECEIVE#USER#f4013afd-130e-4aa9-b9e6-715e3380eee6"
+    },
+    "Type": {
+      "S": "Receiver"
+    },
+    "accepted_at": {
+      "S": "2024-07-28T08:05:14.802767"
+    }
+  },
+  {
+    "PK": {
+      "S": "SHARE#63fad379-99a2-4387-82af-ba66d7037b1d"
+    },
+    "SK": {
+      "S": "INTEREST#USER#a64ffa47-85ce-47fa-b9ca-4b00be6694d6"
+    },
+    "Type": {
+      "S": "Interested"
+    },
+    "interested_at": {
+      "S": "2024-06-11T08:05:14.802775"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#6baa4731-1c2c-4cf9-88a2-27f017d967fc"
+    },
+    "SK": {
+      "S": "POST#43a37390-b0a2-4547-aefb-16f40f22f2d1"
+    },
+    "Type": {
+      "S": "Post"
+    },
+    "caption": {
+      "S": "Sample post caption"
+    },
+    "img_url": {
+      "S": "https://example.com/post.jpg"
+    },
+    "created_at": {
+      "S": "2025-02-24T08:05:14.802903"
+    }
+  },
+  {
+    "PK": {
+      "S": "POST#43a37390-b0a2-4547-aefb-16f40f22f2d1"
+    },
+    "SK": {
+      "S": "COMMENT#4fcb7f37-d44e-4557-b404-b8861f52d5d7"
+    },
+    "Type": {
+      "S": "Comment"
+    },
+    "userId": {
+      "S": "USER#6baa4731-1c2c-4cf9-88a2-27f017d967fc"
+    },
+    "content": {
+      "S": "Nice!"
+    },
+    "comment_at": {
+      "S": "2024-08-13T08:05:14.803039"
+    }
+  },
+  {
+    "PK": {
+      "S": "POST#43a37390-b0a2-4547-aefb-16f40f22f2d1"
+    },
+    "SK": {
+      "S": "LIKE#USER#6baa4731-1c2c-4cf9-88a2-27f017d967fc"
+    },
+    "Type": {
+      "S": "Like"
+    },
+    "liked_At": {
+      "S": "2024-08-28T08:05:14.803063"
+    }
+  },
+  {
+    "PK": {
+      "S": "COMMENT#4fcb7f37-d44e-4557-b404-b8861f52d5d7"
+    },
+    "SK": {
+      "S": "LIKE#USER#6baa4731-1c2c-4cf9-88a2-27f017d967fc"
+    },
+    "Type": {
+      "S": "Like"
+    },
+    "liked_At": {
+      "S": "2024-08-26T08:05:14.803070"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#6baa4731-1c2c-4cf9-88a2-27f017d967fc"
+    },
+    "SK": {
+      "S": "FOLLOWING#USER#ea5a957c-bb3b-48cb-9df3-245dca3e288e"
+    },
+    "Type": {
+      "S": "Follow"
+    },
+    "followed_At": {
+      "S": "2024-08-19T08:05:14.803082"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#6baa4731-1c2c-4cf9-88a2-27f017d967fc"
+    },
+    "SK": {
+      "S": "FOLLOWER#USER#ea5a957c-bb3b-48cb-9df3-245dca3e288e"
+    },
+    "Type": {
+      "S": "Follow"
+    },
+    "followed_At": {
+      "S": "2025-03-03T08:05:14.803087"
+    }
+  },
+  {
+    "PK": {
+      "S": "QUEST#01d3d437-1c0f-459a-be5d-b694794bc5cd"
+    },
+    "SK": {
+      "S": "DETAILS"
+    },
+    "Type": {
+      "S": "Quest"
+    },
+    "title": {
+      "S": "Quest Title"
+    },
+    "description": {
+      "S": "Complete this challenge"
+    },
+    "create_at": {
+      "S": "2025-03-05T08:05:14.803255"
+    },
+    "reward_pointt": {
+      "N": "36"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#6baa4731-1c2c-4cf9-88a2-27f017d967fc"
+    },
+    "SK": {
+      "S": "QUEST#QUEST#01d3d437-1c0f-459a-be5d-b694794bc5cd"
+    },
+    "Type": {
+      "S": "Quest"
+    },
+    "success_at": {
+      "S": "2025-04-05T08:05:14.803279"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#a64ffa47-85ce-47fa-b9ca-4b00be6694d6"
+    },
+    "SK": {
+      "S": "PROFILE"
+    },
+    "Type": {
+      "S": "User"
+    },
+    "username": {
+      "S": "user_694d6"
+    },
+    "email": {
+      "S": "694d6@example.com"
+    },
+    "phone_num": {
+      "S": "0886623224"
+    },
+    "line_id": {
+      "S": "line_694d6"
+    },
+    "password": {
+      "S": "hashedpassword"
+    },
+    "profile_url": {
+      "S": "https://example.com/profile.jpg"
+    },
+    "bio": {
+      "S": "Mock user bio"
+    },
+    "score": {
+      "N": "28"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#a64ffa47-85ce-47fa-b9ca-4b00be6694d6"
+    },
+    "SK": {
+      "S": "STAT"
+    },
+    "Type": {
+      "S": "Stat"
+    },
+    "share_quantity": {
+      "N": "5"
+    },
+    "reduce_foodwaste": {
+      "N": "47"
+    },
+    "no_expired": {
+      "N": "20"
+    },
+    "updated_at": {
+      "S": "2024-06-15T08:05:14.803298"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#a64ffa47-85ce-47fa-b9ca-4b00be6694d6"
+    },
+    "SK": {
+      "S": "FOLDER#463baf74-d943-4af6-a3af-a9087a2600de"
+    },
+    "Type": {
+      "S": "Folder"
+    },
+    "folderName": {
+      "S": "Folder_00de"
+    },
+    "description": {
+      "S": "Sample folder"
+    },
+    "created_at": {
+      "S": "2024-05-31T08:05:14.803357"
+    },
+    "quantity": {
+      "N": "3"
+    },
+    "img_url": {
+      "S": "https://example.com/folder.jpg"
+    }
+  },
+  {
+    "PK": {
+      "S": "FOLDER#463baf74-d943-4af6-a3af-a9087a2600de"
+    },
+    "SK": {
+      "S": "FOOD#476eda1d-bb79-49da-8c1f-14a168467bd8"
+    },
+    "Type": {
+      "S": "Food"
+    },
+    "foodName": {
+      "S": "Food_7bd8"
+    },
+    "created_at": {
+      "S": "2024-08-21T08:05:14.803399"
+    },
+    "expired_at": {
+      "S": "2025-06-09T08:05:14.803407"
+    },
+    "unit": {
+      "S": "ชิ้น"
+    },
+    "quantity": {
+      "N": "10"
+    },
+    "img_url": {
+      "S": "https://example.com/food.jpg"
+    },
+    "category": {
+      "S": "ผลไม้"
+    },
+    "use_at": {
+      "S": "2024-12-21T08:05:14.803419"
+    },
+    "status": {
+      "S": "หมดอายุ"
+    }
+  },
+  {
+    "PK": {
+      "S": "USER#a64ffa47-85ce-47fa-b9ca-4b00be6694d6"
+    },
+    "SK": {
+      "S": "SHARE#89d2b7b0-89a6-4549-827f-5435fa5af893"
+    },
+    "Type": {
+      "S": "SharePost"
+    },
+    "available_time": {
+      "S": "2024-11-16T08:05:14.803458"
+    },
+    "status": {
+      "S": "รอดำเนินการ"
+    },
+    "foodId": {
+      "S": "FOOD#476eda1d-bb79-49da-8c1f-14a168467bd8"
+    },
+    "quantity": {
+      "N": "2"
+    },
+    "latitude": {
+      "S": "13.873966"
+    },
+    "longtitude": {
+      "S": "100.579825"
+    },
+    "created_at": {
+      "S": "2025-05-10T08:05:14.803486"
+    }
+  }
+]

@@ -39,38 +39,44 @@ const params = {
 const createTable = async () => {
   try {
     const data = await dynamoDb.send(new CreateTableCommand(params));
-    console.log("Table created", data);
+    console.log("✅ Table created:", data.TableDescription.TableName);
   } catch (err) {
-    console.error(err);
+    if (err.name === "ResourceInUseException") {
+      console.warn("⚠️ Table already exists");
+    } else {
+      console.error("❌ Error creating table:", err);
+      process.exit(1);
+    }
   }
+
+  insertDataInBatches(formattedItems);
 };
 
 createTable();
 
-const items = JSON.parse(readFileSync("./mock_data.json", "utf8"));
+const items = JSON.parse(readFileSync("./mock_dynamodb_data.json", "utf8"));
+
+const formattedItems = items.map((item) => ({
+  PutRequest: { Item: item },
+}));
 
 const insertDataInBatches = async (items, batchSize = 25) => {
   for (let i = 0; i < items.length; i += batchSize) {
     const batch = items.slice(i, i + batchSize);
     const command = new BatchWriteItemCommand({
       RequestItems: {
-        ["kua-glang"]: batch,
+        "kua-glang": batch,
       },
     });
 
     try {
       const res = await dynamoDb.send(command);
-      console.log("✅ Batch ${i / batchSize + 1} inserted");
+      console.log(`✅ Batch ${i / batchSize + 1} inserted`);
       if (Object.keys(res.UnprocessedItems).length > 0) {
-        console.warn(
-          ":warning: มีบางรายการไม่ถูกประมวลผล:",
-          res.UnprocessedItems
-        );
+        console.warn("⚠️ Unprocessed Items:", res.UnprocessedItems);
       }
     } catch (err) {
-      console.error("❌ Error inserting batch ${i / batchSize + 1}`", err);
+      console.error(`❌ Error inserting batch ${i / batchSize + 1}`, err);
     }
   }
 };
-
-insertDataInBatches(items);

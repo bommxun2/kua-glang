@@ -10,6 +10,11 @@ const getPostsFromFollowing = require("../controllers/post/getPostsFromFollowing
 const likePost = require("../controllers/post/likePost.controller")
 const commentPost = require("../controllers/post/commentPost.controller")
 const likeComment = require("../controllers/post/likeComment.contoller")
+const deleteComment = require("../controllers/post/deleteComment.controller");
+const updateComment = require("../controllers/post/updateComment.controller");
+const getFriendsAndSuggestions = require("../controllers/post/getFriendsAndSuggestions.controller");
+const unfollowUser = require("../controllers/post/unfollowUser.controller");
+const followUser = require("../controllers/post/followUser.controller");
 
 router.get('/', getAllPosts);
 router.get('/:userId', getPostsFromFollowing);
@@ -19,6 +24,11 @@ router.delete('/:userId/:postId', deletePost);
 router.post('/like/:userId/:postId', likePost);
 router.post('/post/:postId/comment/:userId', commentPost);
 router.post('/post/:cid/comment/:userId', likeComment);
+router.delete("/:postId/comment/:cId", deleteComment);
+router.put("/:postId/comment/:cId", updateComment);
+router.get("/friend/:userId", getFriendsAndSuggestions);
+router.post("/friend/:userId/:followId", followUser);
+router.delete("/friend/:userId/:followId", unfollowUser);
 
 
 module.exports = router;

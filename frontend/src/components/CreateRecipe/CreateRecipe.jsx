@@ -2,17 +2,16 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CreateRecipe.css';
 import MenuBar from '../MenuBar/MenuBar.jsx';
-import axios from 'axios';
 
 const CreateRecipe = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    foodName: '',
+    name: '',
     category: '',
-    expired_at: '',
-    quntity: '',
+    expirationDate: '',
+    quantity: '',
     unit: '',
-    img_url: '',
+    image: null,
   });
   const [imagePreview, setImagePreview] = useState(null); // State for image preview
 
@@ -33,16 +32,15 @@ const CreateRecipe = () => {
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
+    setFormData({ ...formData, image: file });
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImagePreview(reader.result);
-        setFormData({ ...formData, img_url: reader.result });
+        setImagePreview(reader.result); // Set preview URL
       };
       reader.readAsDataURL(file);
     } else {
-      setImagePreview(null);
-      setFormData({ ...formData, img_url: '' });
+      setImagePreview(null); // Clear preview if no file
     }
   };
 
@@ -50,18 +48,10 @@ const CreateRecipe = () => {
     alert('ฟังก์ชันถ่ายภาพยังไม่พร้อมใช้งานในขณะนี้');
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      // สมมุติ folderId = 1
-      const folderId = 1;
-      await axios.post(`/food/${folderId}`, formData);
-      alert('เพิ่มอาหารสำเร็จ!');
-      navigate(-1);
-    } catch (err) {
-      console.error(err);
-      alert('เกิดข้อผิดพลาดในการเพิ่มอาหาร');
-    }
+    console.log('Form Data:', formData);
+    alert('สูตรอาหารถูกบันทึกเรียบร้อยแล้ว!');
   };
 
   const handleGoBack = () => {
@@ -86,8 +76,8 @@ const CreateRecipe = () => {
             ชื่อ*:
             <input
               type="text"
-              name="foodName"
-              value={formData.foodName}
+              name="name"
+              value={formData.name}
               onChange={handleInputChange}
               required
               style={{ background: '#fff', color: '#333' }}
@@ -97,8 +87,8 @@ const CreateRecipe = () => {
             วันหมดอายุ*:
             <input
               type="date"
-              name="expired_at"
-              value={formData.expired_at}
+              name="expirationDate"
+              value={formData.expirationDate}
               onChange={handleInputChange}
               required
               style={{ background: '#fff', color: '#333' }}
@@ -108,8 +98,8 @@ const CreateRecipe = () => {
             ปริมาณ:
             <input
               type="number"
-              name="quntity"
-              value={formData.quntity}
+              name="quantity"
+              value={formData.quantity}
               onChange={handleInputChange}
               style={{ background: '#fff', color: '#333' }}
             />

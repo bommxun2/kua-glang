@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import './RecipeDetail.css';
 import { FaSearch, FaTimes, FaBell, FaArrowLeft, FaShareAlt } from 'react-icons/fa';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import MenuBar from '../MenuBar/MenuBar.jsx';
+import onionImg from '../../assets/onion.png';
+import tomatoImg from '../../assets/tomato.png';
+import porkImg from '../../assets/pork.png';
+import senspaghettiImg from '../../assets/senspaghetti.png';
 
 const categories = [
   { label: 'ทั้งหมด', value: 'all' },
@@ -15,21 +18,14 @@ const categories = [
 const RecipeDetail = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [items, setItems] = useState([]);
   const navigate = useNavigate();
-  const { folderId } = useParams(); // สมมติ route เป็น /recipe/:folderId
 
-  useEffect(() => {
-    // ถ้าไม่มี folderId ใน url ให้ fallback เป็น 1
-    const id = folderId || 1;
-    axios.get(`/food/${id}`)
-      .then(res => {
-        // filter เฉพาะ status 'ยังไม่ใช้'
-        const filtered = res.data.filter(item => item.status === 'ยังไม่ใช้');
-        setItems(filtered);
-      })
-      .catch(err => console.error('fetch error', err));
-  }, [folderId]);
+  const items = [
+    { id: 1, name: "มะเขือเทศลูกโตๆ", category: "ทั้งหมด", quantity: "6 ลูก", expiry: "08 มกราคม 2025", img: tomatoImg },
+    { id: 2, name: "เส้นสปาเก็ตตี้", category: "ทั้งหมด", quantity: "4 กรัม", expiry: "08 มกราคม 2025", img: senspaghettiImg },
+    { id: 3, name: "หมูชิ้นๆ", category: "ทั้งหมด", quantity: "2 กิโลกรัม", expiry: "09 มกราคม 2025", img: porkImg },
+    { id: 4, name: "หัวหอมแต่หอมไม่สู้แก้มเธอ", category: "ทั้งหมด", quantity: "3 ลูก", expiry: "09 มกราคม 2025", img: onionImg },
+  ];
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
@@ -41,6 +37,10 @@ const RecipeDetail = () => {
 
   const handleAddItem = () => {
     navigate('/create-recipe');
+  };
+
+  const handleGoBack = () => {
+    navigate('/');
   };
 
   const handleIngredientClick = (ingredientId) => {
@@ -94,18 +94,18 @@ const RecipeDetail = () => {
       {/* Items List */}
       <div className="items-list">
         {items
-          .filter((item) => item.foodName.includes(searchQuery))
+          .filter((item) => item.name.includes(searchQuery))
           .map((item) => (
             <div
-              key={item.foodId}
+              key={item.id}
               className="item-card"
-              onClick={() => handleIngredientClick(item.foodId)}
+              onClick={() => handleIngredientClick(item.id)} // Add click handler
             >
-              <img src={item.img_url} alt={item.foodName} className="item-img" />
+              <img src={item.img} alt={item.name} className="item-img" />
               <div className="item-info">
-                <h3 className="item-name">{item.foodName}</h3>
-                <p className="item-expiry">{item.expired_at ? new Date(item.expired_at).toLocaleDateString('th-TH', { year: 'numeric', month: 'long', day: '2-digit' }) : ''}</p>
-                <p className="item-quantity">{item.quntity} {item.unit}</p>
+                <h3 className="item-name">{item.name}</h3>
+                <p className="item-expiry">{item.expiry}</p>
+                <p className="item-quantity">{item.quantity}</p>
               </div>
             </div>
           ))}

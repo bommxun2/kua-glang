@@ -23,17 +23,17 @@ app.use("/folder", require("./routes/folder.route"))
 app.use("/food", require("./routes/food.route"))
 
 app.get("/", (req, res) => {
-  res.json({
-    status: "ok",
-    message: "Backend service Lambda Express on.",
-    serviceName: "KuaGlangAPI",
-    timestamp: new Date().toISOString(),
-  });
+    res.json({
+        status: "ok",
+        message: "Backend service Lambda Express on.",
+        serviceName: "KuaGlangAPI",
+        timestamp: new Date().toISOString(),
+    });
 });
 
 app.listen(port, () => {
-  console.log(`Backend service listening on port ${port}`);
+    console.log(`Backend service listening on port ${port}`);
 });
 
 exports.handler = (event, context) =>
-  awsServerlessExpress.proxy(server, event, context);
+    awsServerlessExpress.proxy(server, event, context);

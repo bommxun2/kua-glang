@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home"; // ✅ import หน้าใหม่
 
+import Competition from './competition.jsx';
 function App() {
   return (
     <Routes>
@@ -18,6 +19,7 @@ function App() {
       <Route path="/edit-ingredient/:id" element={<EditIngredient />} />
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="/edit-profile" element={<EditProfilePage />} />
+      <Route path="/competition" element={<Competition />} /> {/* ✅ หน้าระดับ/แงค์ */}
       {/* เพิ่ม Route อื่นๆ ตามต้องการ */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />

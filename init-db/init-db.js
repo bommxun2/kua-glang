@@ -15,7 +15,7 @@ const dynamoDb = new DynamoDBClient({
 });
 
 const params = {
-  TableName: "kua-glang", // เปลี่ยนกลับเป็น kua-glang
+  TableName: "kua-glang",
   AttributeDefinitions: [
     { AttributeName: "PK", AttributeType: "S" },
     { AttributeName: "SK", AttributeType: "S" },

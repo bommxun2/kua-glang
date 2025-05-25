@@ -1,25 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './HomePage.css';
 import { FaSignOutAlt, FaSearch, FaTimes } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import '@fontsource/bai-jamjuree';
 import MenuBar from '../MenuBar/MenuBar.jsx';
-import spaghettiImg from '../../assets/spaghetti.png';
-import salapaoImg from '../../assets/salapao.png';
-import chinesetableImg from '../../assets/chinesetable.png';
+import axios from 'axios';
 
 const URL = "http://localhost:3000";
 
 const HomePage = () => {
   const [selectedLocation, setSelectedLocation] = useState("Accom park");
   const [searchQuery, setSearchQuery] = useState("");
-
-  const [recipes, setRecipes] = useState([]);
-  const [username, setUsername] = useState(""); // เพิ่ม state สำหรับ username
-  const navigate = useNavigate();
-
+  const [recipes, setRecipes] = useState([]); // Add recipes state
+  const navigate = useNavigate(); // ใช้ useNavigate สำหรับการนำทาง
 
   useEffect(() => {
+    // TODO: เปลี่ยน userId ให้เหมาะสม (mock เป็น 1)
+    const userId = 1;
+    axios.get(`/folder/${userId}`)
+      .then(res => setRecipes(Array.isArray(res.data) ? res.data : []))
+      .catch(err => console.error('fetch error', err));
+  }, []);
+
+  const handleLocationChange = (e) => {
+    setSelectedLocation(e.target.value);
+  };
 
     const userId = localStorage.getItem("userId");
 

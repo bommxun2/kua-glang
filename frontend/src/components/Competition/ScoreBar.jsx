@@ -1,13 +1,14 @@
-import colors from "../styles/colors";
+import colors from "../../styles/colors";
 
 function ScoreBar({ score, maxScore = 100 }) {
-  const progressPercent = Math.min((score / maxScore) * 100, 100);
-  const remaining = Math.max(maxScore - score, 0);
+  const currentRoundScore = score % maxScore;
+  const progressPercent = (currentRoundScore / maxScore) * 100;
+  const remaining = maxScore - currentRoundScore;
 
   return (
     <div style={{ margin: "24px" }}>
       <p style={{ marginBottom: "8px", fontFamily: "'Bai Jamjuree', sans-serif" }}>
-        คะแนนของคุณ: {score} คะแนน
+        คะแนนของคุณ: {currentRoundScore}/{maxScore} คะแนน
       </p>
 
       <div
@@ -23,6 +24,7 @@ function ScoreBar({ score, maxScore = 100 }) {
             backgroundColor: colors.primary,
             width: `${progressPercent}%`,
             height: "10px",
+            transition: "width 0.3s",
           }}
         ></div>
       </div>
@@ -34,7 +36,7 @@ function ScoreBar({ score, maxScore = 100 }) {
           fontFamily: "'Bai Jamjuree', sans-serif",
         }}
       >
-        {score < maxScore
+        {remaining > 0
           ? `เหลืออีก ${remaining} คะแนนจะได้อัปแรงค์ใหม่!`
           : "ยอดเยี่ยม! คุณอาจได้อัปแรงค์แล้ว 🎉"}
       </small>

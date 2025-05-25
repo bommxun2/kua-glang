@@ -1,5 +1,5 @@
 import { useState } from "react";
-import colors from "../styles/colors";
+import colors from "../../styles/colors";
 function ModeRank({ currentMode, onChangeMode }) {
   
   const buttonGroupStyle = {

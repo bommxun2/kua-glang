@@ -10,9 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.817.0",
     "@fontsource/bai-jamjuree": "^5.2.6",
-    "frontend": "file:",
+    "axios": "^1.9.0",
     "bcrypt": "^6.0.0",
+    "frontend": "file:",
     "lucide-react": "^0.511.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

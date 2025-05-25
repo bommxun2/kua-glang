@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
-import colors from "./styles/colors";
-import HeaderRank from "./components/HeaderRank";
-import ScoreBar from "./components/ScoreBar";
-import ModeRank from "./components/ModeRank";
-import FilterBar from "./components/FilterBar";
-import Leaderboard from "./components/Leaderboard/Leaderboard";
-import MenuBar from "./components/MenuBar";
-import QuestModal from "./components/QuestModal";
+import colors from "../styles/colors"
+
+import HeaderRank from "../components/Competition/HeaderRank";
+import ScoreBar from "../components/Competition/ScoreBar";
+import ModeRank from "../components/Competition/ModeRank";
+import Leaderboard from "../components/Competition/Leaderboard/Leaderboard";
+import FilterBar from "../components/Competition/FilterBar";
+import MenuBar from "../components/MenuBar/MenuBar";
+import QuestModal from "../components/Competition/QuestModal";
 
 function Competition() {
-  const userId = "user003"; // ✅ เปลี่ยนเป็น userId จริงจากระบบ login
+  const userId = localStorage.getItem("userId"); 
   const maxScore = 100; // ✅ สามารถปรับได้ถ้ามีหลายระดับ
   const [mode, setMode] = useState("trash");
   const [viewScope, setViewScope] = useState("all");
@@ -19,7 +20,7 @@ function Competition() {
 
   // ✅ โหลดคะแนนรวมจาก backend
   const loadScore = () => {
-    fetch(`http://kua-backend:3000/ranking/score/${userId}`, {
+    fetch(`http://localhost:3000/ranking/score/${userId}`, {
       method: "GET",
     })
       .then((res) => res.json())
@@ -29,29 +30,9 @@ function Competition() {
       .catch((err) => console.error("โหลดคะแนนไม่สำเร็จ", err));
   };
 
-  // ✅ ส่งคะแนนใหม่กลับ backend
-  const updateScore = (userId, newScore) => {
-    fetch(`http://kua-backend:3000/ranking/score/${userId}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId,
-        score: newScore,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("อัปเดตคะแนนสำเร็จ", data);
-        setScore(newScore); // อัปเดตคะแนนใน frontend ทันที
-      })
-      .catch((err) => console.error("อัปเดตคะแนนไม่สำเร็จ", err));
-  };
-
   // ✅ โหลดเควสจาก backend ตอน mount
   useEffect(() => {
-    fetch(`http://kua-backend:3000/ranking/quest/${userId}`)
+    fetch(`http://localhost:3000/ranking/quest/${userId}`)
       .then((res) => res.json())
       .then((data) => {
         const normalized = Array.isArray(data)
@@ -87,7 +68,6 @@ function Competition() {
           setQuests={setQuests}
           userId={userId}
           loadScore={loadScore}
-          updateScore={updateScore} // ✅ ส่งไปให้ QuestModal เรียกใช้
         />
       )}
 

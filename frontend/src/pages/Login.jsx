@@ -21,7 +21,8 @@ export default function Login() {
     const data = await res.json();
     if (res.ok) {
       localStorage.setItem("userId", data.userId);
-      navigate("/home");
+      navigate("..");
+      alert("เข้าสู่ระบบสำเร็จ");
     } else {
       alert("เข้าสู่ระบบไม่สำเร็จ");
     }

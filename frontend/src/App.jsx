@@ -13,8 +13,7 @@ import CommunityPage from './pages/CommunityPage/CommunityPage.jsx';
 import CreatePostPage from './pages/CreatePostPage/CreatePostPage.jsx';
 import EditPostPage from './pages/EditPostPage/EditPostPage.jsx';  
 import FollowingPage from './pages/FollowingPage/FollowingPage.jsx'; 
-
-import Competition from './competition.jsx';
+import Competition from './pages/Competition.jsx';
 function App() {
   return (
     <Routes>

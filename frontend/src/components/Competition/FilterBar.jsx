@@ -46,7 +46,7 @@ function FilterBar({ viewScope, onChangeViewScope, onOpenQuest }) {
             style={{
               ...buttonStyle,
               flexDirection: "row",
-              justifyContent: "center", // ⭐ ปรับข้อความให้อยู่ตรงกลาง
+              justifyContent: "center", 
               minWidth: "200px",
               gap: "6px",
             }}

@@ -41,55 +41,6 @@ exports.listFolders = async (req, res) => {
   }
 };
 
-exports.addFolder = async (req, res) => {
-  const { userId } = req.params;
-  const folderId = Date.now().toString();
-
-  // Debug log
-  console.log("addFolder params:", req.params);
-  console.log("addFolder body:", req.body);
-
-  // รับ quantity หรือ quntity (รองรับทั้งสอง)
-  let quantity = req.body.quantity || req.body.quntity || "00";
-
-  // ใช้ created_at จาก body ถ้ามี ไม่งั้นใช้เวลาปัจจุบัน
-  const created_at = req.body.created_at || new Date().toISOString();
-
-  // แปลงค่าทุก field เป็นรูปแบบ DynamoDB
-  const item = {
-    PK: { S: `USER#${userId}` },
-    SK: { S: `FOLDER#${folderId}` },
-    folderId: { S: folderId },
-    userId: { S: userId },
-    folderName: { S: req.body.folderName || "" },
-    description: { S: req.body.description || "" },
-    quantity: { S: quantity },
-    img_url: { S: req.body.img_url || "" },
-    created_at: { S: created_at },
-  };
-
-  const params = { TableName: TABLE_NAME, Item: item };
-  try {
-    await dynamoDb.send(new PutItemCommand(params));
-    // ส่ง response กลับแบบอ่านง่าย
-    res.status(201).json({
-      folderId: folderId,
-      folderName: req.body.folderName || "",
-      description: req.body.description || "",
-      created_at: created_at,
-      quantity: quantity,
-      img_url: req.body.img_url || ""
-    });
-  } catch (err) {
-    console.error("Failed to add folder", err);
-    res.status(500).json({
-      error: "Failed to add folder",
-      details: err.message,
-      params,
-    });
-  }
-};
-
 exports.updateFolder = async (req, res) => {
   const { userId, folderId } = req.params;
   // รับ quntity (ไม่ใช่ quantity) ตาม API

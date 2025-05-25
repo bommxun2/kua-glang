@@ -44,8 +44,8 @@ input[type="date"],
 input[type="number"],
 textarea {
   width: calc(100% - 20px); /* Ensure inputs are balanced within the container */
-  padding: 10px;
-  margin-bottom: 15px;
+  padding: 0px;
+  margin-bottom: 0px;
   border: 1px solid var(--border);
   border-radius: 10px;
   font-size: 14px;
@@ -71,7 +71,7 @@ input[type="file"] {
   margin-left: 10px; /* Add spacing to the left to move it away from the text */
 }
 
-button {
+.button {
   padding: 10px 20px;
   border: none;
   border-radius: 10px;

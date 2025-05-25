@@ -1,81 +1,120 @@
 import React, { useState } from 'react';
 import './RecipeDetail.css';
-import { FaSearch, FaTimes, FaBell, FaArrowLeft, FaShareAlt } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { FaSearch, FaTimes, FaBell, FaArrowLeft } from 'react-icons/fa';
+import { useNavigate, useParams } from 'react-router-dom';
 import MenuBar from '../MenuBar/MenuBar.jsx';
-import onionImg from '../../assets/onion.png';
-import tomatoImg from '../../assets/tomato.png';
-import porkImg from '../../assets/pork.png';
-import senspaghettiImg from '../../assets/senspaghetti.png';
+
 
 const categories = [
-  { label: 'ทั้งหมด', value: 'all' },
-  { label: 'เครื่องดื่ม', value: 'drink' },
+  { label: 'ทั้งหมด', value: '' },
+  { label: 'อาหารคาว', value: 'savory' },
   { label: 'ของหวาน', value: 'dessert' },
+  { label: 'เครื่องดื่ม', value: 'drink' },
   { label: 'อาหารแช่แข็ง', value: 'frozen' },
+  { label: 'ของว่าง', value: 'snack' },
+  { label: 'ผักและผลไม้', value: 'vegetable-fruit' },
 ];
 
 const RecipeDetail = () => {
+
+  const { folderId } = useParams();
+  const [items, setItems] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedCategory, setSelectedCategory] = useState('');
   const navigate = useNavigate();
 
-  const items = [
-    { id: 1, name: "มะเขือเทศลูกโตๆ", category: "ทั้งหมด", quantity: "6 ลูก", expiry: "08 มกราคม 2025", img: tomatoImg },
-    { id: 2, name: "เส้นสปาเก็ตตี้", category: "ทั้งหมด", quantity: "4 กรัม", expiry: "08 มกราคม 2025", img: senspaghettiImg },
-    { id: 3, name: "หมูชิ้นๆ", category: "ทั้งหมด", quantity: "2 กิโลกรัม", expiry: "09 มกราคม 2025", img: porkImg },
-    { id: 4, name: "หัวหอมแต่หอมไม่สู้แก้มเธอ", category: "ทั้งหมด", quantity: "3 ลูก", expiry: "09 มกราคม 2025", img: onionImg },
+  const mockData = [
+    {
+      foodId: '1',
+      foodName: 'เค้กจ้า',
+      quantity: 4,
+      unit: 'ชิ้น',
+      expired_at: '2025-06-01',
+      category:"dessert",
+      img_url: 'https://i.pinimg.com/736x/75/a5/62/75a562db96c7f70fcd61b0d7cf37529c.jpg',
+      status: 'ยังไม่ใช้'
+    },
+    {
+      foodId: '2',
+      foodName: 'มันฝรั่ง',
+      quantity: 3,
+      unit: 'หัว',
+      expired_at: '2025-06-03',
+      category:"vegetable-fruit",
+      img_url: 'https://i.pinimg.com/736x/05/3c/4e/053c4e34dc5b10cdda768068cd19bbed.jpg',
+      status: 'ยังไม่ใช้'
+    },
+    {
+      foodId: '3',
+      foodName: 'หอมใหญ่',
+      quantity: 1,
+      unit: 'หัว',
+      expired_at: null,
+      category:"vegetable-fruit",
+      img_url: 'https://i.pinimg.com/736x/ac/71/0b/ac710bfaa12bb7b8f658a5da6c19aa56.jpg',
+      status: 'ยังไม่ใช้'
+    }
   ];
 
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const id = folderId || '1';
+        const response = await axios.get(`http://localhost:3000/food/folder/${id}`);
+        const filtered = response.data.filter(item => item.status === 'ยังไม่ใช้');
+        setItems(filtered.length > 0 ? filtered : mockData);
+      } catch (error) {
+        console.error('Error fetching food items:', error);
+        setItems(mockData);
+      }
+    };
+    fetchData();
+  }, [folderId]);
 
-  const handleClearSearch = () => {
-    setSearchQuery("");
-  };
 
-  const handleAddItem = () => {
-    navigate('/create-recipe');
-  };
+  const handleSearchChange = (e) => setSearchQuery(e.target.value);
+  const handleClearSearch = () => setSearchQuery("");
+  const handleAddItem = () => navigate('/create-recipe');
+  const handleIngredientClick = (id) => navigate(`/edit-ingredient/${id}`);
 
-  const handleGoBack = () => {
-    navigate('/');
-  };
 
-  const handleIngredientClick = (ingredientId) => {
-    navigate(`/edit-ingredient/${ingredientId}`); // Navigate to EditIngredient page with ingredient ID
-  };
+  const filteredItems = items.filter((item) =>
+    item.foodName.toLowerCase().includes(searchQuery.toLowerCase()) &&
+    (selectedCategory === '' || item.category === selectedCategory)
+  );
+
 
   return (
     <div className="recipe-detail">
       {/* Header */}
       <div className="header">
-        <div className="back-icon" onClick={() => navigate('/')}> {/* Navigate to HomePage */}
+        <div className="back-icon" onClick={() => navigate('/')}>
           <FaArrowLeft />
         </div>
         <h1>ครัวกลาง</h1>
         <FaBell className="notification-icon large-icon" />
       </div>
 
-      {/* Search Bar */}
-      <div className="search-container">
-        <FaSearch className="search-icon-recipedetail" />
-        <input
-          type="text"
-          className="search-bar-recipedetail"
-          placeholder="ค้นหา"
-          value={searchQuery}
-          onChange={handleSearchChange}
-          style={{ background: '#fff', color: '#333' }}
-        />
-        {searchQuery && <FaTimes className="clear-icon" onClick={handleClearSearch} />}
-      </div>
-
       {/* Add Button */}
       <div className="add-item-recipedetail">
         <button className="add-item-btn" onClick={handleAddItem}>+ เพิ่ม</button>
-        <FaShareAlt className="share-icon" style={{ marginLeft: '15px', color: 'var(--primary)' }} /> {/* Adjusted to align to the right of the button */}
+        <button className="share-item-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+            <path d="M 23 3 A 4 4 0 0 0 19 7 A 4 4 0 0 0 19.09375 7.8359375 L 10.011719 12.376953 A 4 4 0 0 0 7 11 A 4 4 0 0 0 3 15 A 4 4 0 0 0 7 19 A 4 4 0 0 0 10.013672 17.625 L 19.089844 22.164062 A 4 4 0 0 0 19 23 A 4 4 0 0 0 23 27 A 4 4 0 0 0 27 23 A 4 4 0 0 0 23 19 A 4 4 0 0 0 19.986328 20.375 L 10.910156 15.835938 A 4 4 0 0 0 11 15 A 4 4 0 0 0 10.90625 14.166016 L 19.988281 9.625 A 4 4 0 0 0 23 11 A 4 4 0 0 0 27 7 A 4 4 0 0 0 23 3 z" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Search */}
+      <div className="search-box-detail">
+        <FaSearch className="search-icon" />
+        <input
+          type="text"
+          placeholder="ค้นหา"
+          value={searchQuery}
+          onChange={handleSearchChange}
+        />
+        {searchQuery && <FaTimes className="clear-icon" onClick={handleClearSearch} />}
       </div>
 
       {/* Category Filter */}
@@ -91,24 +130,27 @@ const RecipeDetail = () => {
         ))}
       </div>
 
-      {/* Items List */}
+      {/* Items */}
       <div className="items-list">
-        {items
-          .filter((item) => item.name.includes(searchQuery))
-          .map((item) => (
-            <div
-              key={item.id}
-              className="item-card"
-              onClick={() => handleIngredientClick(item.id)} // Add click handler
-            >
-              <img src={item.img} alt={item.name} className="item-img" />
-              <div className="item-info">
-                <h3 className="item-name">{item.name}</h3>
-                <p className="item-expiry">{item.expiry}</p>
-                <p className="item-quantity">{item.quantity}</p>
-              </div>
+
+        {filteredItems.map((item) => (
+          <div key={item.foodId} className="item-card" onClick={() => handleIngredientClick(item.foodId)}>
+            <img src={item.img_url} alt={item.foodName} className="item-img" />
+            <div className="item-info">
+              <h3 className="item-name">{item.foodName}</h3>
+              <p className="item-expiry">
+                {item.expired_at
+                  ? new Date(item.expired_at).toLocaleDateString('th-TH', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: '2-digit',
+                    })
+                  : ''}
+              </p>
+              <p className="item-quantity">{item.quantity} {item.unit}</p>
             </div>
-          ))}
+          </div>
+        ))}
       </div>
       <MenuBar />
     </div>

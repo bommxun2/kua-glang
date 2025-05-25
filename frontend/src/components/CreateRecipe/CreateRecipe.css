@@ -71,7 +71,7 @@ input[type="file"] {
   margin-left: 10px; /* Add spacing to the left to move it away from the text */
 }
 
-button {
+.button {
   padding: 10px 20px;
   border: none;
   border-radius: 10px;

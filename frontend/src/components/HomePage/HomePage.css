@@ -102,88 +102,106 @@ body {
   font-size: 1.2rem; /* ขนาดไอคอน */
 }
 
-/* ปรับปรุงเพิ่มเติมให้ไอคอนและช่องค้นหาอยู่ในตำแหน่งที่สมดุล */
-.search-container {
+/* Container สำหรับช่องค้นหาและปุ่ม */
+.input-group {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.search-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* จัดให้อยู่ตรงกลางในแนวตั้ง */
+  align-items: center;     /* จัดให้อยู่ตรงกลางในแนวนอน */
+  gap: 12px;
+  min-height: 120px;       /* ลดความสูงลงจากเดิม */
+  padding: 0 1rem;         /* ลบ padding ด้านบน/ล่าง */
+}
+
+.search-box {
   display: flex;
   align-items: center;
-  background-color: var(--background); /* เปลี่ยนเป็นสีเดียวกับ background */
-  border-radius: 25px;
-  padding: 8px 12px; /* ลด Padding ให้เล็กลงอีก */
-  margin-bottom: 20px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
-  border: 1px solid var(--primary);
-  width: 90%;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+  background-color: white;
+  border: 2px solid #d94f7b;
+  border-radius: 999px;
+  padding: 0.6rem 1.2rem; /* เท่ากับปุ่ม */
+  font-size: 1rem; /* เท่ากับปุ่ม */
+  width: 100%;
+  max-width: 360px;
+  box-sizing: border-box;
 }
 
-.search-icon-homepage {
-  margin-right: 5px; /* ลดระยะห่างระหว่างไอคอนและช่องค้นหาให้ใกล้กันมากขึ้น */
-  color: var(--primary);
-  font-size: 20px;
-  display: flex;
-  align-items: center; /* จัดให้อยู่กึ่งกลางแนวตั้ง */
+.search-box,
+.add-new-btn {
+  height: 48px; /* หรือค่าที่เหมาะกับ UI */
 }
 
-.search-bar {
+
+.search-box,
+.add-new-btn {
+  max-width: 360px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+.search-box input {
+  all: unset; 
+  appearance: none; 
+  -webkit-appearance: none;
+  border: none !important;
+  outline: none !important; 
   flex: 1;
+  font-size: 1rem;
+  padding: 0;
+  margin-bottom: 0px;
   font-family: 'Bai Jamjuree', sans-serif;
-  border: none;
+  background-color: transparent;
+}
+
+.search-box input:focus {
   outline: none;
-  font-size: 16px; /* ลดขนาดฟอนต์เล็กน้อย */
-  color: #333;
-  padding: 5px;
-  display: flex;
-  align-items: center; /* จัดให้อยู่กึ่งกลางแนวตั้ง */
-  margin-top: 12px;
-  background: var(--background); /* เปลี่ยนเป็นสีเดียวกับ background */
+  box-shadow: none;
+}
+
+.search-icon {
+  color: #d94f7b;
+  font-size: 1.2rem;
 }
 
 .clear-icon {
-  color: var(--primary);
+  color: #888;
   cursor: pointer;
-  font-size: 20px;
-  margin-left: 5px; /* ลดระยะห่างระหว่างไอคอนลบและช่องค้นหา */
-  display: flex;
-  align-items: center; /* จัดให้อยู่กึ่งกลางแนวตั้ง */
+  margin-left: 8px;
 }
 
-/* Add Item Button */
-.add-item {
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  margin: 20px auto; /* Add margin to separate from other elements */
-  width: fit-content; /* Adjust width to fit the content */
-}
-
-.add-item-btn {
-  background-color: var(--secondary); /* สีรองของปุ่ม */
+.add-new-btn {
+  background-color: #d94f7b;
   color: white;
-  padding: 12px 25px;
-  font-size: 1rem;
   border: none;
-  border-radius: 25px;
-  cursor: pointer;
+  border-radius: 999px;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  width: 100%;
+  max-width: 360px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: background-color 0.2s;
+  font-family: 'Bai Jamjuree', sans-serif;
+}
+.add-new-btn:active,
+.add-new-btn:focus {
+  background-color: #d94f7b; 
+  box-shadow: none;
+  outline: none;
+}
+.add-new-btn {
+  -webkit-tap-highlight-color: transparent; 
+  user-select: none; 
 }
 
-/* Add hover effect for the add-item-btn */
-.add-item-btn:hover {
-  background-color: var(--primary); /* Change background color on hover */
-  color: #ffffff; /* Ensure text color is white */
-  transform: scale(1.05); /* Slightly enlarge the button */
-  transition: all 0.3s ease; /* Smooth transition effect */
-}
-
-/* Center the add-item section specifically for HomePage */
-.add-item-homepage {
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  margin: 20px auto; /* Add margin to separate from other elements */
-  width: fit-content; /* Adjust width to fit the content */
-}
 
 /* Recipe Container */
 .recipe-container {
@@ -197,10 +215,11 @@ body {
 /* Recipe Item */
 .recipe-item {
   background-color: white;
+  height: 130px;
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* เงาของการ์ด */
   display: flex;
-  padding: 15px;
+  padding: 0px 15px 0px 0px;
   align-items: center;
   justify-content: space-between;
   position: relative;
@@ -216,32 +235,38 @@ body {
 }
 
 .recipe-img-wrapper {
-  width: 110px;
-  height: 110px;
-  border-radius: 18px;
+  width: 130px;
+  height: 100%;
   overflow: hidden;
   margin-right: 18px;
   display: flex;
   align-items: center;
+  border-radius: 18px 0 0 18px;
   justify-content: center;
   flex-shrink: 0;
 }
 
 .recipe-img {
-  width: 100%;
+  width: 130px;
   height: 100%;
   aspect-ratio: 1/1;
   object-fit: cover;
-  border-radius: 18px;
   display: block;
 }
 
 .recipe-details {
+  height: 130px;
   flex-grow: 1;
+  padding: 5px
 }
 
+.recipe-name-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+}
 .recipe-name {
-  font-size: 1.1rem;
+  font-size: 16px;
   font-weight: bold;
   color: #333;
 }
@@ -252,17 +277,14 @@ body {
 }
 
 .recipe-quantity {
-  font-size: 0.9rem;
-  color: #333;
+  font-size: 13px;
+  font-weight: 1000;
+  color: #d94f7b;
 }
 
-.arrow {
-  font-size: 1.5rem;
-  color: var(--primary); /* ใช้สีหลักของลูกศร */
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  transform: translateY(-50%);
+.recipe-description {
+  font-weight: 500;
+  font-size: 13px;
 }
 
 /* Header HomePage */

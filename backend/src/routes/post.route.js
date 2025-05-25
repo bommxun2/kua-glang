@@ -21,10 +21,10 @@ router.delete('/:userId/:postId', deletePost);
 router.get('/', getAllPosts);
 router.get('/:userId', getPostsFromFollowing);
 router.post('/like/:userId/:postId', likePost);
-router.post('/post/:postId/comment/:userId', commentPost);
+router.post('/post/comment-by/:userId/:postId', commentPost); // คอมเม้นโพสต์ของคนอื่น
 router.post('/post/:cid/comment/:userId', likeComment);
-router.delete("/:postId/comment/:cId", deleteComment);
-router.put("/:postId/comment/:cId", updateComment);
+router.delete("/post/comment/:cId/:postId", deleteComment); // ลบคอมเม้น
+router.put("/post/comment/:cId/:postId", updateComment); // แก้ไขคอมเม้น
 router.get("/friend/:userId", getFriendsAndSuggestions);
 router.post("/friend/:userId/:followId", followUser);
 router.delete("/friend/:userId/:followId", unfollowUser);

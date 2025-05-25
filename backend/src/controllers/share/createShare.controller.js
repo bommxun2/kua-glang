@@ -9,7 +9,6 @@ const createShareFood = async (req, res) => {
         latitude,
         longtitude,
         available_time,
-        status
     } = req.body;
 
     try {
@@ -60,7 +59,7 @@ const createShareFood = async (req, res) => {
             return res.status(404).json({ error: 'Food item not found in any folder of this user.' });
         }
 
-        if (!quantity || !latitude || !longtitude || !available_time || !status) {
+        if (!quantity || !latitude || !longtitude || !available_time) {
             return res.status(400).json({ error: 'Missing required fields in request body' });
         }
 
@@ -72,6 +71,7 @@ const createShareFood = async (req, res) => {
         const img_url = foodItemDetails.img_url?.S || '';
         const unit = foodItemDetails.unit?.S || '';
         const expired_at = foodItemDetails.expired_at?.S || '';
+        const status = "รอดำเนินการ"
 
         const shareItem = {
             PK: { S: `USER#${userId}` },

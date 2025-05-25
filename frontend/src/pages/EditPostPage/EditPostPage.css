@@ -1,0 +1,334 @@
+/* index.css (หรือไฟล์ CSS กลาง) */
+:root {
+  --color-primary: #D34670;
+  --color-secondary: #E6B4B5; /* หรือสี hover ที่อ่อนกว่า */
+  --color-background: #F7EBEB;
+  --color-text-main: #333333;
+  --color-text-content: #4F4F4F;
+  --color-text-muted: #8A8A8A;
+  --color-text-placeholder: #BDBDBD;
+  --color-card-background: #FFFFFF;
+  --color-white: #FFFFFF;
+  --color-black-opacity-60: rgba(0, 0, 0, 0.6);
+  --color-black-opacity-80: rgba(0, 0, 0, 0.8);
+  --color-gray-100: #F3F4F6; /* สำหรับ border */
+  --app-max-width: 440px;
+}
+
+/* src/pages/CreatePostPage/CreatePostPage.css */
+
+.create-post-page-wrapper {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--color-white);
+}
+
+.create-post-page-container {
+  width: 100%;
+  max-width: var(--app-max-width);
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-background);
+}
+
+.create-post-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem; /* p-3 */
+  border-bottom: 1px solid var(--color-secondary);
+  background-color: var(--color-background); /* ควรเป็นสีพื้นหลัง */
+  position: sticky; /* ให้ header ติดด้านบนเมื่อ scroll */
+  top: 0;
+  z-index: 10;
+}
+
+.header-back-button,
+.toolbar-button,
+.toolbar-label-button {
+  padding: 0.5rem; /* p-2 */
+  border-radius: 9999px; /* rounded-full */
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease-in-out;
+}
+.header-back-button:hover,
+.toolbar-button:hover,
+.toolbar-label-button:hover {
+  background-color: var(--color-secondary);
+}
+.header-back-button svg {
+  color: var(--color-primary);
+  width: 1.25rem; /* w-5 */
+  height: 1.25rem; /* h-5 */
+}
+
+.header-title {
+  font-size: 1rem; /* text-md */
+  font-weight: 600; /* font-semibold */
+  color: var(--color-text-main);
+}
+
+.header-submit-button {
+  padding: 0.25rem 1rem; /* px-4 py-1 */
+  border-radius: 9999px; /* rounded-full */
+  font-size: 0.75rem; /* text-xs */
+  font-weight: 600; /* font-semibold */
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease-in-out;
+}
+.header-submit-button:hover:not(:disabled) {
+  opacity: 0.9;
+}
+.header-submit-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.create-post-content-area {
+  flex-grow: 1; /* flex-1 */
+  padding: 1rem; /* p-4 (ปรับ pt-4 เป็น p-4 เพื่อความสม่ำเสมอ) */
+  display: flex;
+  gap: 0.75rem; /* space-x-3 */
+  overflow-y: auto; /* ให้ scroll ได้ถ้า content ยาว */
+}
+
+.user-avatar-post-create {
+  width: 2.25rem; /* w-9 */
+  height: 2.25rem; /* h-9 */
+  border-radius: 9999px;
+  margin-top: 0.25rem; /* mt-1 */
+  object-fit: cover;
+  align-self: flex-start; /* ให้ avatar อยู่ด้านบนสุดของ flex item */
+}
+
+.post-form-fields {
+  flex-grow: 1; /* flex-1 */
+  display: flex;
+  flex-direction: column;
+}
+.post-user-name {
+  font-weight: 600; /* font-semibold */
+  color: var(--color-text-main);
+  font-size: 0.875rem; /* text-sm */
+  margin-bottom: 0.125rem; /* mb-0.5 */
+}
+.location-input {
+  width: 100%;
+  font-size: 0.75rem; /* text-xs */
+  padding: 0.25rem; /* p-1 */
+  margin-bottom: 0.5rem; /* mb-2 */
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: var(--color-text-muted);
+}
+.location-input::placeholder {
+  color: var(--color-text-placeholder);
+}
+.content-textarea {
+  width: 100%;
+  min-height: 120px; /* min-h-[120px] */
+  font-size: 1rem; /* text-base */
+  background-color: transparent;
+  border: none;
+  outline: none;
+  resize: none; /* ป้องกันการ resize textarea */
+  color: var(--color-text-content);
+  flex-grow: 1; /* ให้ textarea ขยายถ้ามีพื้นที่ */
+}
+.content-textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+.image-preview-container {
+  margin-top: 0.5rem; /* mt-2 */
+  position: relative;
+  border: 1px solid var(--color-secondary);
+  border-radius: 0.5rem; /* rounded-lg */
+  overflow: hidden; /* ให้ขอบมนของรูปแสดงผล */
+  display: inline-block; /* ให้ container พอดีกับรูป */
+  max-width: 100%;
+}
+.image-preview {
+  max-height: 15rem; /* max-h-60 (240px) */
+  width: auto; /* ให้ปรับตาม aspect ratio */
+  max-width: 100%;
+  object-fit: contain; /* หรือ cover ตามต้องการ */
+  border-radius: 0.5rem; /* rounded-lg */
+  display: block; /* ลบ space ใต้รูป */
+}
+.remove-image-button {
+  position: absolute;
+  top: 0.25rem; /* top-1 */
+  right: 0.25rem; /* right-1 */
+  background-color: var(--color-black-opacity-60);
+  color: var(--color-white);
+  padding: 0.25rem; /* p-1 */
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  display: flex; /* จัด icon ให้อยู่กลาง */
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease-in-out;
+}
+.remove-image-button:hover {
+  background-color: var(--color-black-opacity-80);
+}
+.remove-image-button svg {
+  width: 0.875rem; /* w-[14px] */
+  height: 0.875rem; /* h-[14px] */
+}
+
+.post-meta-toolbar {
+  padding: 0.5rem 0.75rem; /* px-3 py-2 */
+  border-top: 1px solid var(--color-secondary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-background);
+}
+.reply-permission-button {
+  font-size: 0.75rem; /* text-xs */
+  color: var(--color-primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem; /* gap-1 */
+  padding: 0;
+}
+.reply-permission-button:hover {
+  text-decoration: underline;
+}
+.reply-permission-button svg {
+  width: 0.75rem; /* w-3 */
+  height: 0.75rem; /* h-3 */
+}
+.char-counter {
+  font-size: 0.75rem; /* text-xs */
+  color: var(--color-text-muted);
+}
+
+.actions-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* justify-start */
+  padding: 0.25rem; /* p-1 */
+  border-top: 1px solid var(--color-secondary);
+  /* space-x-0 หรือ space-x-1 ขึ้นอยู่กับว่าต้องการ gap หรือไม่ */
+  gap: 0; /* space-x-0 */
+  background-color: var(--color-background);
+}
+.toolbar-label-button { /* สำหรับ <label> ที่ทำตัวเหมือน button */
+  color: var(--color-primary);
+}
+.toolbar-button { /* สำหรับ <button> */
+  color: var(--color-primary);
+}
+.toolbar-button:disabled,
+.toolbar-label-button:disabled { /* ถ้า label มี disabled state */
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.toolbar-button svg,
+.toolbar-label-button svg {
+  width: 1.125rem; /* w-[18px] */
+  height: 1.125rem; /* h-[18px] */
+}
+.toolbar-button .gif-text { /* สำหรับ "GIF" */
+  font-weight: bold;
+  font-size: 0.75rem; /* text-xs */
+}
+.hidden-file-input {
+  display: none;
+}
+
+
+/* Responsive Styles (md breakpoint) */
+@media (min-width: 768px) {
+  .create-post-page-container {
+    height: 956px;
+    max-height: 100vh;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    overflow: hidden;
+    background-color: var(--color-background);
+
+  }
+  .create-post-header {
+    padding: 1rem; /* md:p-4 */
+  }
+  .header-back-button svg {
+    width: 1.375rem; /* md:w-[22px] */
+    height: 1.375rem; /* md:h-[22px] */
+  }
+  .header-title {
+    font-size: 1.125rem; /* md:text-lg */
+  }
+  .header-submit-button {
+    padding: 0.375rem 1.25rem; /* md:px-5 md:py-1.5 */
+    font-size: 0.875rem; /* md:text-sm */
+  }
+
+  .create-post-content-area {
+    padding: 1rem; /* md:p-4 */
+    /* gap: 0.75rem; md:space-x-3 เหมือนเดิม */
+  }
+  .user-avatar-post-create {
+    width: 2.5rem; /* md:w-10 */
+    height: 2.5rem; /* md:h-10 */
+  }
+  .post-user-name {
+    font-size: 1rem; /* md:text-base */
+  }
+  .content-textarea {
+    min-height: 150px; /* md:min-h-[150px] */
+    font-size: 1.125rem; /* md:text-lg */
+  }
+  .image-preview {
+    max-height: 20rem; /* md:max-h-80 (320px) */
+  }
+  .remove-image-button svg {
+    width: 1rem; /* md:w-4 */
+    height: 1rem; /* md:h-4 */
+  }
+
+  .post-meta-toolbar {
+    padding: 0.5rem 1rem; /* md:px-4 py-2 */
+  }
+  .reply-permission-button {
+    font-size: 0.875rem; /* md:text-sm */
+  }
+  .reply-permission-button svg {
+    width: 0.875rem; /* md:w-[14px] */
+    height: 0.875rem; /* md:h-[14px] */
+  }
+  .char-counter {
+    font-size: 0.875rem; /* md:text-sm */
+  }
+
+  .actions-toolbar {
+    padding: 0.5rem; /* md:p-2 */
+    gap: 0.25rem; /* md:space-x-1 */
+  }
+  .toolbar-button svg,
+  .toolbar-label-button svg {
+    width: 1.25rem; /* md:w-5 */
+    height: 1.25rem; /* md:w-5 */
+  }
+  .toolbar-button .gif-text {
+    font-size: 0.875rem; /* md:text-sm */
+  }
+}

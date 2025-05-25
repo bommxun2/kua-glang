@@ -1,0 +1,137 @@
+:root {
+  --color-primary: #D34670;
+  --color-secondary: #E6B4B5; /* หรือสี hover ที่อ่อนกว่า */
+  --color-background: #F7EBEB;
+  --color-text-main: #333333;
+  --color-text-content: #4F4F4F;
+  --color-text-muted: #8A8A8A;
+  --color-text-placeholder: #BDBDBD;
+  --color-card-background: #FFFFFF;
+  --color-white: #FFFFFF;
+  --color-black-opacity-60: rgba(0, 0, 0, 0.6);
+  --color-black-opacity-80: rgba(0, 0, 0, 0.8);
+  --color-gray-100: #F3F4F6; /* สำหรับ border */
+  --app-max-width: 440px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--color-background);
+}
+
+/* src/pages/FollowingPage/FollowingPage.css */
+
+/* --- Layout หลัก (คล้าย CommunityPage) --- */
+.following-page-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--color-background);
+}
+
+.following-page-container {
+  width: 100%;
+  max-width: var(--app-max-width);
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-background);
+}
+
+.following-fixed-header-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0; /* For mobile */
+  right: 0; /* For mobile */
+  width: 100%; /* For mobile */
+  z-index: 30;
+  background-color: var(--color-background); /* Ensure background for fixed part */
+}
+
+/* --- Inner Tabs Section --- */
+.following-inner-tabs-container {
+  display: flex;
+  justify-content: space-around; /* หรือ space-evenly */
+  align-items: center;
+  padding: 1rem 3rem 1rem; /* pt-1 pb-1 px-2 */
+  /*border-bottom: 1px solid var(--color-gray-200, #E5E7EB); /* border-gray-200 */
+  background-color: var(--color-background); /* Ensure background */
+}
+
+.following-inner-tab-button {
+  padding: 0.5rem 1.5rem; /* py-2 px-6 */
+  margin-left: 0.25rem; /* mx-1 */
+  margin-right: 0.25rem; /* mx-1 */
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 600; /* font-semibold */
+  border-radius: 9999px; /* rounded-full */
+  border: none;
+  cursor: pointer;
+  min-width: 150px; /* min-w-[150px] */
+  text-align: center;
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+
+.following-inner-tab-button.active {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.following-inner-tab-button.inactive {
+  background-color: var(--color-secondary); /* bg-gray-200 */
+  color: var(--color-text-main);
+}
+.following-inner-tab-button.inactive:hover {
+  background-color: var(--color-secondary); /* hover:bg-gray-300 */
+}
+
+
+/* --- Scrollable Content Area (เหมือน CommunityPage) --- */
+.following-scrollable-content-area {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.following-scrollable-content-area.no-scrollbar::-webkit-scrollbar { display: none; }
+.following-scrollable-content-area.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* --- Search Bar Section (เหมือน CommunityPage, ใช้ class เดิมได้ถ้า import CSS ของ CommunityPage หรือมี CSS กลาง) --- */
+/* ถ้าต้องการแยก class ให้ใช้ prefix เช่น .following-search-bar-section */
+/* ตัวอย่างนี้จะใช้ class names เดิมจาก CommunityPage.css ที่สมมติว่ามีอยู่แล้ว */
+/* .search-bar-section, .search-input-wrapper, .search-icon-prefix, .search-input-field, .clear-search-button */
+
+
+/* --- Content Display Sections --- */
+.following-content-padding { /* สำหรับ padding ของ post list และ friend list */
+  padding: 0.5rem 1rem; /* py-2 px-4 */
+}
+
+.following-content-padding.posts-list > *:not(:last-child) {
+  margin-bottom: 0.75rem; /* space-y-3 (12px) */
+}
+
+
+.friends-section-title {
+  font-size: 1rem; /* text-md */
+  font-weight: 600; /* font-semibold */
+  color: var(--color-text-main);
+  margin-bottom: 0.25rem; /* mb-1 */
+  padding-left: 0.25rem; /* px-1 */
+}
+
+.friends-section-list-container > *:not(:last-child) {
+  border-bottom: 1px solid var(--color-gray-100, #F3F4F6);
+}
+
+.status-message-text { /* ใช้ร่วมกับ CommunityPage ได้ */
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: 2.5rem 0; /* py-10 */
+}
+
+/* --- FAB (เหมือน CommunityPage, ใช้ class เดิมได้) --- */
+/* .create-post-fab */
+
+
+/* --- Responsive Styles (md breakpoint) --- */

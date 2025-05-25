@@ -1,0 +1,130 @@
+/* MainTabsBar.css (หรือ index.css) */
+:root {
+  --color-primary: #D34670;
+  --color-secondary: #E6B4B5;
+  --color-background: #F7EBEB;
+  --color-text-main: #333333;
+  --color-text-content: #4F4F4F;
+  --color-text-muted: #8A8A8A;
+  --color-text-placeholder: #BDBDBD;
+  --color-card-background: #FFFFFF;
+  --color-icon-muted: #BDBDBD;
+  --color-text-black: #000000;
+  width: 100%;
+}
+
+/* src/components/Community/MainTabsBar/MainTabsBar.css */
+
+/* Container หลักของ MainTabsBar */
+.main-tabs-bar-container {
+  width: 100%;
+  background-color: var(--color-background); /* สีพื้นหลังหลัก */
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); /* เทียบเท่า shadow-sm */
+  /* หากต้องการให้ติดด้านบนเสมอ อาจจะต้องเพิ่ม position: sticky; top: 0; z-index: 10; (ขึ้นอยู่กับ layout โดยรวม) */
+}
+
+/* ส่วน Header (ชื่อ "ชุมชน" และไอคอน Bell) */
+.main-tabs-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 1.5rem; /* px-4 */
+  padding-right: 1.5rem; /* px-4 */
+  padding-top: 2rem;   /* pt-8 */
+  padding-bottom: 0.75rem; /* pb-3 */
+}
+
+.main-tabs-title {
+  font-size: 1.5rem; /* text-2xl */
+  line-height: 2rem;
+  font-weight: 700; /* font-bold */
+  color: var(--color-text-black);
+}
+
+
+.notifications-button {
+  padding: 0.25rem; /* p-1 */
+  border-radius: 9999px; /* rounded-full */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.notifications-button:hover {
+  background-color: var(--color-secondary); /* สี hover */
+}
+
+.notifications-button svg { /* สไตล์สำหรับไอคอน Bell */
+  color: var(--color-primary); /* หรือ var(--color-primary) ถ้าต้องการให้เด่น */
+  width: 2rem; /* w-6 */
+  height: 2rem; /* h-6 */
+}
+
+/* ส่วนของแถบ Tabs */
+.tabs-list-container {
+  display: flex;
+  justify-content: space-around; /* กระจาย tab ให้เต็มพื้นที่ */
+  padding-left: 0.5rem; /* px-2 */
+  padding-right: 0.5rem; /* px-2 */
+  border-bottom: 1px solid var(--color-secondary); /* เส้นใต้แถบ tabs */
+}
+
+.tab-button {
+  padding-top: 0.5rem; /* py-2 */
+  padding-bottom: 0.5rem; /* py-2 */
+  font-size: 0.75rem; /* text-xs */
+  line-height: 1rem;
+  font-weight: 600; /* font-semibold */
+  flex-grow: 1; /* flex-1 */
+  border-radius: 0%; /* ไม่มีมุมโค้ง */
+  text-align: center;
+  color: var(--color-text-muted); /* สีตัวอักษร tab ที่ไม่ active */
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid transparent; /* เตรียมพื้นที่สำหรับ border ของ active tab */
+  cursor: pointer;
+  transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  outline: none; /* เอา outline ของ button ออก */
+}
+
+.tab-button:hover {
+  color: var(--color-primary); /* สีตัวอักษรตอน hover */
+}
+
+.tab-button.active { /* สไตล์สำหรับ tab ที่ active */
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+/* Responsive Styles (สำหรับขนาดจอ md ขึ้นไป) */
+@media (min-width: 768px) { /* md breakpoint ของ Tailwind คือ 768px */
+  .main-tabs-header {
+    padding-left: 1.125rem; /* md:px-[18px] */
+    padding-right: 1.125rem; /* md:px-[18px] */
+    padding-top: 3.125rem;  /* md:pt-[50px] */
+    padding-bottom: 0.75rem; /* md:pb-[12px] */
+  }
+
+  .main-tabs-title {
+    font-size: 2rem; /* md:text-[32px] */
+    line-height: 2.5rem;
+  }
+
+  .notifications-button svg {
+    width: 1.625rem; /* md:w-[26px] */
+    height: 1.625rem; /* md:h-[26px] */
+  }
+
+  .tabs-list-container {
+    padding-left: 0.625rem; /* md:px-[10px] */
+    padding-right: 0.625rem; /* md:px-[10px] */
+  }
+
+  .tab-button {
+    padding-top: 0.625rem; /* md:py-[10px] */
+    padding-bottom: 0.625rem; /* md:py-[10px] */
+    font-size: 0.8125rem; /* md:text-[13px] */
+  }
+}

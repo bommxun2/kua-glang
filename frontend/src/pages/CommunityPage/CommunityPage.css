@@ -1,0 +1,194 @@
+/* index.css (หรือไฟล์ CSS กลาง) */
+:root {
+  --color-primary: #D34670;
+  --color-secondary: #E6B4B5;
+  --color-background: #F7EBEB;
+  --color-text-main: #333333;
+  --color-text-content: #4F4F4F;
+  --color-text-muted: #8A8A8A;
+  --color-text-placeholder: #BDBDBD;
+  --color-card-background: #FFFFFF;
+  --color-white: #FFFFFF;
+  /* ... (สีอื่นๆ ที่จำเป็นจาก component ลูก) ... */
+
+  /* App dimensions (optional, but can be useful) */
+  --app-max-width: 440px;
+  --fab-size: 60px;
+  --fab-icon-font-size: 32px; /* For text-based icon like '+' */
+  --fab-bottom-offset: 100px;
+  --fab-right-edge-offset: 1rem; /* 16px */
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    background-color: var(--color-background);
+}
+
+/* src/pages/CommunityPage/CommunityPage.css */
+
+.community-page-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--color-background);
+}
+
+.community-page-container {
+  width: 100%;
+  max-width: var(--app-max-width); /* 440px */
+  height: 100vh; /* Full screen height for mobile */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-background);
+}
+
+.fixed-header-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%; /* Full width for mobile */
+  z-index: 30;
+}
+
+.scrollable-content-area {
+  flex-grow: 1; /* flex-1 */
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+
+}
+/* สำหรับซ่อน Scrollbar (ถ้ายังต้องการ) */
+.scrollable-content-area.no-scrollbar::-webkit-scrollbar { display: none; }
+.scrollable-content-area.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+.search-bar-section {
+  width: 100%;
+  padding:1rem 1rem;
+   /* px-4 py-2 (เดิม) - อาจจะปรับ padding บนล่างถ้าต้องการ */
+  /* background-color: var(--color-background); */ /* ถ้าต้องการให้ section นี้มีสีเดียวกับพื้นหลังหน้า */
+  /* หรือถ้าต้องการให้ section นี้เป็นสีขาว/cardBackground ก็ใช้ var(--color-card-background) */
+  /* จาก UI ดูเหมือน section นี้จะเป็นสีเดียวกับพื้นหลังหลักของหน้า */
+  background-color: var(--color-background);
+}
+
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center; /* สำคัญ: จัด child elements ให้อยู่กลางแนวตั้ง */
+  height: 2.375rem; /* ประมาณ 38px */
+  background-color: var(--color-background);
+  border: 1px solid var(--color-primary);
+  border-radius: 9999px;
+  padding-left: 0.875rem; /* Padding ซ้ายสำหรับ search icon */
+  box-sizing: border-box; /* เพิ่มเพื่อให้ padding และ border ไม่ทำให้ขนาดโดยรวมใหญ่ขึ้น */
+}
+
+.search-icon-prefix {
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  margin-right: 0.5rem; /* ระยะห่างระหว่าง icon กับ input field */
+  /* ไม่จำเป็นต้องกำหนด height ถ้า align-items: center ที่ wrapper ทำงาน */
+}
+.search-icon-prefix svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  display: block; /* ช่วยเรื่องการจัดตำแหน่งบางกรณี */
+}
+
+.search-input-field {
+  flex-grow: 1;
+  width: 100%;
+  height: 100%; /* ให้ input สูงเต็ม wrapper */
+  background-color: transparent !important; /* !important เพื่อ override user agent stylesheet ถ้าจำเป็น */
+  padding-top: 2; /* ลบ padding บนล่างของ input field เอง */
+  padding-bottom: 0; /* เพื่อให้ text จัดกลางด้วย line-height */
+  padding-left: 0; /* padding ซ้ายจะถูกจัดการโดย margin ของ icon */
+  padding-right: 2.5rem; /* มีที่สำหรับ clear button */
+  line-height: 2.375rem; /* <<----- ตั้ง line-height ให้เท่ากับ height ของ wrapper */
+  font-size: 0.8125rem; /* ประมาณ 13px */
+  border: none !important; /* !important เพื่อ override user agent stylesheet */
+  outline: none !important; /* !important เพื่อ override user agent stylesheet */
+  box-shadow: none !important; /* !important เพื่อลบ box-shadow ที่อาจจะติดมา */
+  color: var(--color-text-main);
+  appearance: none; /* พยายามลบ default styling ของ browser */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  box-sizing: border-box; /* เพิ่มเพื่อให้ padding ไม่ทำให้ขนาดโดยรวมใหญ่ขึ้น */
+}
+
+.search-input-field::placeholder {
+  color: var(--color-primary);
+  opacity: 0.7;
+  vertical-align: middle; /* ลองเพิ่มอันนี้ดู */
+}
+
+.search-input-wrapper:focus-within {
+  box-shadow: 0 0 0 1px var(--color-primary);
+  /* ไม่จำเป็นต้องเปลี่ยน border ถ้าใช้ box-shadow เป็น indicator */
+  /* border-color: var(--color-primary); */
+}
+
+.clear-search-button {
+  position: absolute;
+  right: 0.625rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-primary);
+  background-color: transparent;
+  /* ... (styles อื่นๆ ของ clear button) ... */
+}
+.clear-search-button svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  display: block; /* ช่วยเรื่องการจัดตำแหน่งบางกรณี */
+}
+
+.posts-list-section {
+  flex-grow: 1; /* flex-1 */
+  padding-left: 1rem; /* px-4 */
+  padding-right: 1rem; /* px-4 */
+  padding-bottom: 7rem; /* pb-28, ให้มีที่พอสำหรับ FAB และ MenuBar */
+  background-color: var(--color-background); /* Ensure it matches page background */
+}
+/* space-y-3 จะถูกจัดการโดย margin-bottom ของ PostCard เอง */
+.posts-list-section > *:not(:last-child) {
+  margin-bottom: 0.75rem; /* space-y-3 (12px) */
+}
+
+
+.status-message-text {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding-top: 2.5rem; /* py-10 */
+  padding-bottom: 2.5rem; /* py-10 */
+}
+
+.create-post-fab {
+  position: fixed;
+  width: var(--fab-size);
+  height: var(--fab-size);
+  bottom: var(--fab-bottom-offset);
+  /* Right positioning is tricky without calc() in CSS directly if app is centered.
+     We'll use JavaScript for precise positioning for now or simplify.
+     For pure CSS, if app is always full width on mobile, can use `right: var(--fab-right-edge-offset);`
+     If app is centered on larger screens, this needs JS or more complex CSS. */
+  /* right: var(--fab-right-edge-offset); */ /* Simplified for now */
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 9999px; /* rounded-full */
+  font-size: var(--fab-icon-font-size);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-lg */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.15s ease-in-out;
+  z-index: 50;
+  border: none;
+}
+.create-post-fab:hover {
+  opacity: 0.9;
+}

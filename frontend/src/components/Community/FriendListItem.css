@@ -1,0 +1,91 @@
+/* index.css (หรือไฟล์ CSS กลาง) */
+:root {
+  --color-primary: #D34670;
+  --color-secondary: #E6B4B5;
+  --color-background: #F7EBEB;
+  --color-text-main: #333333;
+  --color-text-content: #4F4F4F;
+  --color-text-muted: #8A8A8A;
+  --color-text-placeholder: #BDBDBD;
+  --color-card-background: #FFFFFF; /* หรือ --color-white: #FFFFFF; */
+  --color-icon-muted: #BDBDBD;
+  --color-gray-100: #F3F4F6; /* bg-gray-100 */
+  --color-gray-200: #E5E7EB; /* hover:bg-gray-200 */
+  --color-gray-300: #D1D5DB; /* border-gray-300 */
+  /* ... (สีอื่นๆ ที่จำเป็น) ... */
+}
+
+/* src/components/FriendList/FriendListItem.css */
+
+.friend-list-item-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.75rem; /* py-3 */
+  padding-bottom: 0.75rem; /* py-3 */
+  padding-left: 1rem; /* px-1 */
+  padding-right: 1rem; /* px-1 */
+  /* อาจจะเพิ่ม border-bottom ถ้าต้องการเส้นคั่นระหว่าง item */
+  /* border-bottom: 1px solid var(--color-gray-100); */
+}
+
+.user-info-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem; /* space-x-3 */
+}
+
+.user-avatar {
+  width: 2.5rem; /* w-10 */
+  height: 2.5rem; /* h-10 */
+  border-radius: 9999px; /* rounded-full */
+  object-fit: cover;
+}
+
+.user-details .user-name {
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 600; /* font-semibold */
+  color: var(--color-text-main);
+}
+
+.user-details .suggestion-text {
+  font-size: 0.75rem; /* text-xs */
+  color: var(--color-text-muted);
+}
+
+.friendship-toggle-button {
+  font-size: 0.75rem; /* text-xs */
+  font-weight: 500; /* font-medium */
+  padding: 0.375rem 0.75rem; /* py-1.5 px-3 */
+  border-radius: 9999px; /* rounded-full */
+  display: flex;
+  align-items: center;
+  gap: 0.375rem; /* gap-1.5 */
+  border: 1px solid transparent; /* เตรียม border ไว้ */
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out, border-color 0.15s ease-in-out, opacity 0.15s ease-in-out;
+}
+
+/* สไตล์สำหรับปุ่ม "ติดตาม" */
+.friendship-toggle-button.follow-button {
+  background-color: var(--color-primary);
+  color: var(--color-card-background); /* text-white */
+}
+.friendship-toggle-button.follow-button:hover {
+  opacity: 0.9;
+}
+
+/* สไตล์สำหรับปุ่ม "เลิกติดตาม" / "เพื่อน" */
+.friendship-toggle-button.unfollow-button {
+  background-color: var(--color-gray-100);
+  color: var(--color-text-muted);
+  border-color: var(--color-gray-300);
+}
+.friendship-toggle-button.unfollow-button:hover {
+  background-color: var(--color-gray-200);
+}
+
+.friendship-toggle-button svg {
+  width: 0.875rem; /* size={14} */
+  height: 0.875rem; /* size={14} */
+}

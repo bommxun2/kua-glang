@@ -8,6 +8,10 @@ import EditProfilePage from './pages/ProfilePage/EditProfilePage.jsx';
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home"; // ✅ import หน้าใหม่
+import CommunityPage from './pages/CommunityPage/CommunityPage.jsx';
+import CreatePostPage from './pages/CreatePostPage/CreatePostPage.jsx';
+import EditPostPage from './pages/EditPostPage/EditPostPage.jsx';  
+import FollowingPage from './pages/FollowingPage/FollowingPage.jsx'; 
 
 import Competition from './competition.jsx';
 function App() {
@@ -24,6 +28,10 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/home" element={<Home />} /> {/* ✅ เพิ่ม path หลัง login */}
+      <Route path="/community" element={<CommunityPage />} />
+      <Route path="/community/create" element={<CreatePostPage />} />
+      <Route path="/community/edit/:postId" element={<EditPostPage />} />
+      <Route path="/community/following" element={<FollowingPage />} />
     </Routes>
   );
 }

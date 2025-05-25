@@ -1,22 +1,24 @@
 .edit-options-box {
-  background-color: #FBDDE4;
-  border-radius: 16px;
-  padding: 8px 0;
-  color: #D34670;
+  background-color: #F7EBEB; /* กล่องสีอ่อน */
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .edit-option-btn {
-  background: none;
+  background-color: white;
+  color: #D34670;
   border: none;
-  width: 100%;
-  padding: 14px 20px;
-  text-align: left;
-  font-weight: bold;
-  border-bottom: 1px solid #f3c5ce;
+  border-radius: 8px;
+  padding: 10px;
   font-size: 1rem;
+  font-weight: 500;
   cursor: pointer;
+  transition: background-color 0.2s;
 }
 
-.edit-option-btn:last-child {
-  border-bottom: none;
+.edit-option-btn:hover {
+  background-color: #ffe6ea;
 }

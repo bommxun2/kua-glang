@@ -1,16 +1,3 @@
-.stat-pic {
-    width: 120px;
-    height: 120px;
-}
-
-.profile-header {
-    font-family: 'Bai Jamjuree', sans-serif;
-}
-
-.period-selector {
-    font-family: 'Bai Jamjuree', sans-serif;
-
-}
 
 .profile-stats {
     font-family: 'Bai Jamjuree', sans-serif;
@@ -51,16 +38,22 @@ body {
   margin: 0;
 }
 
+.profile-page {
+  font-family: 'Bai Jamjuree', sans-serif;
+}
+
 .profile-title {
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 48px !important;
+  font-weight: bold !important;
   text-align: left;
   margin-bottom: 12px;
   padding-left: 8px;
+  color: black !important;
 }
 
 .profile-header {
   text-align: center;
+  font-family: 'Bai Jamjuree', sans-serif !important;
 }
 
 .profile-img {
@@ -74,6 +67,7 @@ body {
 .profile-name {
   font-weight: bold;
   font-size: 1.2rem;
+  color : black
 }
 
 .profile-bio {
@@ -87,6 +81,14 @@ body {
   justify-content: center;
   align-items: center;
   gap: 8px;
+  color: black;
+}
+
+.edit-btn {
+  border-radius: 50px;
+  border: 1px #D34670 !important ;
+  background:#F7EBEB ;
+  color: #D34670; 
 }
 
 .tab-buttons {
@@ -114,6 +116,7 @@ body {
 }
 
 .period-selector {
+  font-family: 'Bai Jamjuree', sans-serif;
   display: flex;
   gap: 8px;
   justify-content: space-around;
@@ -143,6 +146,11 @@ body {
 .stats-row {
   display: flex;
   gap: 16px;
+}
+
+.stat-pic {
+    width: 120px;
+    height: 120px;
 }
 
 .stat-card {
@@ -178,6 +186,7 @@ body {
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 4px;
+  color: black;
 }
 
 .stat-label {

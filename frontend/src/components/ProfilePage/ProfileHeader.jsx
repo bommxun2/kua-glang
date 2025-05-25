@@ -4,8 +4,7 @@ import './Profile.css'
 
 export default function ProfileHeader() {
   const [user, setUser] = useState(null);
-  //const userId = localStorage.getItem('userId');
-  const userId = 'user002'
+  const userId = localStorage.getItem('userId')|| 'user003';
   const navigate = useNavigate();
 
   const handleEditClick = () => {
@@ -34,7 +33,7 @@ export default function ProfileHeader() {
 
   return (
     <div className="profile-header">
-      <h1 className="profile-title">โปรไฟล์</h1>
+      <h2 className="profile-title">โปรไฟล์</h2>
       <img src={user.profile_url} alt="profile" className="profile-img" />
       <div className="profile-name">{user.username}</div>
       <div className="profile-bio">{user.bio}</div>

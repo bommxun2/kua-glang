@@ -29,7 +29,6 @@ app.use("/history", require("./routes/history.route"));
 app.use("/ranking", require("./routes/rank.route"));
 app.use("/folder", require("./routes/folder.route"));
 app.use("/food", require("./routes/food.route"));
-app.use("/image", require("./routes/api.route"));
 
 app.get("/", (req, res) => {
   res.json({

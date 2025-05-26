@@ -50,6 +50,7 @@ const getFoodUsageHistory = async (req, res) => {
           expired_at: food.expired_at?.S || null,
           use_at: food.use_at?.S || null,
           status: food.status?.S || null,
+          img_url: food.img_url?.S || null,
         });
       });
     }

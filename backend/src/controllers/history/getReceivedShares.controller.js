@@ -1,91 +1,85 @@
-const { QueryCommand } = require("@aws-sdk/client-dynamodb");
 const dynamoDb = require("../../utils/database");
+const { QueryCommand, GetItemCommand } = require("@aws-sdk/client-dynamodb");
+const { unmarshall } = require("@aws-sdk/util-dynamodb");
 
-const getReceivedShares = async (req, res) => {
+const receive = async (req, res) => {
   const { userId } = req.params;
 
   try {
-    const receiveRes = await dynamoDb.send(
+    const receive = await dynamoDb.send(
       new QueryCommand({
         TableName: "kua-glang",
         IndexName: "SKIndex",
         KeyConditionExpression: "SK = :sk",
+        FilterExpression: "begins_with(PK, :pkPrefix)",
         ExpressionAttributeValues: {
           ":sk": { S: `RECEIVE#${userId}` },
+          ":pkPrefix": { S: "SHARE#" },
         },
       })
     );
 
-    const receiveItems = receiveRes.Items || [];
+    const result = [];
+    for (const recv of receive.Items) {
+      const shareId = recv.PK.S;
+      const share = await dynamoDb.send(
+        new QueryCommand({
+          TableName: "kua-glang",
+          IndexName: "SKIndex",
+          KeyConditionExpression: "SK = :shareId",
+          ExpressionAttributeValues: {
+            ":shareId": { S: `${shareId}` },
+          },
+        })
+      );
 
-    const result = await Promise.all(
-      receiveItems.map(async (receive) => {
-        const shareId = receive.PK.S.split("#")[1];
+      const userId = share.Items[0].PK.S;
+      const user = await dynamoDb.send(
+        new GetItemCommand({
+          TableName: "kua-glang",
+          Key: {
+            PK: { S: `${userId}` },
+            SK: { S: "PROFILE" },
+          },
+        })
+      );
 
-        const sharePostRes = await dynamoDb.send(
-          new QueryCommand({
-            TableName: "kua-glang",
-            IndexName: "SKIndex",
-            KeyConditionExpression: "SK = :sk",
-            ExpressionAttributeValues: {
-              ":sk": { S: `SHARE#${shareId}` },
-            },
-          })
-        );
+      const foodId = share.Items[0].foodId.S;
+      const food = await dynamoDb.send(
+        new QueryCommand({
+          TableName: "kua-glang",
+          IndexName: "SKIndex",
+          KeyConditionExpression: "SK = :sk",
+          ExpressionAttributeValues: {
+            ":sk": { S: `FOOD#${foodId}` },
+          },
+        })
+      );
 
-        const sharePost = sharePostRes.Items?.[0];
-        if (!sharePost) return null;
+      const userData = unmarshall(user.Item);
+      const shareData = unmarshall(share.Items[0]);
+      const foodData = unmarshall(food.Items[0]);
 
-        const status = sharePost.status?.S;
-        if (status !== "สำเร็จ" && status !== "ยกเลิก") return null;
+      result.push({
+        username: userData.username,
+        accepted_at: recv.accepted_at.S,
+        foodName: foodData.foodName,
+        img_url: foodData.img_url,
+        expired_at: foodData.expired_at,
+        quantity: shareData.quantity,
+        latitude: shareData.latitude,
+        longtitude: shareData.longtitude,
+        lineId: userData.line_id,
+        avaliable_time: shareData.avaliable_time,
+        profile_image_url: userData.profile_url,
+      });
+    }
 
-        const foodId = sharePost.foodId?.S;
-
-        let foodName = "unknown";
-        if (foodId) {
-          const foodRes = await dynamoDb.send(
-            new QueryCommand({
-              TableName: "kua-glang",
-              IndexName: "SKIndex",
-              KeyConditionExpression: "SK = :sk",
-              ExpressionAttributeValues: {
-                ":sk": { S: `FOOD#${foodId}` },
-              },
-            })
-          );
-          foodName = foodRes.Items?.[0]?.foodName?.S || "unknown";
-        }
-
-        const ownerId = sharePost.PK.S.split("#")[1];
-        const userRes = await dynamoDb.send(
-          new QueryCommand({
-            TableName: "kua-glang",
-            KeyConditionExpression: "PK = :pk AND SK = :sk",
-            ExpressionAttributeValues: {
-              ":pk": { S: `USER#${ownerId}` },
-              ":sk": { S: "PROFILE" },
-            },
-          })
-        );
-
-        const username = userRes.Items?.[0]?.username?.S || "unknown";
-
-        return {
-          username,
-          foodName,
-          created_at: sharePost.created_at?.S,
-          status,
-        };
-      })
-    );
-
-    const filtered = result.filter((item) => item !== null);
-
-    return res.status(200).json(filtered);
-  } catch (error) {
-    console.error("Error fetching received shares:", error);
-    return res.status(500).json({ message: "Internal server error" });
+    return res.status(200).json(result);
+  } catch (err) {
+    console.log(err);
+    return res.status(500);
   }
 };
 
-module.exports = getReceivedShares;
+module.exports = receive;

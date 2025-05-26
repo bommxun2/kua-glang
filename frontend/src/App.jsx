@@ -22,6 +22,7 @@ import AddShareItemScreen from "./components/AddShareItem/AddShareItem.jsx";
 import ShareScreen from "./components/Share/Share.jsx";
 import { useAuth } from "./contexts/AuthContext";
 import { Navigate, useLocation } from "react-router-dom";
+import EditProfileImagePage from './pages/ProfilePage/EditProfileImage.jsx';
 
 function RequireAuth({ children }) {
   const { userId, isAuthReady } = useAuth();
@@ -59,6 +60,7 @@ function App() {
       <Route path="/history" element={<RequireAuth><HistoryScreen /></RequireAuth>} />
       <Route path="/add-share-item" element={<RequireAuth><AddShareItemScreen /></RequireAuth>} />
       <Route path="/share" element={<RequireAuth><ShareScreen /></RequireAuth>} />
+      <Route path="/edit/profile_url" element={<EditProfileImagePage /></RequireAuth>} />                                
       <Route path="/" element={<Navigate to="/login" replace />} />
     </Routes>
   );

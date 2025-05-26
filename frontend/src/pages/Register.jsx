@@ -48,6 +48,7 @@ export default function Register() {
 
     setIsUploading(true);
     let finalProfileS3Url = "";
+
     if (profileImageFile) {
       try {
         const imgInform = {

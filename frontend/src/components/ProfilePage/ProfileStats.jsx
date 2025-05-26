@@ -5,8 +5,12 @@
   import './Profile.css';
 
   const ProfileStats = () => {
-    const [stat, setStat] = useState(null);
-    const userId = localStorage.getItem('userId')||'RPZ3';
+    const [stat, setStat] = useState({
+    share_quantity: 0,
+    reduce_foodwaste: 0,
+    no_expired: 0,
+    });
+    const userId = localStorage.getItem('userId');
 
     useEffect(() => {
       fetch(`https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/profile/stat/${userId}`)
@@ -16,9 +20,9 @@
         })
         .then((data) => {
           const parsed = {
-            share_quantity: parseInt(data.share_quantity || "0", 10),
-            reduce_foodwaste: parseInt(data.reduce_foodwaste || "0", 10),
-            no_expired: parseInt(data.no_expired || "0", 10),
+            share_quantity: parseInt(data?.share_quantity || "0", 10),
+            reduce_foodwaste: parseInt(data?.reduce_foodwaste || "0", 10),
+            no_expired: parseInt(data?.no_expired || "0", 10),
           };
           console.log("✅ parsed stat", parsed);
           setStat(parsed);

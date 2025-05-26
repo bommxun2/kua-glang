@@ -21,6 +21,7 @@ import Competition from "./pages/Competition.jsx";
 import HistoryScreen from "./components/History/History.jsx";
 import AddShareItemScreen from "./components/AddShareItem/AddShareItem.jsx";
 import ShareScreen from "./components/Share/Share.jsx";
+import EditProfileImagePage from './pages/ProfilePage/EditProfileImage.jsx';
 function App() {
   return (
     <Routes>
@@ -35,6 +36,7 @@ function App() {
       <Route path="/edit-profile" element={<EditProfilePage />} />
       <Route path="/edit/:field" element={<EditFieldPage />} />
       <Route path="/competition" element={<Competition />} />{" "}
+      
       {/* หน้าระดับ/แงค์ */}
       {/* เพิ่ม Route อื่นๆ ตามต้องการ */}
       <Route path="/login" element={<Login />} />
@@ -47,6 +49,8 @@ function App() {
       <Route path="/history" element={<HistoryScreen />} />
       <Route path="/add-share-item" element={<AddShareItemScreen />} />
       <Route path="/share" element={<ShareScreen />} />
+      <Route path="/edit/profile_url" element={<EditProfileImagePage />} />
+
     </Routes>
   );
 }

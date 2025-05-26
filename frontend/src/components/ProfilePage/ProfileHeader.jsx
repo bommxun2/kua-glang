@@ -4,7 +4,7 @@ import './Profile.css'
 
 export default function ProfileHeader() {
   const [user, setUser] = useState(null);
-  const userId = localStorage.getItem('userId')|| 'RPZ3';
+  const userId = localStorage.getItem('userId');
   const navigate = useNavigate();
 
   const handleEditClick = () => {

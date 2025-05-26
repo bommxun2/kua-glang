@@ -1,5 +1,10 @@
 const dynamoDb = require("../../utils/database");
-const { PutItemCommand, QueryCommand, UpdateItemCommand, DeleteItemCommand } = require("@aws-sdk/client-dynamodb");
+const {
+  PutItemCommand,
+  QueryCommand,
+  UpdateItemCommand,
+  DeleteItemCommand,
+} = require("@aws-sdk/client-dynamodb");
 
 const TABLE_NAME = "kua-glang";
 
@@ -44,20 +49,17 @@ exports.listFolders = async (req, res) => {
 exports.updateFolder = async (req, res) => {
   const { userId, folderId } = req.params;
   // รับ quntity (ไม่ใช่ quantity) ตาม API
-  const { folderName, description, quntity, img_url } = req.body;
+  const { folderName, description } = req.body;
   const params = {
     TableName: TABLE_NAME,
     Key: {
       PK: { S: `USER#${userId}` },
       SK: { S: `FOLDER#${folderId}` },
     },
-    UpdateExpression:
-      "set folderName = :n, description = :d, quntity = :q, img_url = :i",
+    UpdateExpression: "set folderName = :n, description = :d",
     ExpressionAttributeValues: {
       ":n": { S: folderName },
       ":d": { S: description },
-      ":q": { S: quntity },
-      ":i": { S: img_url },
     },
     ReturnValues: "ALL_NEW",
   };
@@ -67,8 +69,6 @@ exports.updateFolder = async (req, res) => {
     res.json({
       folderName: folderName,
       description: description,
-      quntity: quntity,
-      img_url: img_url
     });
   } catch (err) {
     res.status(500).json({

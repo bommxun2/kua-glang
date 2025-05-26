@@ -10,7 +10,8 @@ const {
 const snsClient = new SNSClient({ region: "us-east-1" });
 
 const register = async (req, res) => {
-  const { username, email, phone_num, line_id, password } = req.body;
+  const { username, email, phone_num, line_id, password, profile_url } =
+    req.body;
 
   if (!username || !email || !password) {
     return res.status(400).json({ error: "Missing required fields" });
@@ -42,6 +43,7 @@ const register = async (req, res) => {
     line: { S: line_id || "" },
     password: { S: password },
     created_at: { S: createdAt },
+    profile_url: { S: profile_url },
   };
 
   try {

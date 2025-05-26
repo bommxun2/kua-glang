@@ -22,14 +22,14 @@ const receiveShare = async (req, res) => {
       return res.status(404).json({ error: "ไม่พบข้อมูลผู้ใช้ที่ต้องอัปเดต" });
     }
 
-    const owerUserItem = queryResult.Items[0]; // เอารายการแรก (ในกรณีมีหลาย user ต้องจัดการเพิ่ม)
+    const owerUserItem = queryResult.Items[0];
     const owerUserId = owerUserItem.PK.replace("USER#", "");
     const { foodId, quantity } = queryResult.Items[0];
 
     const foodQueryResult = await docClient.send(
       new QueryCommand({
         TableName: "kua-glang",
-        IndexName: "SKIndex", // ใช้ GSI ที่ตั้งไว้
+        IndexName: "SKIndex",
         KeyConditionExpression: "SK = :sk",
         ExpressionAttributeValues: {
           ":sk": `FOOD#${foodId}`,
@@ -43,7 +43,7 @@ const receiveShare = async (req, res) => {
         .json({ error: "ไม่พบข้อมูลอาหารที่ต้องการคัดลอก" });
     }
 
-    const foodItem = foodQueryResult.Items[0]; // อาจมีหลายรายการ แต่เลือกตัวแรกไว้ก่อน
+    const foodItem = foodQueryResult.Items[0];
 
     let ownerFoodUpdateOrDelete;
     if (quantity >= foodItem.quantity) {
@@ -81,13 +81,13 @@ const receiveShare = async (req, res) => {
           ":pk": `USER#${userId}`,
           ":sk": "FOLDER#",
         },
-        ScanIndexForward: false, // เรียงจากใหม่สุดไปเก่าสุด
+        ScanIndexForward: false,
         Limit: 1,
       })
     );
-    const latestFolderId = foldersData.Items[0].SK.replace("FOLDER#", "");
 
-    const newFoodId = nanoid(4); // หรือจะใช้ uuid ใหม่ก็ได้
+    const latestFolderId = foldersData.Items[0].SK.replace("FOLDER#", "");
+    const newFoodId = nanoid(4);
 
     const newFoodItem = {
       ...foodItem,
@@ -133,6 +133,22 @@ const receiveShare = async (req, res) => {
           },
         },
         ownerFoodUpdateOrDelete,
+        {
+          Update: {
+            TableName: "kua-glang",
+            Key: {
+              PK: `USER#${owerUserId}`,
+              SK: "STAT",
+            },
+            UpdateExpression:
+              "SET share_quantity = if_not_exists(share_quantity, :zero) + :inc, updated_at = :now",
+            ExpressionAttributeValues: {
+              ":inc": 1,
+              ":zero": 0,
+              ":now": timestamp,
+            },
+          },
+        },
       ],
     };
 

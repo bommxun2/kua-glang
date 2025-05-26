@@ -1,0 +1,428 @@
+/* frontend/src/components/ShareScreen/ShareScreen.css */
+.share-screen-container {
+  width: 100%;
+  /* max-width: 420px; /* หรือขนาดที่คุณต้องการสำหรับ mobile view */
+  /* ให้ container หลักของแอป (เช่น .app-main-wrapper) จัดการ max-width */
+  margin: 0 auto;
+  background-color: #fff; /* พื้นหลังหลักของหน้าจอ */
+  min-height: 100vh; /* หรือ 100% ถ้าอยู่ใน container ที่กำหนดความสูง */
+  display: flex;
+  flex-direction: column;
+  font-family: 'Kanit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* ฟอนต์ที่คล้ายในรูป */
+}
+
+/* Main Tabs */
+.main-tabs-nav {
+  display: flex;
+  justify-content: space-around; /* กระจายแท็บให้เต็มความกว้าง */
+  padding: 8px 0; /* ลด padding บนล่าง */
+  border-bottom: 1px solid #f0f0f0;
+  background-color: #fdf0f3;
+  flex-shrink: 0; /* ไม่ให้หด */
+}
+
+.main-tab-button {
+  background: none;
+  border: none;
+  padding: 10px 5px;
+  font-size: 14px; /* ขนาดฟอนต์สำหรับแท็บหลัก */
+  color: #2e2d2d; /* สีเทาสำหรับ inactive tab */
+  cursor: pointer;
+  position: relative;
+  font-weight: 500; /* น้ำหนักฟอนต์ */
+  flex-grow: 1; /* ให้แต่ละแท็บขยายเท่ากัน */
+  text-align: center;
+}
+
+.main-tab-button.active {
+  color: #2e2d2d; /* สีชมพู/แดงเข้มสำหรับ active tab (ปรับตามรูป) */
+  font-weight: 1000; /* หนาขึ้นเล็กน้อย */
+}
+
+.main-tab-button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; /* ให้ชิดกับ border-bottom ของ nav */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%; /* ความกว้างของเส้นใต้ (ปรับได้) */
+  height: 3px; /* ความหนาของเส้นใต้ */
+  background-color: #D34670; /* สีเดียวกับตัวอักษร active */
+  border-radius: 1.5px;
+}
+
+
+/* Search Bar */
+.search-bar-container-share {
+  padding: 10px 15px; /* ปรับ padding */
+  background-color: #fff;
+  border-bottom: 1px solid #f0f0f0; /* เพิ่มเส้นคั่นบางๆ */
+  flex-shrink: 0;
+}
+
+.search-bar-share {
+  display: flex;
+  align-items: center;
+  background-color: #fdf0f3; /* พื้นหลังสีขาว */
+  border: 1.5px solid #D34670; /* ขอบสีชมพูอ่อน (ปรับตามรูป) */
+  border-radius: 25px;
+  padding: 4px 12px; /* ปรับ padding ภายใน */
+  height: 42px;
+  box-sizing: border-box;
+}
+
+.search-bar-share .inner-input-wrapper {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  border: 1px solid #e0e0e0;
+  border-radius: 20px; /* โค้งมนของ input */
+  padding: 0px 10px; /* Padding ภายใน input */
+  height: 30px;
+  margin-left: 8px;;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.search-bar-share input[type="text"] {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  margin-left: 10px;
+  background-color: transparent;
+  color: #D34670;
+  padding: 0 10px;
+  line-height: normal;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+.search-bar-share input::placeholder {
+  color: #D34670;
+  font-weight: 400;
+}
+
+.search-icon-share {
+  color: #D34670; /* สีชมพูเดียวกับขอบ */
+  font-size: 18px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+.clear-icon-share {
+  color: #aaa;
+  cursor: pointer;
+  margin-left: 6px;
+  margin-right: 10px;
+  font-size: 16px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Sub Tabs ("ทั้งหมด", "การแบ่งปันของฉัน") */
+.sub-tabs-toggle-container {
+  display: flex; /* จัดปุ่มลูกให้อยู่ในแถวเดียว */
+  width: calc(100% - 30px); /* ให้กว้างเกือบเต็ม container หลัก (15px padding L+R) */
+  max-width: 380px; /* กำหนดความกว้างสูงสุด */
+  margin: 15px auto; /* จัดกึ่งกลาง และมีระยะห่างบนล่าง */
+  background-color: #E6B4B5; /* สีพื้นหลังอ่อนๆ ของ container ทั้งหมด */
+  border-radius: 25px; /* ความโค้งมนของ container ทั้งหมด */
+  overflow: hidden; /* ป้องกันเงาของปุ่ม active ล้นออกมาถ้าไม่ต้องการ */
+  padding: 3px; /* เพิ่ม padding เล็กน้อยเพื่อให้เห็นพื้นหลัง container */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* เงาจางๆ ที่ container */
+}
+
+
+.sub-tab-toggle-button {
+  flex-grow: 1; /* ให้ปุ่มแต่ละปุ่มแบ่งพื้นที่เท่ากัน */
+  flex-basis: 0;
+  padding: 9px 10px; /* ปรับ padding ของปุ่ม */
+  border: none; /* ไม่มี border โดยตรงที่ปุ่ม */
+  background-color: transparent; /* เริ่มต้นด้วยพื้นหลังโปร่งใส (จะใช้สีจาก container) */
+  color: #D34670; /* สีตัวอักษรสำหรับปุ่ม inactive (ชมพูเข้ม) */
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 22px; /* ความโค้งมนของปุ่มแต่ละปุ่ม (น้อยกว่า container เล็กน้อย) */
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+  position: relative; /* สำหรับ z-index ถ้าต้องการ */
+}
+
+.sub-tab-toggle-button.active {
+  background-color: #D34670; /* สีชมพูเข้มสำหรับปุ่ม active */
+  color: white; /* สีตัวอักษรขาว */
+  font-weight: 600;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* เงาที่ปุ่ม active ให้ดูนูนขึ้น */
+  z-index: 1; /* ให้ปุ่ม active อยู่เหนือปุ่ม inactive เล็กน้อย (ถ้ามี overlap) */
+}
+
+/* Tab Content General */
+.tab-content {
+  padding: 10px 15px 15px 15px; /* ปรับ padding */
+  flex-grow: 1;
+  overflow-y: auto;
+  background-color: #f9f9f9; /* สีพื้นหลังส่วน content อ่อนๆ */
+}
+
+.empty-state-message {
+  text-align: center;
+  color: #777;
+  font-size: 16px;
+  margin-top: 50px;
+  font-weight: 500;
+}
+.larger-empty-message { /* สำหรับ "ไม่มีรายการ" ในหน้าของฉัน */
+  font-size: 18px;
+  font-weight: 500;
+  color: #555;
+}
+
+
+/* Share Item Card */
+.share-item-card {
+  background-color: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  margin-bottom: 12px; /* ลดระยะห่างระหว่างการ์ด */
+  padding: 12px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+.sharer-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.avatar {
+  width: 36px; /* ลดขนาด avatar */
+  height: 36px;
+  border-radius: 50%;
+  margin-right: 8px;
+  object-fit: cover;
+}
+
+.sharer-details {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.sharer-name {
+  font-weight: 600; /* หนาขึ้น */
+  font-size: 14px;
+  color: #333;
+}
+
+.time-ago {
+  font-size: 11px; /* เล็กลง */
+  color: #888;
+}
+
+.free-tag {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: transparent; /* ตามรูป ไม่มีพื้นหลัง */
+  color: #D34670; /* สีชมพู/แดง */
+  padding: 0; /* ไม่มี padding ถ้าไม่มีพื้นหลัง */
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.item-content {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.item-image {
+  width: 85px; /* ปรับขนาดรูป */
+  height: 65px;
+  border-radius: 6px;
+  object-fit: cover;
+  /* border: 1px solid #eee; // อาจจะไม่ต้องมีถ้าไม่ต้องการ */
+}
+
+.item-details {
+  flex-grow: 1;
+}
+
+.item-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #222;
+  margin: 0 0 4px 0;
+  line-height: 1.3;
+}
+
+.item-quantity, .item-expiry {
+  font-size: 12px;
+  color: #666;
+  margin: 2px 0;
+}
+.item-note {
+  font-size: 11px;
+  color: #777; /* สีเทาอ่อน */
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+.action-button {
+  display: block;
+  width: auto; /* ให้ปุ่มกว้างตามเนื้อหา + padding */
+  min-width: 90px; /* กำหนดความกว้างขั้นต่ำ */
+  padding: 7px 15px; /* ปรับ padding ปุ่ม */
+  border-radius: 20px; /* ทำให้ปุ่มโค้งมนมากขึ้น */
+  border: none;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, opacity 0.2s;
+  margin-left: auto; /* ดันปุ่มไปทางขวาของการ์ด */
+}
+
+.interested-button { /* ปุ่ม "สนใจรับ" */
+  background-color: #D34670; /* สีชมพู/แดง */
+  color: white;
+}
+
+.view-requests-button { /* ปุ่ม "ดูคำขอ" */
+  background-color: #D34670; /* สีชมพู/แดง (ตามรูป ถ้ามีคำขอ) */
+  color: white;
+}
+.view-requests-button.no-request { /* ถ้าไม่มีคำขอ อาจจะใช้สีเทา */
+  background-color: #BDBDBD; /* สีเทา */
+  color: #616161;
+}
+.view-requests-button.no-request:hover {
+  background-color: #9E9E9E;
+}
+.view-requests-button:hover {
+  background-color: #c92456;
+}
+
+/* My Shares Tab Specifics - ปุ่ม "ดูคำขอ" ของฉัน (อาจจะแสดงด้านล่างสุดของการ์ด) */
+.my-share-item-card .action-button {
+  width: 10px;
+  margin-top: 8px;
+}
+
+/* Request List */
+.request-list-section {
+  margin-top: -2px; /* ให้ชิดกับการ์ดด้านบนเล็กน้อย */
+  margin-bottom: 12px;
+  padding: 10px 12px 12px 12px;
+  background-color: #fff; /* พื้นหลังสีขาว */
+  border-radius: 0 0 8px 8px; /* โค้งมนเฉพาะด้านล่าง ให้ต่อกับการ์ด */
+  border: 1px solid #e8e8e8;
+  border-top: none; /* ไม่มีเส้นขอบด้านบน */
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+.request-list-section h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #444;
+  padding-bottom: 6px;
+  font-weight: 600;
+  /* border-bottom: 1px solid #e0e0e0; // อาจจะไม่ต้องมีเส้นคั่น */
+}
+
+.request-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.request-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.request-user-info {
+  flex-grow: 1;
+  margin-left: 8px;
+}
+.request-user-info .sharer-name { /* ใช้ class เดิมได้ */
+  font-size: 13px;
+  font-weight: 500;
+}
+.request-user-info .time-ago {
+  font-size: 10px;
+}
+
+.request-actions {
+  display: flex;
+  gap: 6px;
+}
+.request-actions .action-button { /* ปุ่มอนุมัติ, ติดต่อ */
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 15px; /* โค้งมน */
+  min-width: 81px;
+}
+.approve-button {
+  background-color: #D34670; /* สีชมพู/แดง */
+  color: white;
+}
+.approve-button:hover {
+  background-color: #c92456;
+}
+.contact-button {
+  background-color: #46D365; /* สีเขียว */
+  color: white;
+}
+.contact-button:hover {
+  background-color: #388E3C;
+}
+.no-requests {
+  text-align: center;
+  color: #888;
+  padding: 15px 0;
+  font-size: 13px;
+}
+
+
+/* Floating Action Button (FAB) */
+.fab {
+  position: fixed;
+  bottom: 100px; /* ปรับตำแหน่ง */
+  right: 25px;
+  background-color: #D34670; /* สีชมพู/แดง */
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  cursor: pointer;
+  z-index: 1000;
+  transition: background-color 0.2s, transform 0.2s;
+}
+.fab:hover {
+  background-color: #c92456;
+  transform: scale(1.05);
+}
+
+.empty-my-shares { /* container สำหรับ "ไม่มีรายการ" และ FAB */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1; /* ให้เต็มพื้นที่ */
+  height: 100%;
+}
+
+.requested-button { /* ปุ่ม "ส่งคำขอแล้ว" */
+  background-color: #BDBDBD; /* สีเทา */
+  color: #757575; /* สีตัวอักษรเทาเข้ม */
+}

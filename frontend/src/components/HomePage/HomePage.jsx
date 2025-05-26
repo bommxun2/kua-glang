@@ -1,12 +1,10 @@
-import React, { useState,useEffect } from 'react';
+import { useState,useEffect } from 'react';
 import axios from 'axios';
 import './HomePage.css';
 import { FaSignOutAlt, FaSearch, FaTimes } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import '@fontsource/bai-jamjuree';
-import { useEffect } from 'react';
 import MenuBar from '../MenuBar/MenuBar.jsx';
-import axios from 'axios';
 
 const URL = "https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api";
 

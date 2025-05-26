@@ -20,7 +20,9 @@ function Leaderboard({ currentMode, viewScope, userId }) {
   };
 
   const fetchProfile = async () => {
-    const res = await fetch(`http://localhost:3000/profile/${userId}`);
+    const res = await fetch(
+      `https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/profile/${userId}`
+    );
     const data = await res.json();
     setMyUsername(data.username);
   };
@@ -29,8 +31,8 @@ function Leaderboard({ currentMode, viewScope, userId }) {
     const { api, key } = modeToType[currentMode];
     const endpoint =
       viewScope === "friend"
-        ? `http://localhost:3000/ranking/friend/${userId}?rankingType=${api}`
-        : `http://localhost:3000/ranking/${userId}?rankingType=${api}&number=10`;
+        ? `https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/ranking/friend/${userId}?rankingType=${api}`
+        : `https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/ranking/${userId}?rankingType=${api}&number=10`;
 
     const res = await fetch(endpoint);
     const data = await res.json();
@@ -41,7 +43,9 @@ function Leaderboard({ currentMode, viewScope, userId }) {
     if (me) {
       setMyData(me);
     } else {
-      const profileRes = await fetch(`http://localhost:3000/profile/${userId}`);
+      const profileRes = await fetch(
+        `https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/profile/${userId}`
+      );
       const profileData = await profileRes.json();
       setMyData({
         position: "-",
@@ -83,16 +87,16 @@ function Leaderboard({ currentMode, viewScope, userId }) {
             {users.map((user, index) => (
               <tr key={`${user.username}-${index}`} className="leaderboard-row">
                 <td>{user.position}</td>
-<td>
-  <div className="user-cell">
-    <img
-      src={user.profile_img || defaultAvatar}
-      alt="avatar"
-      className="avatar-img"
-    />
-    <span>{user.username}</span>
-  </div>
-</td>
+                <td>
+                  <div className="user-cell">
+                    <img
+                      src={user.profile_img || defaultAvatar}
+                      alt="avatar"
+                      className="avatar-img"
+                    />
+                    <span>{user.username}</span>
+                  </div>
+                </td>
                 <td>
                   {user.quantity} {user.unit}
                 </td>

@@ -14,7 +14,7 @@ function QuestModal({ onClose, quests, setQuests, userId, loadScore }) {
     };
     setQuests(updatedQuests);
 
-    fetch(`http://localhost:3000/ranking/point/${userId}/${claimedQuest.qId}`, {
+    fetch(`https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/ranking/point/${userId}/${claimedQuest.qId}`, {
       method: "POST",
     })
       .then((res) => res.json())

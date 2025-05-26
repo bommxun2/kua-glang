@@ -1,11 +1,15 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Eye, EyeOff, Mail, Lock, User } from "lucide-react"; // Mail ไม่ได้ใช้ แต่ไม่เป็นไร
 
 export default function Login() {
   const [form, setForm] = useState({ username: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const { login } = useAuth();
+  const from = location.state?.from?.pathname || "/home";
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -21,8 +25,8 @@ export default function Login() {
     const data = await res.json();
     console.log("[DEBUG] Login Response:", data); // เดี๋ยวมาลบ
     if (res.ok) {
-      localStorage.setItem("userId", data.userId);
-      navigate("..");
+      login(data.userId); // ใช้ context login
+      navigate(from, { replace: true });
       alert("เข้าสู่ระบบสำเร็จ");
     } else {
       alert("เข้าสู่ระบบไม่สำเร็จ");

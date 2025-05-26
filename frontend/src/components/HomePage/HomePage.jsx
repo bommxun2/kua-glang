@@ -1,4 +1,5 @@
-import { useState,useEffect } from 'react';
+import React, { useState,useEffect } from 'react';
+
 import axios from 'axios';
 import './HomePage.css';
 import { FaSignOutAlt, FaSearch, FaTimes } from 'react-icons/fa';
@@ -16,8 +17,8 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const userId = localStorage.getItem("userId") || "RPZ3" ;
 
+    const userId = localStorage.getItem("userId") || "RPZ3" ;
 
     if (!userId) {
       setUsername("Joonbom");

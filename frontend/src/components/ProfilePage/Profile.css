@@ -160,7 +160,13 @@ body {
   padding: 20px 16px 16px 16px;
   text-align: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  
+  display: flex;                /* ✅ ทำให้จัดศูนย์แนวตั้งได้ */
+  flex-direction: column;      /* ✅ เรียงจากบนลงล่าง */
+  justify-content: center;     /* ✅ จัดเนื้อหาแนวตั้ง */
+  align-items: center;         /* ✅ จัดเนื้อหาแนวนอน */
 }
+
 
 .stat-full {
   width: 100%;

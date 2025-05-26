@@ -26,11 +26,14 @@
 }
 
 .edit-profile-img {
-  width: 64px;
-  height: 64px;
-  background-color: #fff;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto;
+  display: block;
 }
+
 
 .edit-profile-displayname {
   font-size: 1.5rem;

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import EditProfileSection from '../../components/EditProfile/EditProfileSection.jsx';
+import { useNavigate } from 'react-router-dom';
 import './EditProfilePage.css'; // ใช้สี #D34670 เป็นธีมหลัก
 
 export default function EditProfilePage() {
   const [userData, setUserData] = useState(null);
-  const userId = localStorage.getItem('userId') || 'user003'; // หรือจาก context
+  const navigate = useNavigate();
+  const userId = localStorage.getItem('userId') || 'RPZ3'; // หรือจาก context
   //const mockData = {
   //username: 'mock_user',
   //profile_url: '../../assets/ProfilePage/demoprofile.jpg',
@@ -21,7 +23,7 @@ useEffect(() => {
   //  return;
   //}
 
-  fetch(`http://localhost:3000/profile/${userId}`)
+  fetch(`https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/profile/${userId}`)
     .then(res => res.json())
     .then(data => setUserData(data))
     .catch(err => {
@@ -33,7 +35,7 @@ useEffect(() => {
 if (!userData) return <div>กำลังโหลด...</div>;
 
 const handleBack = () => {
-  window.history.back(); // หรือจะใช้ scroll กลับลงก็ได้
+  navigate('/profile'); // หรือจะใช้ scroll กลับลงก็ได้
 };
 
 const handleSelect = (field) => {
@@ -43,10 +45,10 @@ const handleSelect = (field) => {
 
 return (
     <div className="edit-profile-page">
-      <button className="edit-back-btn" onClick={handleBack}>⬆ แก้ไข</button>
+      <button className="edit-back-btn" onClick={handleBack}>⬆ ย้อนกลับ</button>
 
       <div className="edit-profile-header">
-        <div className="edit-profile-img" />
+        <img className="edit-profile-img" src={userData.profile_url} alt="Profile" />
         <div className="edit-profile-displayname">{userData.username}</div>
       </div>
       <EditProfileSection onSelect={handleSelect} />

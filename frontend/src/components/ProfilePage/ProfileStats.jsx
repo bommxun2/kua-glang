@@ -6,10 +6,10 @@
 
   const ProfileStats = () => {
     const [stat, setStat] = useState(null);
-    const userId = localStorage.getItem('userId')||'user003';
+    const userId = localStorage.getItem('userId')||'RPZ3';
 
     useEffect(() => {
-      fetch(`http://localhost:3000/profile/stat/${userId}`)
+      fetch(`https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/profile/stat/${userId}`)
         .then((res) => {
           if (!res.ok) throw new Error('โหลดข้อมูลสถิติไม่สำเร็จ');
           return res.json();
@@ -40,19 +40,19 @@
         <div className="stats-row">
           <div className="stat-card">
             <img src={shareIcon} alt="share" className="stat-icon" />
-            <div className="stat-value">{stat.share_quantity ?? '-'}</div>
+            <div className="stat-value">{stat.share_quantity}</div>
             <div className="stat-label">จำนวนครั้งที่แบ่งปันอาหาร</div>
           </div>
           <div className="stat-card">
             <img src={trashIcon} alt="trash" className="stat-icon" />
-            <div className="stat-value">{stat.reduce_foodwaste ?? '-'}</div>
+            <div className="stat-value">{stat.reduce_foodwaste}</div>
             <div className="stat-label">กิโลกรัมของขยะอาหารที่ลดไป</div>
           </div>
         </div>
 
         <div className="stat-card stat-full">
           <img src={expireIcon} alt="expire" className="stat-icon-large" />
-          <div className="stat-value">{stat.no_expired ?? '-'}</div>
+          <div className="stat-value">{stat.no_expired}</div>
           <div className="stat-label">จำนวนครั้งที่กินอาหารก่อนหมดอายุ</div>
         </div>
       </div>

@@ -6,10 +6,10 @@ export default function EditFieldPage() {
   const navigate = useNavigate();
   const [value, setValue] = useState('');
   const [userData, setUserData] = useState(null);
-  const userId = localStorage.getItem('userId') || 'user003'; // ใช้จริงใส่ localStorage
+  const userId = localStorage.getItem('userId') || 'RPZ3'; // ใช้จริงใส่ localStorage
 
   useEffect(() => {
-    fetch(`http://localhost:3000/profile/${userId}`)
+    fetch(`https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/profile/${userId}`)
       .then(res => res.json())
       .then(data => {
         setUserData(data);
@@ -20,7 +20,7 @@ export default function EditFieldPage() {
 
   const handleSave = async () => {
     try {
-      const res = await fetch(`http://localhost:3000/profile/stat/${userId}`, {
+      const res = await fetch(`https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/profile/stat/${userId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ [field]: value }),

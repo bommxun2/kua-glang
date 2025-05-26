@@ -4,7 +4,7 @@ import './Profile.css'
 
 export default function ProfileHeader() {
   const [user, setUser] = useState(null);
-  const userId = localStorage.getItem('userId')|| 'user003';
+  const userId = localStorage.getItem('userId')|| 'RPZ3';
   const navigate = useNavigate();
 
   const handleEditClick = () => {
@@ -12,7 +12,7 @@ export default function ProfileHeader() {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:3000/profile/${userId}`)
+    fetch(`https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/profile/${userId}`)
       .then(response => {
         if (!response.ok) throw new Error('เกิดข้อผิดพลาดในการโหลดข้อมูล');
         return response.json();

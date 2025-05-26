@@ -15,11 +15,7 @@ const getFriendsAndSuggestions = require("../controllers/post/getFriendsAndSugge
 const unfollowUser = require("../controllers/post/unfollowUser.controller");
 const followUser = require("../controllers/post/followUser.controller");
 
-router.post('/:userId', createPost);
-router.put('/:userId/:postId', updatePost);
-router.delete('/:userId/:postId', deletePost);
 router.get('/', getAllPosts);
-router.get('/:userId', getPostsFromFollowing);
 router.post('/like/:userId/:postId', likePost);
 router.post('/post/comment-by/:userId/:postId', commentPost); // คอมเม้นโพสต์ของคนอื่น
 router.post('/post/:cid/comment/:userId', likeComment);
@@ -28,5 +24,9 @@ router.put("/post/comment/:cId/:postId", updateComment); // แก้ไขค�
 router.get("/friend/:userId", getFriendsAndSuggestions);
 router.post("/friend/:userId/:followId", followUser);
 router.delete("/friend/:userId/:followId", unfollowUser);
+router.post('/:userId', createPost);
+router.put('/:userId/:postId', updatePost);
+router.delete('/:userId/:postId', deletePost);
+router.get('/:userId', getPostsFromFollowing);
 
 module.exports = router;

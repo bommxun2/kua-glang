@@ -1,52 +1,67 @@
 // src/utils/sanitize.js
-import { MOCK_CURRENT_USER_ID, MOCK_CURRENT_USER_AVATAR } from '../data/mockData'; // Adjust path if needed
 
+import { MOCK_CURRENT_USER_ID, MOCK_CURRENT_USER_AVATAR } from '../data/mockData';
+
+/**
+ * ทำความสะอาดข้อมูลคอมเมนต์ที่ได้จาก backend
+ */
 export const sanitizeComment = (c) => {
-    if (!c || typeof c.id === 'undefined') {
-        console.warn('[SanitizeUtil] Sanitizing invalid comment object:', c);
-        return null;
-    }
-    return {
-        id: String(c.id),
-        authorId: String(c.authorId || MOCK_CURRENT_USER_ID),
-        user: c.user || 'Anonymous',
-        text: c.text || '',
-        likes: Number(c.likes) || 0,
-        isLikedByCurrentUser: !!c.isLikedByCurrentUser,
-        timestamp: c.timestamp || new Date().toISOString(),
-        replies: Array.isArray(c.replies) ? c.replies.map(sanitizeComment).filter(r => r !== null) : []
-    };
+  if (!c || typeof c.id === 'undefined') {
+    console.warn('[SanitizeUtil] Invalid comment object:', c);
+    return null;
+  }
+
+  return {
+    id: String(c.id),
+    authorId: String(c.authorId || MOCK_CURRENT_USER_ID),
+    user: c.user || 'Anonymous',
+    text: c.text || '',
+    likes: Number(c.likes) || 0,
+    isLikedByCurrentUser: !!c.isLikedByCurrentUser,
+    timestamp: c.timestamp || new Date().toISOString(),
+    replies: Array.isArray(c.replies)
+      ? c.replies.map(sanitizeComment).filter(Boolean)
+      : [],
+  };
 };
 
+/**
+ * ทำความสะอาดข้อมูลโพสต์ที่ได้จาก backend
+ */
 export const sanitizePost = (p) => {
-    if (!p || typeof p.id === 'undefined') {
-        console.warn('[SanitizeUtil] Sanitizing invalid post object:', p);
-        return null;
-    }
-    const commentsArray = Array.isArray(p.commentsArray)
-        ? p.commentsArray.map(sanitizeComment).filter(c => c !== null)
-        : [];
+  if (!p || (!p.postId && !p.id)) return null;
 
-    const totalComments = commentsArray.reduce((sum, cItem) => {
-        let count = 1;
-        if (cItem.replies && Array.isArray(cItem.replies)) {
-            count += cItem.replies.length;
-        }
-        return sum + count;
-    }, 0);
+  const postId = String(p.postId || p.id || '');
+  const userId = String(p.userId || p.authorId || '');
 
-    return {
-        id: Number(p.id),
-        authorId: String(p.authorId || MOCK_CURRENT_USER_ID),
-        name: p.name || 'Anonymous',
-        avatar: p.avatar || MOCK_CURRENT_USER_AVATAR,
-        location: p.location || '',
-        content: p.content || '',
-        image: p.image || null,
-        time: p.time || 'Sometime ago',
-        likes: Number(p.likes) || 0,
-        isLiked: !!p.isLiked,
-        commentsArray: commentsArray,
-        comments: totalComments,
-    };
+  const commentsArray = Array.isArray(p.comment)
+    ? p.comment.map((c) => ({
+        id: String(c.cid || c.id),
+        text: c.caption || '',
+        user: c.username || 'Unknown',
+        authorId: c.userId || '',
+        likes: c.like_count || 0,
+        isLikedByCurrentUser: false,
+        replies: [],
+      }))
+    : [];
+
+  return {
+    id: postId,
+    postId,
+    userId,
+    authorId: userId,
+    name: p.username || 'Unknown',
+    avatar: p.avatar || '/user-avatar-placeholder.png',
+    location: p.location || '',
+    content: p.caption || '',
+    image: p.img_url || null,
+    time: p.created_at || '',
+    likes: Array.isArray(p.like) ? p.like.length : 0,
+    isLiked: Array.isArray(p.like)
+      ? p.like.some((l) => l.username === p.username)
+      : false,
+    commentsArray,
+    comments: commentsArray.length,
+  };
 };

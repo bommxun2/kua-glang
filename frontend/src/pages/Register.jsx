@@ -49,6 +49,12 @@ export default function Register() {
     setIsUploading(true);
     let finalProfileS3Url = "";
 
+    const res = await fetch("https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/auth/sign-up", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
     if (profileImageFile) {
       try {
         const imgInform = {

@@ -12,26 +12,20 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try { // เพิ่ม try-catch สำหรับ fetch
-      const res = await fetch("https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
+    const res = await fetch("https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    });
 
-      const data = await res.json();
-      if (res.ok) {
-        localStorage.setItem("userId", data.userId);
-        // อาจจะต้องการ redirect ไปหน้าหลักหรือ dashboard แทน ".."
-        // เช่น navigate("/home") หรือ navigate("/")
-        navigate("/"); // ตัวอย่าง: ไปหน้าแรกหลัง login
-        alert("เข้าสู่ระบบสำเร็จ");
-      } else {
-        alert(data.message || "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง"); // แสดง message จาก API ถ้ามี
-      }
-    } catch (error) {
-      console.error("Login error:", error);
-      alert("เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง");
+    const data = await res.json();
+    console.log("[DEBUG] Login Response:", data); // เดี๋ยวมาลบ
+    if (res.ok) {
+      localStorage.setItem("userId", data.userId);
+      navigate("..");
+      alert("เข้าสู่ระบบสำเร็จ");
+    } else {
+      alert("เข้าสู่ระบบไม่สำเร็จ");
     }
   };
 

@@ -21,11 +21,12 @@ exports.listFoods = async (req, res) => {
 
     const foods = (foodsRes.Items || [])
       .map((food) => ({
+        sk: food.SK?.S || null, // ✅ เพิ่ม SK ที่นี่
         foodId: food.foodId?.S || null,
         foodName: food.foodName?.S || null,
         unit: food.unit?.S || null,
         expired_at: food.expired_at?.S || null,
-        quantity: food.quantity?.S || food.quantity?.N || null, // use 'quantity' if present, fallback to 'quantity'
+        quantity: food.quantity?.S || food.quantity?.N || null,
         category: food.category?.S || null,
         img_url: food.img_url?.S || null,
         status: food.status?.S || null,

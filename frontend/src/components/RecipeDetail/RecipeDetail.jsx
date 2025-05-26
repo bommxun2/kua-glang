@@ -3,7 +3,8 @@ import './RecipeDetail.css';
 import { FaSearch, FaTimes, FaBell, FaArrowLeft } from 'react-icons/fa';
 import { useNavigate, useParams } from 'react-router-dom';
 import MenuBar from '../MenuBar/MenuBar.jsx';
-
+import { useEffect } from 'react';
+import axios from 'axios';
 
 const categories = [
   { label: 'ทั้งหมด', value: '' },

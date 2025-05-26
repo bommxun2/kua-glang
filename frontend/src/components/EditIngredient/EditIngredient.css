@@ -19,14 +19,14 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
   background-image: linear-gradient(to bottom right, #f7ebeb, #e6b4b5); /* Add gradient background */
 }
-
+/*
 h1 {
     margin: 0;
-    font-size: 36px !important; /* Ensure the font size is applied */
-    font-weight: bold !important; /* Ensure the bold style is applied */
-    color: var(--primary) !important; /* Ensure the color is applied */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2) !important; /* Ensure the shadow is applied */
-    text-align: center; /* Center the heading */
+    font-size: 36px !important; 
+    font-weight: bold !important; 
+    color: var(--primary) !important; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2) !important; 
+    text-align: center; 
     padding-bottom: 20px;
     margin-top: 30px;
 }
@@ -43,20 +43,20 @@ input[type="text"],
 input[type="date"],
 input[type="number"],
 textarea {
-  width: calc(100% - 20px); /* Ensure inputs are balanced within the container */
+  width: calc(100% - 20px); 
   padding: 0px;
   margin-bottom: 0px;
   border: 1px solid var(--border);
   border-radius: 10px;
   font-size: 14px;
   font-family: 'Bai Jamjuree', sans-serif;
-  box-sizing: border-box; /* Include padding and border in width calculation */
+  box-sizing: border-box; 
 }
 
 input[type="file"] {
   display: none;
 }
-
+*/
 .upload-label {
   display: inline-block;
   background-color: var(--primary);

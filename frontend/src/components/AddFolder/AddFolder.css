@@ -1,94 +1,155 @@
+.header-folder {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Bai Jamjuree', sans-serif;
+  font-weight: bold;
+  margin-top: 40px;
+  justify-content: flex-start;
+  margin-bottom: 25px;
+}
+
+.header-folder h1 {
+  font-size: 36px !important; /* Ensure the font size is applied */
+  font-weight: bold !important; /* Ensure the bold style is applied */
+  margin: 0;
+  text-align: center;
+  color: var(--primary) !important; /* Ensure the color is applied */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2) !important; /* Ensure the shadow is applied */
+}
+
+.back-icon-folder {
+  cursor: pointer;
+  color:#d34670;
+  transition: background-color 0.2s ease;
+  stroke-width: 4.5; 
+}
+
+.back-iconfolder:hover {
+  background-color: rgba(211, 70, 112, 0.15);
+}
+
+.back-icon-folder svg.size-6 {
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.5;
+}
+
+
+.add-item-label {
+  display: block; 
+  margin-bottom: 8px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.add-folder-button {
+  all: unset;
+  padding: 5px !important;
+  color: #ffffff;
+  background-color: #d34670;
+  width: 100%;
+  height: 25px;
+  border: none;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center; /* จัดกลางแนวนอน */
+  align-items: center;     /* จัดกลางแนวตั้ง */
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.add-folder-button:hover {
+  background-color: #b0305a;
+}
+
+.add-folder-icon {
+  width: 28px;
+  height: 28px;
+  stroke-width: 2.5; 
+}
+
 .add-folder-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 70vh; /* Make container take full viewport height */
-  padding: 20px;
+  align-items: stretch; /* ให้เต็มความกว้าง container */
+  gap: 15px;
+  height: auto;
+  padding: 30px;
   background-image: linear-gradient(to bottom right, #f7ebeb, #e6b4b5);
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  margin: 0 auto; /* Center horizontally */
-  text-align: center;
+  margin: 0 auto;
+  font-family: 'Bai Jamjuree', sans-serif;
 }
 
-.add-folder-container h1 {
-  font-size: 1.8rem;
-  color: #d34670;
-  margin-bottom: 20px;
-}
-
-label {
-  display: block;
-  text-align: left;
-  margin-top: 5px;
-  margin-bottom: 10px;
+.add-folder-container label {
   font-size: 1rem;
   color: #333;
+  margin-bottom: 5px;
+  display: block;
+  text-align: left;
 }
 
 .folder-input {
   width: 100%;
   padding: 10px;
-  margin-top: 7px;
-  margin-bottom: 15px;
+  margin-top: 5px;
   border: 1px solid #ccc;
-  border-radius: 10px;
+  border-radius: 20px;
   font-size: 1rem;
 }
 
-.add-item-button {
-  background-color: #d34670;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 10px auto;
-}
-
-.add-item-button:hover {
-  background-color: #b0305a;
-}
-
 .form-actions {
-  margin-top: auto; /* Push buttons to the bottom */
-  margin-bottom: 20px; /* Adjust spacing to bring buttons higher */
-  display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+  margin-top: 10px;
 }
 
-.cancel-button {
-  background-color: white;
-  color: black;
-  padding: 10px 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  cursor: pointer;
-}
 
 .save-button {
   background-color: #d34670;
+  border: none;
   color: white;
   padding: 10px 20px;
-  border: none;
+  font-size: 1rem;
   border-radius: 10px;
   cursor: pointer;
+  margin-top: 20px;
 }
 
 .save-button:hover {
   background-color: #b0305a;
 }
 
-.header {
+.food-list-preview {
+  background-color: #d34670;
+  color: #ffffff;
+  margin-top: 10px;
+  padding: 8px 12px;
+  text-align: left;
+  border-radius: 20px;
   display: flex;
-  justify-content: center; /* Center align horizontally */
-  align-items: center; /* Center align vertically */
-  text-align: center;
-  margin-bottom: 30px; /* Increase space between header and container */
-  margin-top: 40px;
+  justify-content: space-between;
+  align-items: center;
 }
+
+/* ปรับปุ่มลบให้ไม่มีพื้นหลัง + ขาว */
+.delete-food-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.delete-food-button svg {
+  width: 20px;
+  height: 20px;
+  stroke: white;
+}
+
+
+

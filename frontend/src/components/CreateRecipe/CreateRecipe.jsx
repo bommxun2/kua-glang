@@ -1,3 +1,8 @@
+/* 
+
+  Create Recipe From Folder
+
+*/
 import { useState, useEffect, useRef } from 'react';
 import './CreateRecipe.css';
 import MenuBar from '../MenuBar/MenuBar.jsx';
@@ -33,7 +38,6 @@ const CreateRecipe = () => {
 
 
   const categories = [
-    { label: 'ทั้งหมด', value: '' },
     { label: 'อาหารคาว', value: 'savory' },
     { label: 'ของหวาน', value: 'dessert' },
     { label: 'เครื่องดื่ม', value: 'drink' },

@@ -1,8 +1,9 @@
-import React, { useState,useEffect } from 'react';
+
+import { useState, useEffect } from 'react';
 
 import axios from 'axios';
 import './HomePage.css';
-import { FaSignOutAlt, FaSearch, FaTimes } from 'react-icons/fa';
+import { FaSignOutAlt, FaSearch, FaTimes, FaBell } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import '@fontsource/bai-jamjuree';
 import MenuBar from '../MenuBar/MenuBar.jsx';
@@ -17,8 +18,7 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-
-    const userId = localStorage.getItem("userId") || "RPZ3" ;
+    const userId = localStorage.getItem("userId") || "RPZ3";
 
     if (!userId) {
       setUsername("Joonbom");
@@ -48,16 +48,18 @@ const HomePage = () => {
       .then((res) => setUsername(res.data.username))
       .catch((err) => {
         console.error("Profile fetch error:", err);
-        setUsername("Joonbom"); 
+        setUsername("Joonbom");
       });
 
     axios.get(`${URL}/folder/${userId}`)
       .then((res) => setRecipes(Array.isArray(res.data) ? res.data : []))
       .catch((err) => {
         console.error("Recipes fetch error:", err);
-        setRecipes([]); 
+        setRecipes([]);
       });
   }, []);
+
+
 
 
   const handleLocationChange = (e) => setSelectedLocation(e.target.value);
@@ -69,7 +71,13 @@ const HomePage = () => {
     navigate("/login");
   };
   const handleAddFolder = (id) => navigate(`/add-folder/${id}`);
-  const handleRecipeClick = (id) => navigate(`/recipe/${id}`);
+  const handleRecipeClick = (folderId, folderName) => {
+    //console.log(folderName);
+    navigate(`/recipe/${folderId}`, {
+      state: { folderName }
+    });
+  };
+
 
   const filteredRecipes = recipes.filter((recipe) =>
     recipe.folderName.toLowerCase().includes(searchQuery.toLowerCase())
@@ -79,6 +87,9 @@ const HomePage = () => {
     <div className="App">
       <header className="header-homepage">
         <div className="user-name">{username}</div>
+        <button className="logout-btn" onClick={handleLogout}>
+          <FaSignOutAlt />
+        </button>
         <div className="location">
           <span className="location-label">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '6px', color: 'var(--primary)' }}>
@@ -98,9 +109,6 @@ const HomePage = () => {
             <option value="City Square">City Square</option>
           </select>
         </div>
-        <button className="logout-btn" onClick={handleLogout}>
-          <FaSignOutAlt />
-        </button>
       </header>
       <hr className="header-divider" />
 
@@ -127,7 +135,7 @@ const HomePage = () => {
 
       <div className="recipe-container">
         {filteredRecipes.map((recipe) => (
-          <div key={recipe.id} className="recipe-item" onClick={() => handleRecipeClick(recipe.id)}>
+          <div key={recipe.id} className="recipe-item" onClick={() => handleRecipeClick(recipe.folderId, recipe.folderName)}>
             <div className="recipe-img-wrapper">
               <img src={recipe.img_url} alt={recipe.folderName} className="recipe-img" />
             </div>

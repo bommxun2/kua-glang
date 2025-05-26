@@ -61,7 +61,6 @@ const AddFolder = () => {
             img_inform
           );
 
-
           await fetch(data.uploadUrl, {
             method: 'PUT',
             headers: {
@@ -69,7 +68,6 @@ const AddFolder = () => {
             },
             body: food.img_url.Blob,
           });
-
 
           return {
             ...food,
@@ -91,13 +89,11 @@ const AddFolder = () => {
         `https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/folder/${userId}`,
         payload
       );
-
       console.log('บันทึกสำเร็จ', res.data);
-
       setFolderName('');
       setDescription('');
       setFoodList([]);
-      alert('บันทึกสำเร็จ');
+      navigate(-1);
     } catch (err) {
       console.error('เกิดข้อผิดพลาด', err);
       alert('บันทึกไม่สำเร็จ');

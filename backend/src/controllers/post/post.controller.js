@@ -8,7 +8,7 @@ const createPost = async (req, res) => {
   const { userId } = req.params;
   const { caption, img_url } = req.body;
 
-  if (!caption || !img_url) {
+  if (!caption && !img_url) {
     return res.status(400).json({ error: 'caption and img_url are required' });
   }
 

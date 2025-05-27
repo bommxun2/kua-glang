@@ -10,13 +10,14 @@ const {
 const snsClient = new SNSClient({ region: "us-east-1" });
 
 const register = async (req, res) => {
-  const { username, email, phone_num, line_id, password } = req.body;
+  const { username, email, phone_num, line_id, password, profile_url } =
+    req.body;
 
   if (!username || !email || !password) {
     return res.status(400).json({ error: "Missing required fields" });
   }
 
-  // เช็กว่ามีอยู่แล้วหรือยัง
+  // Check if user already exists
   const checkParams = {
     TableName: "kua-glang",
     Key: {
@@ -33,7 +34,8 @@ const register = async (req, res) => {
   const userId = nanoid(4);
 
   const createdAt = new Date().toISOString();
-  const item = {
+
+  const profileItem = {
     PK: { S: `USER#${username}` },
     SK: { S: "PROFILE" },
     username: { S: username },
@@ -42,13 +44,48 @@ const register = async (req, res) => {
     line: { S: line_id || "" },
     password: { S: password },
     created_at: { S: createdAt },
+    profile_url: { S: profile_url || "" },
+  };
+
+  const statItem = {
+    PK: { S: `USER#${username}` }, // ใช้ username เป็น userId ใน PK เช่นเดิม
+    SK: { S: "STAT" },
+    share_quantity: { N: "0" },
+    reduce_foodwaste: { N: "0" },
+    no_expired: { N: "0" },
+    updated_at: { S: createdAt },
   };
 
   try {
+    // Save PROFILE
     await client.send(
       new PutItemCommand({
         TableName: "kua-glang",
-        Item: item,
+        Item: profileItem,
+      })
+    );
+
+    // Save STAT
+    await client.send(
+      new PutItemCommand({
+        TableName: "kua-glang",
+        Item: statItem,
+      })
+    );
+
+    // SNS Notification
+    const topicName = "kua-notification-topic";
+    const createTopicRes = await snsClient.send(
+      new CreateTopicCommand({ Name: topicName })
+    );
+
+    const topicArn = createTopicRes.TopicArn;
+
+    await snsClient.send(
+      new SubscribeCommand({
+        Protocol: "email",
+        TopicArn: topicArn,
+        Endpoint: email,
       })
     );
 

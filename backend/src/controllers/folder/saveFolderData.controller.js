@@ -4,14 +4,8 @@ const dynamoDb = require("../../utils/database");
 
 const saveFolderData = async (req, res) => {
   const { userId } = req.params;
-  const {
-    folderName,
-    description,
-    quntity,
-    food = [],
-    img_url,
-    created_at,
-  } = req.body;
+  const { folderName, description, quantity, food, img_url, created_at } =
+    req.body || {};
 
   const folderId = nanoid(4);
   const PK = `USER#${userId}`;
@@ -27,7 +21,7 @@ const saveFolderData = async (req, res) => {
           Type: { S: "Folder" },
           folderName: { S: folderName },
           description: { S: description },
-          quantity: { S: quntity },
+          quantity: { S: quantity },
           img_url: { S: img_url },
           created_at: { S: created_at },
         },
@@ -41,7 +35,7 @@ const saveFolderData = async (req, res) => {
           foodName,
           expired_at,
           unit,
-          quntity,
+          quantity,
           img_url,
           category,
           status,
@@ -58,7 +52,7 @@ const saveFolderData = async (req, res) => {
               created_at: { S: created_at },
               expired_at: { S: expired_at },
               unit: { S: unit },
-              quantity: { S: quntity },
+              quantity: { S: quantity },
               img_url: { S: img_url },
               category: { S: category },
               use_at: { NULL: true },

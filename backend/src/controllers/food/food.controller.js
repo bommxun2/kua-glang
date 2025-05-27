@@ -21,11 +21,12 @@ exports.listFoods = async (req, res) => {
 
     const foods = (foodsRes.Items || [])
       .map((food) => ({
-        foodId: food.foodId?.S || null,
+        sk: food.SK?.S || null, // ✅ เพิ่ม SK ที่นี่
+        foodId: food?.SK?.S?.split("#")[1] || "",
         foodName: food.foodName?.S || null,
         unit: food.unit?.S || null,
         expired_at: food.expired_at?.S || null,
-        quntity: food.quntity?.S || food.quantity?.N || null, // use 'quntity' if present, fallback to 'quantity'
+        quantity: food.quantity?.N || null,
         category: food.category?.S || null,
         img_url: food.img_url?.S || null,
         status: food.status?.S || null,
@@ -50,16 +51,16 @@ exports.addFood = async (req, res) => {
     foodName,
     unit,
     expired_at,
-    quntity, // Note: use 'quntity' to match request/response
+    quantity, // Note: use 'quantity' to match request/response
     category,
     img_url,
   } = req.body;
 
-  if (!foodName || !unit || !expired_at || !quntity || !category || !img_url) {
+  if (!foodName || !unit || !expired_at || !quantity || !category || !img_url) {
     return res.status(400).json({ error: "Missing required fields" });
   }
 
-  const foodId = nanoid();
+  const foodId = nanoid(4);
   const item = {
     PK: `FOLDER#${folderId}`,
     SK: `FOOD#${foodId}`,
@@ -68,7 +69,7 @@ exports.addFood = async (req, res) => {
     foodName,
     unit,
     expired_at,
-    quntity: String(quntity),
+    quantity: String(quantity),
     category,
     img_url,
     status: "ยังไม่ใช้",
@@ -88,7 +89,7 @@ exports.addFood = async (req, res) => {
       foodName,
       unit,
       expired_at,
-      quntity: String(quntity),
+      quantity: String(quantity),
       category,
       img_url,
       status: "ยังไม่ใช้",
@@ -101,9 +102,9 @@ exports.addFood = async (req, res) => {
 
 exports.updateFood = async (req, res) => {
   const { folderId, foodId } = req.params;
-  const { foodName, unit, expired_at, quntity, category, img_url } = req.body;
+  const { foodName, unit, expired_at, quantity, category, img_url } = req.body;
 
-  if (!foodName || !unit || !expired_at || !quntity || !category || !img_url) {
+  if (!foodName || !unit || !expired_at || !quantity || !category || !img_url) {
     return res.status(400).json({ error: "Missing required fields" });
   }
 
@@ -115,7 +116,7 @@ exports.updateFood = async (req, res) => {
     foodName,
     unit,
     expired_at,
-    quntity: String(quntity),
+    quantity: String(quantity),
     category,
     img_url,
     status: "ยังไม่ใช้",

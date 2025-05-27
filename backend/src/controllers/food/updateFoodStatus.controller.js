@@ -27,13 +27,14 @@ const updateFoodStatus = async (req, res) => {
     const item = foodRes.Items[0];
     const PK = item.PK.S;
     const SK = item.SK.S;
-    const quantity = parseInt(item.quantity?.N || "1"); // เผื่อไม่มีให้ default = 1
+    const quantity = parseInt(item.quantity?.N || "1");
     const useNow = new Date().toISOString();
 
     const expiredAt = item.expired_at?.S;
     const usedBeforeExpire =
       expiredAt && new Date(useNow) < new Date(expiredAt);
 
+    // อัปเดตสถานะอาหาร
     await client.send(
       new UpdateItemCommand({
         TableName: "kua-glang",
@@ -78,32 +79,39 @@ const updateFoodStatus = async (req, res) => {
       SK: { S: "STAT" },
     };
 
-    // อัปเดต reduce_foodwaste และ no_expired (ถ้าใช้ก่อนหมดอายุ)
-    const updateExpressions = [
-      "SET reduce_foodwaste = if_not_exists(reduce_foodwaste, :zero) + :q",
-      "updated_at = :now",
-    ];
+    // ✅ แก้ตรงนี้ให้ใช้ ExpressionAttributeNames ครบทุกฟิลด์ที่มี # ใน UpdateExpression
+    const updateExpressions = [];
     const expressionAttributeValues = {
       ":q": { N: quantity.toString() },
       ":zero": { N: "0" },
       ":now": { S: useNow },
     };
     const expressionAttributeNames = {
+      "#reduce_foodwaste": "reduce_foodwaste",
       "#updated_at": "updated_at",
     };
 
     if (usedBeforeExpire) {
-      updateExpressions.unshift(
-        "no_expired = if_not_exists(no_expired, :zero) + :one"
+      updateExpressions.push(
+        "#no_expired = if_not_exists(#no_expired, :zero) + :one"
       );
       expressionAttributeValues[":one"] = { N: "1" };
+      expressionAttributeNames["#no_expired"] = "no_expired";
     }
 
+    updateExpressions.push(
+      "#reduce_foodwaste = if_not_exists(#reduce_foodwaste, :zero) + :q"
+    );
+    updateExpressions.push("#updated_at = :now");
+
+    const UpdateExpression = `SET ${updateExpressions.join(", ")}`;
+
+    // อัปเดตสถิติผู้ใช้
     await client.send(
       new UpdateItemCommand({
         TableName: "kua-glang",
         Key: statKey,
-        UpdateExpression: updateExpressions.join(", "),
+        UpdateExpression,
         ExpressionAttributeNames: expressionAttributeNames,
         ExpressionAttributeValues: expressionAttributeValues,
       })

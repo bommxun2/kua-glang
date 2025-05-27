@@ -3297,5 +3297,16 @@
                 }
             }
         }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "PK": { "S": "USER#user003" },
+          "SK": { "S": "POST#testpost1" },
+          "caption": { "S": "ทดสอบโพสต์จาก mock" },
+          "img_url": { "S": "https://picsum.photos/id/10/300/200" },
+          "created_at": { "S": "2024-05-25T09:00:00Z" }
+        }
+      }
     }
 ]

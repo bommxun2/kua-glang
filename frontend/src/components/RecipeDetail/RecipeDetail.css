@@ -34,6 +34,14 @@
   gap: 10px;
 }
 
+.no-items-message {
+  text-align: center;
+  color: #888;
+  font-size: 1.2rem;
+  margin-top: 40px;
+}
+
+
 .header h1 {
   margin: 0;
   font-size: 36px !important; /* Ensure the font size is applied */
@@ -46,7 +54,7 @@
   align-items: center;
 }
 
-.notification-icon {
+.edit-food-button {
   font-size: 28px;
   color: var(--primary); /* Use primary color from root */
   cursor: pointer;
@@ -55,10 +63,6 @@
   height: 36px; /* ปรับให้มีความสูงเท่ากัน */
 }
 
-/* Notification Icon */
-.notification-icon.large-icon {
-  font-size: 28px;
-}
 .search-section {
   display: flex;
   flex-direction: column;
@@ -201,7 +205,6 @@
 .item-card:hover {
   transform: scale(1.05); /* Slightly enlarge the card */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add a more prominent shadow */
-  background-color: var(--primary); /* Change background color on hover */
   transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Smooth transition */
 }
 
@@ -356,9 +359,6 @@
   transition: background 0.2s;
   display: block;
 }
-.edit-ingredient-photo-btn:hover {
-  background: #b92c5c;
-}
 
 .edit-ingredient-image-preview {
   width: 100%;
@@ -391,9 +391,6 @@
   font-weight: bold;
   transition: background 0.2s, color 0.2s;
 }
-.edit-ingredient-btn-back:hover {
-  background: #f3e6e6;
-}
 
 .edit-ingredient-btn-save {
   background: var(--primary);
@@ -408,9 +405,7 @@
   font-weight: bold;
   transition: background 0.2s;
 }
-.edit-ingredient-btn-save:hover {
-  background: #b92c5c;
-}
+
 
 .edit-ingredient-btn-delete {
   background: #e53935;
@@ -428,6 +423,49 @@
 .edit-ingredient-btn-delete:hover {
   background: #b71c1c;
 }
+
+.item-bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.update-food-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #d94f7b;
+}
+
+.update-food-status input[type="radio"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 3px solid var(--primary);
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.update-food-status input[type="radio"]::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: var(--primary);
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  display: none;
+}
+
+.update-food-status input[type="radio"]:checked::after {
+  display: block;
+}
+
 
 @media (min-width: 0px) {
   .header, .header-left {

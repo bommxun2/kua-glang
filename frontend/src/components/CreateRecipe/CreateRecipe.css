@@ -1,187 +1,149 @@
-/* Update CreateRecipe styles to match RecipeDetail */
 @import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;500;600&display=swap');
 
 :root {
-  --primary: #D34670; /* สีหลัก */
-  --secondary: #E6B4B5; /* สีรอง */
-  --background: #F7EBEB; /* สีพื้นหลัง */
-  --border: #D9D9D9; /* สีขอบ */
+  --primary: #D34670;
+  --secondary: #E6B4B5;
+  --background: #F7EBEB;
+  --border: #D9D9D9;
 }
 
-/* General container styling */
-.create-recipe-container {
-  font-family: 'Bai Jamjuree', sans-serif;
-  background-color: var(--background);
-  padding: 20px;
-  border-radius: 15px;
-  max-width: 400px;
-  margin: 20px auto; /* Center the container */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
-  background-image: linear-gradient(to bottom right, #f7ebeb, #e6b4b5); /* Add gradient background */
-}
-
-h1 {
-    margin: 0;
-    font-size: 36px !important; /* Ensure the font size is applied */
-    font-weight: bold !important; /* Ensure the bold style is applied */
-    color: var(--primary) !important; /* Ensure the color is applied */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2) !important; /* Ensure the shadow is applied */
-    text-align: center; /* Center the heading */
-    padding-bottom: 20px;
-    margin-top: 30px;
-}
-
-label { 
-  display: block;
-  margin-bottom: 10px;
-  color: var(--primary);
-  font-size: 16px;
-  font-weight: 400;
-}
-
-input[type="text"],
-input[type="date"],
-input[type="number"],
-textarea {
-  width: calc(100% - 20px); /* Ensure inputs are balanced within the container */
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  font-size: 14px;
-  font-family: 'Bai Jamjuree', sans-serif;
-  box-sizing: border-box; /* Include padding and border in width calculation */
-}
-
-input[type="file"] {
-  display: none;
-}
-
-.upload-label {
-  display: inline-block;
-  background-color: var(--primary);
-  color: white;
-  padding: 10px 20px;
-  border-radius: 10px;
-  cursor: pointer;
-  text-align: center;
-  font-size: 14px;
-  font-family: 'Bai Jamjuree', sans-serif;
-  margin-right: 10px; /* Add spacing between photo button and upload button */
-  margin-left: 10px; /* Add spacing to the left to move it away from the text */
-}
-
-.button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  cursor: pointer;
-  font-family: 'Bai Jamjuree', sans-serif;
-}
-
-.cancel-btn {
-  background-color: #fff;
-  color: var(--primary);
-  border: 1px solid var(--primary);
-}
-
-.save-btn {
-  background-color: var(--primary);
-  color: white;
-}
-
-/* Revert search bar styles to original design */
-.search-container {
+.header-folder {
   display: flex;
   align-items: center;
-  background-color: #fff;
-  border-radius: 20px;
-  padding: 10px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.search-icon {
-  margin-right: 10px;
-  color: var(--primary);
-}
-
-.search-bar {
-  flex: 1;
+  gap: 12px;
   font-family: 'Bai Jamjuree', sans-serif;
+  font-weight: bold;
+  margin-top: 40px;
+  justify-content: flex-start;
+  margin-bottom: 25px;
+}
+
+.header-folder h1 {
+  font-size: 36px !important; /* Ensure the font size is applied */
+  font-weight: bold !important; /* Ensure the bold style is applied */
+  margin: 0;
+  text-align: center;
+  color: var(--primary) !important; /* Ensure the color is applied */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2) !important; /* Ensure the shadow is applied */
+}
+
+.create-recipe-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; /* ให้เต็มความกว้าง container */
+  gap: 15px;
+  height: auto;
+  padding: 30px;
+  background-image: linear-gradient(to bottom right, #f7ebeb, #e6b4b5);
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  font-family: 'Bai Jamjuree', sans-serif;
+}
+
+.create-recipe-container label {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 5px;
+  display: block;
+  text-align: left;
+}
+
+.create-recipe-input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 1rem;
+}
+.image-section {
+  position: relative;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+.main-btn {
+  background-color: #D34670;
+  color: white;
+  padding: 10px 20px;
   border: none;
-  outline: none;
+  border-radius: 12px;
   font-size: 16px;
 }
 
-.clear-icon {
-  color: var(--primary);
+.popup {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  height: 200px;
+  display: flex;
+  justify-content:space-around;
+}
+
+.popup-option {
+  display: flex !important; 
+  flex-direction: column;
+  align-items: center;
   cursor: pointer;
+  text-align: center !important;
+}
+
+.icon-button {
+  background-color: #D34670;
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-svg {
+  width: 28px;
+  height: 28px;
+  color: white;
+}
+
+.popup-label {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #333;
 }
 
 .image-preview {
-  margin-top: 17px; /* Adjusted spacing above the preview block */
-  text-align: center; /* Center the preview block */
-  border: 1px dashed var(--border); /* Dashed border for preview area */
-  border-radius: 10px; /* Rounded corners */
-  padding: 10px; /* Add padding inside the preview block */
-  background-color: #f9f9f9; /* Light background for contrast */
-  margin-bottom: 20px; /* Add spacing below the preview block to separate it from buttons */
+  margin-top: 20px;
 }
 
 .image-preview img {
-  max-width: 100%; /* Ensure the image fits within the preview block */
-  max-height: 200px; /* Limit the height of the preview image */
-  border-radius: 5px; /* Slightly round the image corners */
+  max-width: 200%;
+  border-radius: 10px;
 }
 
-.form-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: -12px; /* Move buttons up by an additional 3px */
-}
-
-.edit-ingredient-category-dropdown {
-  background: var(--primary);
-  color: #fff;
+.image-preview button {
+  margin-top: 10px;
+  background: #ff4e4e;
+  color: white;
   border: none;
-  border-radius: 12px;
-  padding: 10px 18px;
-  font-family: 'Bai Jamjuree', sans-serif;
-  font-size: 17px;
-  min-width: 160px;
-  margin-left: 16px;
-  box-shadow: 0 2px 8px rgba(211, 70, 112, 0.10);
-  transition: box-shadow 0.2s, background 0.2s, color 0.2s, transform 0.2s;
-  outline: none;
+  padding: 8px 12px;
+  border-radius: 8px;
   cursor: pointer;
-  appearance: none;
-  position: relative;
-  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23fff' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 18px 18px;
 }
 
-.edit-ingredient-category-dropdown:focus, .edit-ingredient-category-dropdown:hover {
-  background: #b92c5c;
-  color: #fff;
-  box-shadow: 0 4px 16px rgba(211, 70, 112, 0.18);
-  transform: scale(1.04);
-}
-
-.edit-ingredient-category-dropdown option {
-  color: #222;
-  background: #fff;
-}
-
-@media (max-width: 600px) {
-  .edit-ingredient-category-dropdown {
-    min-width: 0;
-    width: 100%;
-    margin-left: 0;
-    margin-top: 8px;
-  }
+.save-recipe-button {
+  background-color: #d34670;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 30px;
 }

@@ -21,7 +21,6 @@ export default function CommentSection({
 
     const renderRecursiveComment = (comment, isReply = false, parentId = null) => (
         <CommentItem
-            key={comment.id}
             comment={comment}
             postId={postId}
             currentUserId={currentUserId}
@@ -39,7 +38,11 @@ export default function CommentSection({
             {/* เพิ่ม class "no-scrollbar" ถ้าต้องการซ่อน scrollbar */}
             <div className="comments-list no-scrollbar">
                 {(commentsArray && commentsArray.length > 0) ? (
-                    commentsArray.map(comment => renderRecursiveComment(comment, false, null))
+                    commentsArray.map(comment => (
+                        <React.Fragment key={comment.id}>
+                            {renderRecursiveComment(comment, false, null)}
+                        </React.Fragment>
+                    ))
                 ) : (
                     <p className="no-comments-text">ยังไม่มีความคิดเห็น</p>
                 )}

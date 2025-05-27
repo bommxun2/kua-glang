@@ -32,6 +32,7 @@ const register = async (req, res) => {
   }
 
   const userId = nanoid(4);
+
   const createdAt = new Date().toISOString();
 
   const profileItem = {
@@ -73,6 +74,21 @@ const register = async (req, res) => {
     );
 
     // SNS Notification
+    const topicName = "kua-notification-topic";
+    const createTopicRes = await snsClient.send(
+      new CreateTopicCommand({ Name: topicName })
+    );
+
+    const topicArn = createTopicRes.TopicArn;
+
+    await snsClient.send(
+      new SubscribeCommand({
+        Protocol: "email",
+        TopicArn: topicArn,
+        Endpoint: email,
+      })
+    );
+
     const topicName = "kua-notification-topic";
     const createTopicRes = await snsClient.send(
       new CreateTopicCommand({ Name: topicName })

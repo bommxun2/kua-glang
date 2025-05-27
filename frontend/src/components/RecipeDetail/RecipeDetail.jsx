@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import './RecipeDetail.css';
 import { FaSearch, FaTimes, FaBell, FaArrowLeft } from 'react-icons/fa';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import MenuBar from '../MenuBar/MenuBar.jsx';
-
+import { useEffect } from 'react';
+import axios from 'axios';
 
 const categories = [
   { label: 'ทั้งหมด', value: '' },
@@ -18,54 +19,23 @@ const categories = [
 const RecipeDetail = () => {
 
   const { folderId } = useParams();
+  const location = useLocation();
   const [items, setItems] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState('');
   const navigate = useNavigate();
 
-  const mockData = [
-    {
-      foodId: '1',
-      foodName: 'เค้กจ้า',
-      quantity: 4,
-      unit: 'ชิ้น',
-      expired_at: '2025-06-01',
-      category:"dessert",
-      img_url: 'https://i.pinimg.com/736x/75/a5/62/75a562db96c7f70fcd61b0d7cf37529c.jpg',
-      status: 'ยังไม่ใช้'
-    },
-    {
-      foodId: '2',
-      foodName: 'มันฝรั่ง',
-      quantity: 3,
-      unit: 'หัว',
-      expired_at: '2025-06-03',
-      category:"vegetable-fruit",
-      img_url: 'https://i.pinimg.com/736x/05/3c/4e/053c4e34dc5b10cdda768068cd19bbed.jpg',
-      status: 'ยังไม่ใช้'
-    },
-    {
-      foodId: '3',
-      foodName: 'หอมใหญ่',
-      quantity: 1,
-      unit: 'หัว',
-      expired_at: null,
-      category:"vegetable-fruit",
-      img_url: 'https://i.pinimg.com/736x/ac/71/0b/ac710bfaa12bb7b8f658a5da6c19aa56.jpg',
-      status: 'ยังไม่ใช้'
-    }
-  ];
+  const [folderName, setFolderName] = useState(location.state?.folderName || "ไม่มีชื่อโฟลเดอร์");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const id = folderId || '1';
-        const response = await axios.get(`http://localhost:3000/food/folder/${id}`);
+        const response = await axios.get(`https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/food/folder/${id}`);
         const filtered = response.data.filter(item => item.status === 'ยังไม่ใช้');
-        setItems(filtered.length > 0 ? filtered : mockData);
+        setItems(filtered);
       } catch (error) {
         console.error('Error fetching food items:', error);
-        setItems(mockData);
       }
     };
     fetchData();
@@ -74,8 +44,33 @@ const RecipeDetail = () => {
 
   const handleSearchChange = (e) => setSearchQuery(e.target.value);
   const handleClearSearch = () => setSearchQuery("");
-  const handleAddItem = () => navigate('/create-recipe');
-  const handleIngredientClick = (id) => navigate(`/edit-ingredient/${id}`);
+  const handleAddItem = () => navigate(`/create-food/${folderId}`);
+  const handleEditFolder = () => {
+    navigate(`/edit-folder/${folderId}`, {
+      state: { folderName },
+    });
+  };
+
+  const handleEditFood = (item) => {
+    navigate(`/edit-food/${folderId}`, {
+      state: { previousData: item },
+    });
+  };
+
+  const handleFoodStatus = async (id) => {
+    try {
+      const res = await axios.put(
+        `https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/food/${id}`
+      );
+      if (res.message == 'update food success') {
+        navigate(`/recipe/${folderId}`);
+      }
+
+    } catch (err) {
+      console.error('เกิดข้อผิดพลาด', err);
+      alert('บันทึกไม่สำเร็จ');
+    }
+  };
 
 
   const filteredItems = items.filter((item) =>
@@ -91,18 +86,27 @@ const RecipeDetail = () => {
         <div className="back-icon" onClick={() => navigate('/')}>
           <FaArrowLeft />
         </div>
-        <h1>ครัวกลาง</h1>
-        <FaBell className="notification-icon large-icon" />
+        <h1>{folderName}</h1>
+        <div className='edit-food-button'>
+          <svg
+            onClick={handleEditFolder}
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={2.5}      // เส้นหนาขึ้น
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ height: "20px" }}  // ปรับให้เตี้ยลง
+          >
+            <path d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+          </svg>
+        </div>
       </div>
 
       {/* Add Button */}
       <div className="add-item-recipedetail">
         <button className="add-item-btn" onClick={handleAddItem}>+ เพิ่ม</button>
-        <button className="share-item-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
-            <path d="M 23 3 A 4 4 0 0 0 19 7 A 4 4 0 0 0 19.09375 7.8359375 L 10.011719 12.376953 A 4 4 0 0 0 7 11 A 4 4 0 0 0 3 15 A 4 4 0 0 0 7 19 A 4 4 0 0 0 10.013672 17.625 L 19.089844 22.164062 A 4 4 0 0 0 19 23 A 4 4 0 0 0 23 27 A 4 4 0 0 0 27 23 A 4 4 0 0 0 23 19 A 4 4 0 0 0 19.986328 20.375 L 10.910156 15.835938 A 4 4 0 0 0 11 15 A 4 4 0 0 0 10.90625 14.166016 L 19.988281 9.625 A 4 4 0 0 0 23 11 A 4 4 0 0 0 27 7 A 4 4 0 0 0 23 3 z" />
-          </svg>
-        </button>
       </div>
 
       {/* Search */}
@@ -132,26 +136,40 @@ const RecipeDetail = () => {
 
       {/* Items */}
       <div className="items-list">
-
-        {filteredItems.map((item) => (
-          <div key={item.foodId} className="item-card" onClick={() => handleIngredientClick(item.foodId)}>
-            <img src={item.img_url} alt={item.foodName} className="item-img" />
-            <div className="item-info">
-              <h3 className="item-name">{item.foodName}</h3>
-              <p className="item-expiry">
-                {item.expired_at
-                  ? new Date(item.expired_at).toLocaleDateString('th-TH', {
+        {filteredItems.length > 0 ? (
+          filteredItems.map((item) => (
+            <div className="item-card" onClick={() => handleEditFood(item)}>
+              <img src={item.img_url} alt={item.foodName} className="item-img" />
+              <div className="item-info">
+                <h3 className="item-name">{item.foodName}</h3>
+                <p className="item-expiry">
+                  {item.expired_at
+                    ? new Date(item.expired_at).toLocaleDateString('th-TH', {
                       year: 'numeric',
                       month: 'long',
                       day: '2-digit',
                     })
-                  : ''}
-              </p>
-              <p className="item-quantity">{item.quantity} {item.unit}</p>
+                    : ''}
+                </p>
+                <div className="item-bottom-row">
+                  <p className="item-quantity">{item.quantity} {item.unit}</p>
+                  <div className="update-food-status" onClick={(e) => e.stopPropagation()}>
+                    <input
+                      type="radio"
+                      onClick={() => handleFoodStatus(item.foodId)}
+                    />
+                    <p>หมดแล้ว</p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
+
+          ))
+        ) : (
+          <p className="no-items-message">ไม่มีรายการอาหารในโฟลเดอร์นี้</p>
+        )}
       </div>
+
       <MenuBar />
     </div>
   );

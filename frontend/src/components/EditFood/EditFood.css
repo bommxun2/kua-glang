@@ -134,7 +134,7 @@ input[type="file"] {
 }
 
 .image-preview {
-  margin-top: 17px; /* Adjusted spacing above the preview block */
+  margin-top: 10px; /* Adjusted spacing above the preview block */
   text-align: center; /* Center the preview block */
   border: 1px dashed var(--border); /* Dashed border for preview area */
   border-radius: 10px; /* Rounded corners */
@@ -145,7 +145,7 @@ input[type="file"] {
 
 .image-preview img {
   max-width: 100%; /* Ensure the image fits within the preview block */
-  max-height: 200px; /* Limit the height of the preview image */
+  max-height: 100px; /* Limit the height of the preview image */
   border-radius: 5px; /* Slightly round the image corners */
 }
 

@@ -23,11 +23,9 @@ export default function Login() {
     });
 
     const data = await res.json();
-    console.log("[DEBUG] Login Response:", data); // เดี๋ยวมาลบ
     if (res.ok) {
-      login(data.userId); // ใช้ context login
+      login(data.userId);
       navigate(from, { replace: true });
-      alert("เข้าสู่ระบบสำเร็จ");
     } else {
       alert("เข้าสู่ระบบไม่สำเร็จ");
     }

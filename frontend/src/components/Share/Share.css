@@ -1,14 +1,16 @@
 /* frontend/src/components/ShareScreen/ShareScreen.css */
+#root {
+  margin: 0;
+  padding: 0;
+}
+
 .share-screen-container {
+  all:initial;
   width: 100%;
-  /* max-width: 420px; /* หรือขนาดที่คุณต้องการสำหรับ mobile view */
-  /* ให้ container หลักของแอป (เช่น .app-main-wrapper) จัดการ max-width */
-  margin: 0 auto;
-  background-color: #fff; /* พื้นหลังหลักของหน้าจอ */
-  min-height: 100vh; /* หรือ 100% ถ้าอยู่ใน container ที่กำหนดความสูง */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  font-family: 'Kanit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* ฟอนต์ที่คล้ายในรูป */
+  font-family: 'Bai Jamjuree', sans-serif;
 }
 
 /* Main Tabs */
@@ -55,15 +57,12 @@
 /* Search Bar */
 .search-bar-container-share {
   padding: 10px 15px; /* ปรับ padding */
-  background-color: #fff;
-  border-bottom: 1px solid #f0f0f0; /* เพิ่มเส้นคั่นบางๆ */
   flex-shrink: 0;
 }
 
 .search-bar-share {
   display: flex;
   align-items: center;
-  background-color: #fdf0f3; /* พื้นหลังสีขาว */
   border: 1.5px solid #D34670; /* ขอบสีชมพูอ่อน (ปรับตามรูป) */
   border-radius: 25px;
   padding: 4px 12px; /* ปรับ padding ภายใน */
@@ -164,7 +163,6 @@
   padding: 10px 15px 15px 15px; /* ปรับ padding */
   flex-grow: 1;
   overflow-y: auto;
-  background-color: #f9f9f9; /* สีพื้นหลังส่วน content อ่อนๆ */
 }
 
 .empty-state-message {
@@ -185,7 +183,7 @@
 .share-item-card {
   background-color: #fff;
   border: 1px solid #e8e8e8;
-  border-radius: 8px;
+  border-radius: 20px;
   margin-bottom: 12px; /* ลดระยะห่างระหว่างการ์ด */
   padding: 12px;
   box-shadow: 0 1px 2px rgba(0,0,0,0.04);
@@ -241,8 +239,8 @@
 }
 
 .item-image {
-  width: 85px; /* ปรับขนาดรูป */
-  height: 65px;
+  width: 120px; /* ปรับขนาดรูป */
+  height: 120px;
   border-radius: 6px;
   object-fit: cover;
   /* border: 1px solid #eee; // อาจจะไม่ต้องมีถ้าไม่ต้องการ */

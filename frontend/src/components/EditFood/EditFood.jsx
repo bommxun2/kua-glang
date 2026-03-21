@@ -143,7 +143,7 @@ const EditFood = () => {
       navigate(-1);
     } catch (err) {
       console.error('เกิดข้อผิดพลาด:', err);
-      alert('บันทึกไม่สำเร็จ');
+      //alert('บันทึกไม่สำเร็จ');
     }
   };
 
@@ -156,7 +156,7 @@ const EditFood = () => {
       navigate('/');
     } catch (err) {
       console.error('เกิดข้อผิดพลาด', err);
-      alert('บันทึกไม่สำเร็จ');
+      //alert('บันทึกไม่สำเร็จ');
     }
   };
 
@@ -171,7 +171,7 @@ const EditFood = () => {
         <h1>แก้ไขอาหาร</h1>
       </div>
 
-      <div className="create-recipe-container">
+      <div className="create-recipe-container scroll-hidden" style={{ maxHeight: '80vh' }}>
         <form onSubmit={handleSubmit}>
           <label>ชื่อ*:
             <input type="text" name="name" value={formData.name} onChange={handleInputChange} required className="create-recipe-input" />
@@ -229,7 +229,7 @@ const EditFood = () => {
           </div>
 
           <div className="form-actions">
-            <button onClick={handledeleteFolder} className="save-recipe-button">ลบ</button>
+            <button type="button" onClick={handledeleteFolder} className="save-recipe-button">ลบ</button>
             <button type="submit" className="save-recipe-button">บันทึกการแก้ไข</button>
           </div>
         </form>

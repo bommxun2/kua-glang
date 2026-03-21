@@ -33,12 +33,24 @@
   align-items: stretch; /* ให้เต็มความกว้าง container */
   gap: 15px;
   height: auto;
-  padding: 30px;
+  padding: 30px !important;
   background-image: linear-gradient(to bottom right, #f7ebeb, #e6b4b5);
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
   font-family: 'Bai Jamjuree', sans-serif;
+  max-height: 80vh; /* หรือ 100vh ก็ได้ */
+  overflow-y: auto;
+}
+
+.scroll-hidden {
+  overflow-y: scroll;
+  -ms-overflow-style: none;  /* สำหรับ IE และ Edge */
+  scrollbar-width: none;     /* สำหรับ Firefox */
+}
+
+.scroll-hidden::-webkit-scrollbar {
+  display: none;             /* สำหรับ Chrome, Safari และ Opera */
 }
 
 .create-recipe-container label {
@@ -145,5 +157,5 @@
   font-size: 1rem;
   border-radius: 10px;
   cursor: pointer;
-  margin-top: 30px;
+  margin-top: 10px;
 }

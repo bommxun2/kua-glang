@@ -81,7 +81,7 @@ const EditFolder = () => {
           />
         </label>
         <div className="form-actions">
-          <button onClick={handledeleteFolder} className="save-button">ลบรายการอาหาร</button>
+          <button type="button" onClick={handledeleteFolder} className="save-recipe-button">ลบ</button>
           <button onClick={handleEditFolder} className="save-button">บันทึกการแก้ไข</button>
         </div>
       </div>

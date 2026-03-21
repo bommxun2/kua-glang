@@ -1,13 +1,12 @@
-/* History.css */
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;500;600&display=swap');
+
 /* สไตล์สำหรับ History Screen */
 
 .history-screen-container {
   width: 100%;
   height: 100%;
   min-height: 100vh;
-  background-color: #fdf0f3;
-  border: 1px solid #b0b0b0;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  background-color: var(--background);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -19,8 +18,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fdf0f3;
-
 }
 
 .header-title {
@@ -44,7 +41,6 @@
 .search-bar {
   display: flex;
   align-items: center;
-  background-color: #fff;
   border: 1.5px solid #e91e63;
   border-radius: 25px;
   padding: 10px 15px;
@@ -116,10 +112,9 @@
 }
 
 .content-area {
-  flex-grow: 1; /* ให้ขยายเต็มพื้นที่ที่เหลือ */
-  overflow-y: auto; /* ให้ scroll ได้ถ้าเนื้อหาเยอะ */
-  background-color: #fdf0f3; /* สีพื้นหลังอ่อนๆ (ปรับตามดีไซน์) */
-  display: flex; /* ตั้งเป็น flex container */
+  flex-grow: 1; 
+  overflow-y: auto; 
+  display: flex; 
   flex-direction: column;
 }
 
@@ -142,9 +137,8 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  background-color: #fdf0f3;
 }
-.content-area.empty { /* สำหรับจัดกลาง empty state */
+.content-area.empty { 
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -153,25 +147,45 @@
 }
 
 
+/* Recipe Container */
+.recipe-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+/* Recipe Item */
+.recipe-item {
+  background-color: white;
+  height: 130px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  display: flex;
+  padding: 0px 15px 0px 0px;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  max-width: 100%;
+}
+
 .history-card-new {
   background-color: #fff;
-  border-radius: 10px; /* ความโค้งมนของการ์ด */
-  padding: 12px;
+  border-radius: 20px; 
   display: flex;
-  gap: 10px; /* ระยะห่างระหว่างรูปกับข้อมูล */
+  gap: 20px; /* ระยะห่างระหว่างรูปกับข้อมูล */
   align-items: flex-start; /* จัดรูปและข้อมูลชิดบน */
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08); /* เงาจางๆ */
-  /* height: auto;  ให้ความสูงเป็น auto ตามเนื้อหา */
-  /* ถ้าต้องการกำหนดความสูงตายตัว ก็ใส่ค่าที่นี่ เช่น height: 90px; */
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  height: 120px; 
 }
 
 .history-card-image-new {
-  width: 55px;  /* ขนาดรูปภาพเล็กลง */
-  height: 55px;
-  border-radius: 8px; /* ความโค้งมนของรูปภาพ */
+  width: 120px;
+  height: 120px;
+  border-radius: 20px;
   object-fit: cover;
-  flex-shrink: 0;
-  margin-top: 2px; /* จัดให้ตรงกลางแนวตั้งกับบรรทัดแรกของชื่อเล็กน้อย */
+  flex-shrink: 0; 
 }
 
 .history-card-details-new {
@@ -180,6 +194,8 @@
   flex-direction: column;
   gap: 3px; /* ระยะห่างระหว่างแถวข้อมูล */
   position: relative; /* สำหรับ badge ที่จะ absolute position ภายใน details */
+  padding-right: 10px;
+  padding-top: 10px;
   padding-bottom: 20px; /* พื้นที่สำหรับ badge ด้านล่าง */
 }
 
@@ -191,7 +207,7 @@
 }
 
 .history-card-name-new {
-  font-size: 14px; /* ขนาดชื่อสินค้า */
+  font-size: 20px; /* ขนาดชื่อสินค้า */
   font-weight: 600;
   color: #333;
   margin: 0;
@@ -201,7 +217,7 @@
 }
 
 .history-card-time-new {
-  font-size: 10px; /* ขนาดเวลา */
+  font-size: 15px; /* ขนาดเวลา */
   color: #888;
   white-space: nowrap;
   flex-shrink: 0; /* ไม่ให้เวลาถูกบีบ */
@@ -222,26 +238,32 @@
 
 .history-card-sharer-name-new,
 .history-card-recipient-new {
-  font-size: 11px; /* ขนาดชื่อผู้แบ่งปัน/ผู้รับ */
+  font-size: 15px;
+  font-weight: 800;
   color: #666;
   line-height: 1.2;
 }
-.history-card-row-3 {
-    margin-top: 1px; /* ระยะห่างเล็กน้อย */
-}
 
+.history-card-details-new {
+  position: relative; /* จำเป็นสำหรับ badge ที่ absolute */
+  padding-right: 10px;
+  padding-top: 30px;
+  padding-bottom: 30px; /* เผื่อพื้นที่สำหรับ badge */
+}
 
 .history-card-status-badge-new {
-  position: absolute; /* ทำให้ badge ลอยอยู่มุมขวาล่างของ .history-card-details-new */
-  bottom: 0px;      /* ชิดขอบล่างของ details */
-  right: 0px;       /* ชิดขอบขวาของ details */
-  font-size: 9px;   /* ขนาดฟอนต์ของ badge เล็กลง */
-  padding: 3px 8px; /* padding ภายใน badge */
-  border-radius: 10px;/* ความโค้งมนของ badge */
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  font-size: 15px;
+  padding: 3px 8px;
+  border-radius: 10px;
   font-weight: 500;
-  color: white;     /* สีตัวอักษรใน badge */
+  color: white;
   line-height: 1;
+  white-space: nowrap;
 }
+
 
 /* สีสำหรับ Badge สถานะต่างๆ (ปรับให้ตรงกับ "ประวัติ_ใหม่.png") */
 .status-completed-green-new {

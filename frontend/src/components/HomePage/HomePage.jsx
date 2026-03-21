@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import axios from 'axios';
 import './HomePage.css';
-import { FaSignOutAlt, FaSearch, FaTimes, FaBell } from 'react-icons/fa';
+import { FaSignOutAlt, FaSearch, FaTimes } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import '@fontsource/bai-jamjuree';
 import MenuBar from '../MenuBar/MenuBar.jsx';
@@ -65,7 +65,7 @@ const HomePage = () => {
   const handleSearchChange = (e) => setSearchQuery(e.target.value);
   const handleClearSearch = () => setSearchQuery("");
   const handleLogout = () => {
-    alert("คุณได้ทำการล็อกเอาท์แล้ว");
+    //alert("คุณได้ทำการล็อกเอาท์แล้ว");
     localStorage.removeItem("userId");
     navigate("/login");
   };

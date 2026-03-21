@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
     if (storedId) {
       setUserId(storedId);
     }
-    setIsAuthReady(true); // ✅ แสดงว่าโหลดเสร็จแล้ว ไม่ว่ามี user หรือไม่
+    setIsAuthReady(true); //  แสดงว่าโหลดเสร็จแล้ว ไม่ว่ามี user หรือไม่
   }, []);
 
   // login: set ค่าเข้า localStorage + state

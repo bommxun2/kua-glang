@@ -29,12 +29,15 @@ import EditProfileImagePage from './pages/ProfilePage/EditProfileImage.jsx';
 function RequireAuth({ children }) {
   const { userId, isAuthReady } = useAuth();
   const location = useLocation();
-  if (!isAuthReady) return null; // หรือ loading spinner
+
+  //console.log("userId:", userId, "isAuthReady:", isAuthReady);
+  if (!isAuthReady) return null; 
   if (!userId) return <Navigate to="/login" state={{ from: location }} replace />;
   return children;
 }
 
 function App() {
+  const { userId, isAuthReady } = useAuth();
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
@@ -44,7 +47,6 @@ function App() {
           <HomePage />
         </RequireAuth>
       } />
-      <Route path="/homepage" element={<RequireAuth><HomePage /></RequireAuth>} />
       <Route path="/add-folder/:id" element={<RequireAuth><AddFolder /></RequireAuth>} />
       <Route path="/edit-folder/:folderId" element={<RequireAuth><EditFolder /></RequireAuth>} />
       <Route path="/recipe/:folderId" element={<RequireAuth><RecipeDetail /></RequireAuth>} />
@@ -66,7 +68,20 @@ function App() {
       <Route path="/edit/profile_url" element={<RequireAuth><EditProfileImagePage /></RequireAuth>} />
 
 
-      <Route path="/" element={<Navigate to="/login" replace />} />
+         <Route
+        path="/"
+        element={
+          isAuthReady ? (
+            userId ? (
+              <Navigate to="/home" replace />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          ) : (
+            <div>Loading...</div>
+          )
+        }
+      />
     </Routes>
   );
 }

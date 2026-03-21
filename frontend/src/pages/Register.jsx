@@ -68,7 +68,7 @@ export default function Register() {
         });
 
         finalProfileS3Url = presignData.fileUrl;
-        console.log('อัปโหลดรูปภาพสำเร็จ:', finalProfileS3Url);
+        //console.log('อัปโหลดรูปภาพสำเร็จ:', finalProfileS3Url);
 
       } catch (uploadError) {
         console.error('เกิดข้อผิดพลาดในการอัปโหลดรูปภาพ:', uploadError);
@@ -99,7 +99,7 @@ export default function Register() {
       const responseData = await res.json();
 
       if (res.ok) {
-        alert("ลงทะเบียนสำเร็จ!");
+        //alert("ลงทะเบียนสำเร็จ!");
         navigate("/login");
       } else {
         console.error("ลงทะเบียนไม่สำเร็จ:", responseData);

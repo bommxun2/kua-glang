@@ -11,8 +11,8 @@ import './CommunityPage.css';
 import { useAuth } from '../../contexts/AuthContext';
 import {
   fetchAllPosts,
-  fetchFriends,       // ✅ เพิ่ม
-  followUser,         // ✅ เพิ่ม
+  fetchFriends,      
+  followUser,         
   deletePost,
   likePost,
   likeComment,
@@ -25,7 +25,7 @@ export default function CommunityPage() {
   const navigate = useNavigate();
   const { userId } = useAuth();
   const [posts, setPosts] = useState([]);
-  const [friends, setFriends] = useState([]); // ✅ เพิ่ม
+  const [friends, setFriends] = useState([]); 
   const [showCommentsForPostId, setShowCommentsForPostId] = useState(null);
   const [commentInput, setCommentInput] = useState({});
   const [replyingToComment, setReplyingToComment] = useState(null);
@@ -34,7 +34,7 @@ export default function CommunityPage() {
   const [headerHeight, setHeaderHeight] = useState(0);
   const [fabRight, setFabRight] = useState('1rem');
 
-  // ✅ โหลดเพื่อนของ user
+
   useEffect(() => {
     const loadFriends = async () => {
       try {
@@ -85,7 +85,7 @@ export default function CommunityPage() {
     try {
       await followUser(userId, targetUser.id);
       alert(`ติดตาม ${targetUser.name} แล้ว`);
-      navigate('/community/following', { state: { refreshFriends: true } }); // ✅ เพิ่มบรรทัดนี้
+      navigate('/community/following', { state: { refreshFriends: true } }); 
 
     } catch (err) {
       console.error("เพิ่มเพื่อนล้มเหลว:", err);
@@ -107,7 +107,7 @@ export default function CommunityPage() {
 
   const handleLikePost = async (postId) => {
     try {
-      await likePost(postId, userId);          // ✅ ถูกต้องตาม API path
+      await likePost(postId, userId);          
       setPosts(prev => prev.map(p =>
         p.postId === postId ? {
           ...p,

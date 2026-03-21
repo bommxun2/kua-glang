@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './AddFolder.css';
+import MenuBar from '../MenuBar/MenuBar.jsx';
 import axios from 'axios';
 
 const AddFolder = () => {
@@ -20,7 +21,6 @@ const AddFolder = () => {
 
       const combinedList = [...location.state.foodList, location.state.foodItem];
 
-
       const uniqueList = combinedList.filter(
         (item, index, self) =>
           index ===
@@ -38,9 +38,6 @@ const AddFolder = () => {
       setFoodList(location.state.foodList);
     }
   }, [location.state]);
-
-
-  console.log(foodList);
 
   const handleAddFolder = async () => {
     const userId = localStorage.getItem('userId') || "RPZ3";
@@ -89,17 +86,16 @@ const AddFolder = () => {
         `https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/folder/${userId}`,
         payload
       );
-      console.log('บันทึกสำเร็จ', res.data);
+      //console.log('บันทึกสำเร็จ', res.data);
       setFolderName('');
       setDescription('');
       setFoodList([]);
-      navigate(-1);
+      navigate('/');
     } catch (err) {
       console.error('เกิดข้อผิดพลาด', err);
       alert('บันทึกไม่สำเร็จ');
     }
   };
-
 
   return (
     <>
@@ -186,9 +182,12 @@ const AddFolder = () => {
         <div className="form-actions">
           <button onClick={handleAddFolder} className="save-button">บันทึก</button>
         </div>
+        <MenuBar />
       </div>
     </>
+
   );
+
 };
 
 export default AddFolder;

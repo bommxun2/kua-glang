@@ -201,7 +201,6 @@ body {
   user-select: none; 
 }
 
-
 /* Recipe Container */
 .recipe-container {
   display: flex;
@@ -216,7 +215,7 @@ body {
   background-color: white;
   height: 130px;
   border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* เงาของการ์ด */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
   display: flex;
   padding: 0px 15px 0px 0px;
   align-items: center;
@@ -227,10 +226,10 @@ body {
 
 /* Restore hover effect for recipe-item */
 .recipe-item:hover {
-  background-color: var(--secondary); /* เปลี่ยนสีพื้นหลังเมื่อ hover */
-  cursor: pointer; /* เปลี่ยน cursor เป็น pointer */
-  transform: scale(1.02); /* ขยายขนาดเล็กน้อย */
-  transition: all 0.3s ease; /* เพิ่มเอฟเฟกต์การเปลี่ยนแปลง */
+  background-color: var(--secondary); 
+  cursor: pointer; 
+  transform: scale(1.02); 
+  transition: all 0.3s ease; 
 }
 
 .recipe-img-wrapper {
@@ -263,11 +262,13 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center; 
+  
 }
 .recipe-name {
   font-size: 16px;
   font-weight: bold;
   color: #333;
+  margin-top: 5px;
 }
 
 .recipe-date {
@@ -276,7 +277,7 @@ body {
 }
 
 .recipe-quantity {
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 1000;
   color: #d94f7b;
 }

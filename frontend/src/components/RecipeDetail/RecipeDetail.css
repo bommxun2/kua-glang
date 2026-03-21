@@ -76,13 +76,12 @@
 .search-box-detail {
   display: flex;
   align-items: center;
-  background-color: white;
   border: 2px solid #d94f7b;
   border-radius: 999px;
   padding: 0.6rem 1.2rem; /* เท่ากับปุ่ม */
   font-size: 1rem; /* เท่ากับปุ่ม */
-  width: 100%;
-  max-width: 360px;
+  width: 140% !important;
+  max-width: 475px !important;
   box-sizing: border-box;
   margin-bottom: 10px;
 }
@@ -219,22 +218,23 @@
 }
 
 .item-name {
+  all:unset;
   font-family: 'Bai Jamjuree', sans-serif; /* Updated font for item names */
-  font-size: 16px;
-  font-weight: 1000;
-  margin: 2px 0;
-  color: #222 !important; /* เปลี่ยนชื่อวัตถุดิบเป็นดำ */
+  font-size: 20px !important;
+  font-weight: 1000 !important;
+  margin: 2px 0 !important;
+  color: #222 !important; 
 }
 
 .item-expiry{
-    font-family: 'Bai Jamjuree', sans-serif; 
-  font-size: 14px;
+  font-family: 'Bai Jamjuree', sans-serif; 
+  font-size: 14px !important;
   font-weight: 500;
   color: #A1A1A1 !important; 
 }
 .item-quantity {
   font-family: 'Bai Jamjuree', sans-serif; 
-  font-size: 14px;
+  font-size: 14px !important;
   font-weight: 700;
   color: #222 !important; 
 }
@@ -270,8 +270,14 @@
   white-space: nowrap;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
+  /* ซ่อน scrollbar */
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;     /* IE & Edge */
 }
 
+.category-filter::-webkit-scrollbar {
+  display: none;                /* Chrome, Safari */
+}
 .category-btn {
   flex-shrink: 0;
   padding: 0.5rem 1rem;
@@ -439,6 +445,9 @@
   color: #d94f7b;
 }
 
+.update-food-status p{
+  font-weight: 900;
+}
 .update-food-status input[type="radio"] {
   appearance: none;
   width: 20px;

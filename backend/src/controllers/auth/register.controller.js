@@ -1,13 +1,6 @@
 const { PutItemCommand, GetItemCommand } = require("@aws-sdk/client-dynamodb");
 const client = require("../../utils/database");
 const { nanoid } = require("nanoid");
-const {
-  SNSClient,
-  CreateTopicCommand,
-  SubscribeCommand,
-} = require("@aws-sdk/client-sns");
-
-const snsClient = new SNSClient({ region: "us-east-1" });
 
 const register = async (req, res) => {
   const { username, email, phone_num, line_id, password, profile_url } =
@@ -48,7 +41,7 @@ const register = async (req, res) => {
   };
 
   const statItem = {
-    PK: { S: `USER#${username}` }, // ใช้ username เป็น userId ใน PK เช่นเดิม
+    PK: { S: `USER#${username}` }, // ใช้ username เป็น userId ใน PK
     SK: { S: "STAT" },
     share_quantity: { N: "0" },
     reduce_foodwaste: { N: "0" },
@@ -70,37 +63,6 @@ const register = async (req, res) => {
       new PutItemCommand({
         TableName: "kua-glang",
         Item: statItem,
-      })
-    );
-
-    // SNS Notification
-    const topicName = "kua-notification-topic";
-    const createTopicRes = await snsClient.send(
-      new CreateTopicCommand({ Name: topicName })
-    );
-
-    const topicArn = createTopicRes.TopicArn;
-
-    await snsClient.send(
-      new SubscribeCommand({
-        Protocol: "email",
-        TopicArn: topicArn,
-        Endpoint: email,
-      })
-    );
-
-    const topicName = "kua-notification-topic";
-    const createTopicRes = await snsClient.send(
-      new CreateTopicCommand({ Name: topicName })
-    );
-
-    const topicArn = createTopicRes.TopicArn;
-
-    await snsClient.send(
-      new SubscribeCommand({
-        Protocol: "email",
-        TopicArn: topicArn,
-        Endpoint: email,
       })
     );
 

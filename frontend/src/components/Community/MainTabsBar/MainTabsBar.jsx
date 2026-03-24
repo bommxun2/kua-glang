@@ -1,7 +1,7 @@
 // src/components/Community/MainTabsBar/MainTabsBar.jsx
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Bell } from 'lucide-react';
-import './MainTabsBar.css'; // <--- Import ไฟล์ CSS ที่สร้างขึ้น
+import './MainTabSBar.css'; // <--- Import ไฟล์ CSS ที่สร้างขึ้น
 
 const defaultMainTabs = [
     { name: 'สำหรับคุณ', path: '/community' },

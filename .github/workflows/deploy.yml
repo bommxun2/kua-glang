@@ -121,7 +121,7 @@ jobs:
           node-version: '20'
 
       - name: Inject Environment Variables
-        working-directory: frontend
+        working-directory: frontend/src
         env:
           API_URL: ${{ needs.deploy-infra.outputs.api_gateway_endpoint }}
         run: |

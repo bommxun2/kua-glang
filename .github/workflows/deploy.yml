@@ -1,0 +1,155 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-push-ecr:
+    name: Build & Push ECR
+    runs-on: ubuntu-latest
+    outputs:
+      registry: ${{ steps.login-ecr.outputs.registry }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: us-east-1
+
+      - id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - run: |
+          aws ecr create-repository \
+            --repository-name ${{ github.repository }} \
+            --region us-east-1 || true
+
+      - env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ github.repository }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+  build-ami:
+    name: Build AMI with packers
+    needs: build-push-ecr
+    runs-on: ubuntu-latest
+    outputs:
+      ami_id: ${{ steps.packer.outputs.ami_id }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: us-east-1
+
+      - id: packer
+        env:
+          PKR_VAR_ecr_repo_url: ${{ needs.build-push-ecr.outputs.registry }}/${{ github.repository }}
+          PKR_VAR_image_tag: ${{ github.sha }}
+          PKR_VAR_aws_region: us-east-1
+          PKR_VAR_container_port: 3000
+        run: |
+          curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+          sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+          sudo apt-get update && sudo apt-get install packer
+          
+          packer init template.pkr.hcl
+          packer build template.pkr.hcl
+
+          EXTRACTED_AMI_ID=$(jq -r '.builds[-1].artifact_id' manifest.json | cut -d ":" -f2)
+          echo "ami_id=$EXTRACTED_AMI_ID" >> $GITHUB_OUTPUT
+
+  deploy-infra:
+    name: Terraform Apply
+    needs: build-ami
+    runs-on: ubuntu-latest
+    outputs:
+      frontend_s3_bucket: ${{ steps.tf.outputs.FRONTEND_S3_BUCKET }}
+      cloudfront_id: ${{ steps.tf.outputs.DISTRIBUTION_ID }}
+      api_gateway_endpoint: ${{ steps.tf.outputs.API_ENDPOINT }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: us-east-1
+
+      - uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_wrapper: false
+
+      - id: tf
+        working-directory: terraform/live/prod
+        env:
+          TF_VAR_ami_id: ${{ needs.build-ami.outputs.ami_id }}
+        run: |
+          terraform init
+          terraform apply -auto-approve
+
+          FRONTEND_S3_BUCKET=$(terraform output -raw frontend_s3_bucket)
+          echo "FRONTEND_S3_BUCKET=$FRONTEND_S3_BUCKET" >> $GITHUB_OUTPUT
+
+          API_ENDPOINT=$(terraform output -raw api_gateway_endpoint)
+          echo "API_ENDPOINT=$API_ENDPOINT" >> $GITHUB_OUTPUT
+
+          DISTRIBUTION_ID=$(terraform output -raw cloudfront_distribution_id)
+          echo "DISTRIBUTION_ID=$DISTRIBUTION_ID" >> $GITHUB_OUTPUT
+
+  deploy-frontend:
+    name: Deploy Frontend to S3
+    needs: [deploy-infra]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Inject Environment Variables
+        working-directory: frontend
+        env:
+          API_URL: ${{ needs.deploy-infra.outputs.api_gateway_endpoint }}
+        run: |
+          echo "API_BASE_URL=$API_URL" > .env
+          echo "API_BASE_URL: $API_URL"
+
+      - name: Install Dependencies and Build
+        working-directory: frontend
+        run: |
+          npm ci
+          npm run build
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: us-east-1
+
+      - name: Sync to S3 and Invalidate CloudFront
+        working-directory: frontend
+        env:
+          S3_BUCKET: ${{ needs.deploy-infra.outputs.frontend_s3_bucket }}
+          CF_ID: ${{ needs.deploy-infra.outputs.cloudfront_id }}
+        run: |
+          aws s3 sync dist/ s3://$S3_BUCKET --delete
+          aws cloudfront create-invalidation --distribution-id $CF_ID --paths "/*"

@@ -1,40 +1,9 @@
 services:
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: kua-frontend
-    restart: always
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-    ports:
-      - "5173:5173"
-    networks:
-      - app-network
-
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    container_name: kua-backend
-    restart: always
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
-    ports:
-      - "3000:3000"
-    networks:
-      - app-network
-      - backend-net
-
   dynamodb:
     image: amazon/dynamodb-local
     container_name: kua-dynamodb
     ports:
       - "8000:8000"
-    volumes:
-      - ./dynamodb:/data
     command: "-jar DynamoDBLocal.jar -sharedDb -dbPath /data"
     networks:
       - backend-net
@@ -52,18 +21,5 @@ services:
     networks:
       - backend-net
 
-  initdb:
-    build: 
-      context: ./init-db
-      dockerfile: Dockerfile
-    container_name: kua-init-db
-    depends_on:
-      - dynamodb
-    networks:
-      - backend-net
-    volumes:
-      - ./init-db:/app
-
 networks:
-  app-network:
   backend-net:

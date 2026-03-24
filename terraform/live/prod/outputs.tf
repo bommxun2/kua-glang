@@ -23,11 +23,6 @@ output "cloudfront_distribution_id" {
   value       = module.s3_cloudfront.cloudfront_distribution_id
 }
 
-output "ecr_repository_url" {
-  description = "The URL of the ECR repository"
-  value       = module.ecr.repository_url
-}
-
 output "dynamodb_table_name" {
   description = "The name of the DynamoDB table"
   value       = module.dynamodb.table_name

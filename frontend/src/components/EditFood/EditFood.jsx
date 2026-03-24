@@ -1,7 +1,7 @@
 import API_BASE_URL from '../../config';
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import './Editfood.css';
+import './EditFood.css';
 import MenuBar from '../MenuBar/MenuBar.jsx';
 import axios from 'axios';
 

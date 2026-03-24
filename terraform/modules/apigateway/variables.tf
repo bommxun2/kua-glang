@@ -18,12 +18,17 @@ variable "private_subnet_ids" {
   type        = list(string)
 }
 
-variable "alb_arn" {
-  description = "ARN of the ALB"
+variable "alb_listener_arn" {
+  description = "ARN of the ALB Listener"
   type        = string
 }
 
 variable "alb_sg_id" {
   description = "Security Group ID of the ALB"
   type        = string
+}
+
+variable "vpc_link_id" {
+  description = "VPC LINK ID"
+  type = string
 }

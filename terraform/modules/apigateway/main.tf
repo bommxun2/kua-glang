@@ -1,23 +1,6 @@
-resource "aws_security_group" "vpc_link" {
-  name        = "${var.project_name}-${var.environment}-vpclink-sg"
-  description = "Security group for API Gateway VPC Link"
-  vpc_id      = var.vpc_id
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name = "${var.project_name}-${var.environment}-vpclink-sg"
-  }
-}
-
 resource "aws_apigatewayv2_vpc_link" "this" {
   name               = "${var.project_name}-${var.environment}-vpclink"
-  security_group_ids = [aws_security_group.vpc_link.id]
+  security_group_ids = [var.vpc_link_id]
   subnet_ids         = var.private_subnet_ids
 
   tags = {
@@ -33,7 +16,7 @@ resource "aws_apigatewayv2_api" "this" {
 resource "aws_apigatewayv2_integration" "alb" {
   api_id             = aws_apigatewayv2_api.this.id
   integration_type   = "HTTP_PROXY"
-  integration_uri    = var.alb_arn
+  integration_uri    = var.alb_listener_arn
   integration_method = "ANY"
   connection_type    = "VPC_LINK"
   connection_id      = aws_apigatewayv2_vpc_link.this.id

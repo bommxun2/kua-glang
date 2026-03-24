@@ -33,6 +33,9 @@ source "amazon-ebs" "amazon-linux" {
   ssh_username    = "ec2-user"
 
   iam_instance_profile = "LabInstanceProfile"
+
+  force_deregister      = true 
+  force_delete_snapshot = true
 }
 
 build {

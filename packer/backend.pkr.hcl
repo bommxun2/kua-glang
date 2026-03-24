@@ -31,6 +31,8 @@ source "amazon-ebs" "amazon-linux" {
   region          = "us-east-1"
   source_ami      = data.amazon-ami.amazon-linux.id
   ssh_username    = "ec2-user"
+
+  iam_instance_profile = "LabInstanceProfile"
 }
 
 build {

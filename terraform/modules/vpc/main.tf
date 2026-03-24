@@ -107,4 +107,32 @@ resource "aws_vpc_endpoint" "dynamodb" {
   }
 }
 
+resource "aws_vpc_endpoint" "s3" {
+  vpc_id            = aws_vpc.this.id
+  service_name      = "com.amazonaws.${data.aws_region.current.name}.s3"
+  vpc_endpoint_type = "Gateway"
+  route_table_ids   = [aws_route_table.private.id]
+
+  tags = {
+    Name = "${var.project_name}-${var.environment}-s3-endpoint"
+  }
+}
+
 data "aws_region" "current" {}
+
+resource "aws_security_group" "vpc_link" {
+  name        = "${var.project_name}-${var.environment}-vpclink-sg"
+  description = "Security group for API Gateway VPC Link"
+  vpc_id      = aws_vpc.this.id
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "${var.project_name}-${var.environment}-vpclink-sg"
+  }
+}

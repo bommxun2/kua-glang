@@ -1,3 +1,4 @@
+import API_BASE_URL from '../../config';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Profile.css'
@@ -12,7 +13,7 @@ export default function ProfileHeader() {
   };
 
   useEffect(() => {
-    fetch(`https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/profile/${userId}`)
+    fetch(`${API_BASE_URL}/profile/${userId}`)
       .then(response => {
         if (!response.ok) throw new Error('เกิดข้อผิดพลาดในการโหลดข้อมูล');
         return response.json();

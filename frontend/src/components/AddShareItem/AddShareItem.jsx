@@ -1,3 +1,4 @@
+import API_BASE_URL from '../../config';
 import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiArrowLeft, FiSearch, FiX, FiPlus, FiMinus } from "react-icons/fi";
@@ -31,7 +32,7 @@ function AddShareItemScreen({ onAddItemToMyShares }) {
 
   const [folderId, setFolderId] = useState(null);
   useEffect(() => {
-    fetch(`https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/folder/${userId}`)
+    fetch(`${API_BASE_URL}/folder/${userId}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.length > 0) {
@@ -39,7 +40,7 @@ function AddShareItemScreen({ onAddItemToMyShares }) {
           console.log("📁 folderId ตัวแรก:", folderId);
 
           // >>> ตัวอย่าง: ใช้ fetch รายการอาหารใน folder นี้
-          fetch(`https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/food/folder/${folderId}`)
+          fetch(`${API_BASE_URL}/food/folder/${folderId}`)
             .then((res) => res.json())
             .then((foods) => {
               if (Array.isArray(foods)) {
@@ -80,7 +81,7 @@ function AddShareItemScreen({ onAddItemToMyShares }) {
         available_time: new Date().toISOString(),
       };
       const res = await axios.post(
-        `https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/share/user/${userId}/${selectedItem.foodId}`,
+        `${API_BASE_URL}/share/user/${userId}/${selectedItem.foodId}`,
         newItemToShare
       );
 

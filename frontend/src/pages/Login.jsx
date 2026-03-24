@@ -1,7 +1,8 @@
+import API_BASE_URL from '../config';
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Eye, EyeOff, Mail, Lock, User } from "lucide-react"; // Mail ไม่ได้ใช้ แต่ไม่เป็นไร
+import { Eye, EyeOff, Lock, User } from "lucide-react";
 
 export default function Login() {
   const [form, setForm] = useState({ username: "", password: "" });
@@ -16,7 +17,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/auth/login", {
+    const res = await fetch(`${API_BASE_URL}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),

@@ -1,3 +1,4 @@
+import API_BASE_URL from '../../config';
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -31,7 +32,7 @@ export default function EditProfileImage() {
     try {
       // 1️⃣ ขอ upload URL จาก backend
       const res = await fetch(
-        'https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/image/upload-url',
+        `${API_BASE_URL}/image/upload-url`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -53,7 +54,7 @@ export default function EditProfileImage() {
 
       // 3️⃣ อัปเดต profile_url ไปยัง DynamoDB
       await fetch(
-        `https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/profile/stat/${userId}`,
+        `${API_BASE_URL}/profile/stat/${userId}`,
         {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },

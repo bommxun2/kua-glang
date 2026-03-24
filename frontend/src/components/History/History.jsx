@@ -1,3 +1,4 @@
+import API_BASE_URL from '../../config';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './History.css';
@@ -73,7 +74,7 @@ function HistoryScreen({ sharedHistoryData }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const BASE_URL = 'https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api';
+      const BASE_URL = `${API_BASE_URL}`;
       let url = `${BASE_URL}/history/${userId}`;
       if (activeTab === TABS.SHARED) url = `${BASE_URL}/history/share/${userId}`;
       else if (activeTab === TABS.RECEIVED) url = `${BASE_URL}/history/receive/${userId}`;

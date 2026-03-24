@@ -1,3 +1,4 @@
+import API_BASE_URL from '../../../config';
 import { useEffect, useState } from "react";
 import "./Leaderboard.css";
 import defaultAvatar from "../../../assets/profilerank.png";
@@ -21,7 +22,7 @@ function Leaderboard({ currentMode, viewScope, userId }) {
 
   const fetchProfile = async () => {
     const res = await fetch(
-      `https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/profile/${userId}`
+      `${API_BASE_URL}/profile/${userId}`
     );
     const data = await res.json();
     setMyUsername(data.username);
@@ -31,8 +32,8 @@ function Leaderboard({ currentMode, viewScope, userId }) {
     const { api, key } = modeToType[currentMode];
     const endpoint =
       viewScope === "friend"
-        ? `https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/ranking/friend/${userId}?rankingType=${api}`
-        : `https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/ranking/${userId}?rankingType=${api}&number=10`;
+        ? `${API_BASE_URL}/ranking/friend/${userId}?rankingType=${api}`
+        : `${API_BASE_URL}/ranking/${userId}?rankingType=${api}&number=10`;
 
     const res = await fetch(endpoint);
     const data = await res.json();
@@ -44,7 +45,7 @@ function Leaderboard({ currentMode, viewScope, userId }) {
       setMyData(me);
     } else {
       const profileRes = await fetch(
-        `https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/profile/${userId}`
+        `${API_BASE_URL}/profile/${userId}`
       );
       const profileData = await profileRes.json();
       setMyData({

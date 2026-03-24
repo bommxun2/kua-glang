@@ -1,6 +1,7 @@
+import API_BASE_URL from '../config';
 // src/services/postService.js
 
-const BASE_URL = "https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api";
+const BASE_URL = `${API_BASE_URL}`;
 
 // 1. สร้างโพสต์ใหม่
 export const createPost = async (userId, postData) => {

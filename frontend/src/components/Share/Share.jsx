@@ -1,3 +1,4 @@
+import API_BASE_URL from '../../config';
 import React, { useState, useEffect } from 'react'; // เพิ่ม useEffect ถ้าต้องการ set active tab
 import { FaSearch, FaTimes, FaPlus } from 'react-icons/fa';
 import { useNavigate, useLocation } from 'react-router-dom'; // เพิ่ม useLocation
@@ -33,7 +34,7 @@ const ShareItemCard = ({ item, onInterested }) => {
       onInterested(item.shareId);
       // ใช้ shareId เป็น identifier
       await axios.post(
-        `https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/share/${item.shareId}/interest/${userId}`
+        `${API_BASE_URL}/share/${item.shareId}/interest/${userId}`
       );
     }
   };
@@ -80,7 +81,7 @@ const RequestList = ({ shareId }) => {
   let request = []
   async function fetchData() {
     const res = await axios.get(
-      `https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/share/${shareId}/interest/${userId}`
+      `${API_BASE_URL}/share/${shareId}/interest/${userId}`
     );
     request = res.data
   }
@@ -154,7 +155,7 @@ const [openRequests, setOpenRequests] = useState(null);
     const userId = localStorage.getItem("userId") || "RPZ3";
     async function fetchData() {
       const res = await axios.get(
-        `https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/share/user/${userId}`
+        `${API_BASE_URL}/share/user/${userId}`
       );
       setMyShares(res.data);
     }
@@ -248,7 +249,7 @@ function ShareScreen({ mySharesData, onApproveShare }) { // รับ mySharesDa
   const [shares, setShares] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch("https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/share");
+      const res = await fetch(`${API_BASE_URL}/share`);
       const data = await res.json();
       const allSharesData = Array.isArray(data) ? data : [];
       setShares(allSharesData);

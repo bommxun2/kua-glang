@@ -1,3 +1,4 @@
+import API_BASE_URL from '../../config';
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
@@ -9,7 +10,7 @@ export default function EditFieldPage() {
   const userId = localStorage.getItem('userId') || 'RPZ3'; // ใช้จริงใส่ localStorage
 
   useEffect(() => {
-    fetch(`https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/profile/${userId}`)
+    fetch(`${API_BASE_URL}/profile/${userId}`)
       .then(res => res.json())
       .then(data => {
         setUserData(data);
@@ -20,7 +21,7 @@ export default function EditFieldPage() {
 
   const handleSave = async () => {
     try {
-      const res = await fetch(`https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/profile/stat/${userId}`, {
+      const res = await fetch(`${API_BASE_URL}/profile/stat/${userId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ [field]: value }),

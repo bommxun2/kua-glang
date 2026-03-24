@@ -1,3 +1,4 @@
+import API_BASE_URL from '../../config';
 import React, { useEffect, useState } from "react";
 import PostCard from "../Community/PostCard"; // ✅ ปรับ path ตามจริง
 
@@ -7,7 +8,7 @@ export default function MyPostSection() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/profile/${userId}/post`)
+    fetch(`${API_BASE_URL}/profile/${userId}/post`)
       .then((res) => {
         if (!res.ok) throw new Error("โหลดโพสต์ไม่สำเร็จ");
         return res.json();

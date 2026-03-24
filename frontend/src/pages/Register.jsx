@@ -1,12 +1,13 @@
+import API_BASE_URL from '../config';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Mail, Lock, User, Phone, Bookmark, Eye, EyeOff, Camera } from "lucide-react";
 import axios from 'axios';
 
 // URL ของ API สำหรับขอ Pre-signed URL
-const PRE_SIGNED_URL_ENDPOINT = 'https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/image/upload-url';
+const PRE_SIGNED_URL_ENDPOINT = `${API_BASE_URL}/image/upload-url`;
 // URL ของ API สำหรับลงทะเบียน
-const SIGN_UP_ENDPOINT = 'https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/auth/sign-up';
+const SIGN_UP_ENDPOINT = `${API_BASE_URL}/auth/sign-up`;
 
 export default function Register() {
   const [form, setForm] = useState({

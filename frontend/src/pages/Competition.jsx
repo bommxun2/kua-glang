@@ -1,3 +1,4 @@
+import API_BASE_URL from '../config';
 import { useState, useEffect } from "react";
 import colors from "../styles/colors"
 
@@ -20,7 +21,7 @@ function Competition() {
 
   // ✅ โหลดคะแนนรวมจาก backend
   const loadScore = () => {
-    fetch(`https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/ranking/score/${userId}`, {
+    fetch(`${API_BASE_URL}/ranking/score/${userId}`, {
       method: "GET",
     })
       .then((res) => res.json())
@@ -32,7 +33,7 @@ function Competition() {
 
   // ✅ โหลดเควสจาก backend ตอน mount
   useEffect(() => {
-    fetch(`https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/ranking/quest/${userId}`)
+    fetch(`${API_BASE_URL}/ranking/quest/${userId}`)
       .then((res) => res.json())
       .then((data) => {
         const normalized = Array.isArray(data)

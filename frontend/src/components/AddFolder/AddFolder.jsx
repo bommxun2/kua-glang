@@ -1,3 +1,4 @@
+import API_BASE_URL from '../../config';
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './AddFolder.css';
@@ -54,7 +55,7 @@ const AddFolder = () => {
           }
 
           const { data } = await axios.post(
-            `https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/image/upload-url`,
+            `${API_BASE_URL}/image/upload-url`,
             img_inform
           );
 
@@ -83,7 +84,7 @@ const AddFolder = () => {
       };
 
       const res = await axios.post(
-        `https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/folder/${userId}`,
+        `${API_BASE_URL}/folder/${userId}`,
         payload
       );
       //console.log('บันทึกสำเร็จ', res.data);

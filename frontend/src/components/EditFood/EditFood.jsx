@@ -1,3 +1,4 @@
+import API_BASE_URL from '../../config';
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import './Editfood.css';
@@ -110,7 +111,7 @@ const EditFood = () => {
         };
 
         const { data } = await axios.post(
-          `https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/image/upload-url`,
+          `${API_BASE_URL}/image/upload-url`,
           img_inform
         );
 
@@ -135,7 +136,7 @@ const EditFood = () => {
       };
 
       await axios.put(
-        `https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/food/${folderId}/${foodId}`,
+        `${API_BASE_URL}/food/${folderId}/${foodId}`,
         payload
       );
 
@@ -151,7 +152,7 @@ const EditFood = () => {
     //const userId = localStorage.getItem('userId') || "RPZ3";
     try {
       await axios.delete(
-        `https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/food/${foodId}`
+        `${API_BASE_URL}/food/${foodId}`
       );
       navigate('/');
     } catch (err) {

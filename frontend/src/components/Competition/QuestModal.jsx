@@ -1,3 +1,4 @@
+import API_BASE_URL from '../../config';
 import React from "react";
 import colors from "../../styles/colors";
 
@@ -14,7 +15,7 @@ function QuestModal({ onClose, quests, setQuests, userId, loadScore }) {
     };
     setQuests(updatedQuests);
 
-    fetch(`https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/ranking/point/${userId}/${claimedQuest.qId}`, {
+    fetch(`${API_BASE_URL}/ranking/point/${userId}/${claimedQuest.qId}`, {
       method: "POST",
     })
       .then((res) => res.json())

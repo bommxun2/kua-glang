@@ -1,3 +1,4 @@
+import API_BASE_URL from '../../config';
   import React, { useEffect, useState } from "react";
   import shareIcon from '../../assets/ProfilePage/shareFood.png';
   import trashIcon from '../../assets/ProfilePage/foodtrash.png';
@@ -13,7 +14,7 @@
     const userId = localStorage.getItem('userId');
 
     useEffect(() => {
-      fetch(`https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/profile/stat/${userId}`)
+      fetch(`${API_BASE_URL}/profile/stat/${userId}`)
         .then((res) => {
           if (!res.ok) throw new Error('โหลดข้อมูลสถิติไม่สำเร็จ');
           return res.json();

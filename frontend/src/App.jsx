@@ -11,7 +11,6 @@ import EditProfilePage from './pages/ProfilePage/EditProfilePage.jsx';
 import EditFieldPage from './pages/ProfilePage/EditFieldPage.jsx';
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Home from "./pages/Home"; //  import หน้าใหม่
 import CommunityPage from "./pages/CommunityPage/CommunityPage.jsx";
 import CreatePostPage from "./pages/CreatePostPage/CreatePostPage.jsx";
 import EditPostPage from "./pages/EditPostPage/EditPostPage.jsx";

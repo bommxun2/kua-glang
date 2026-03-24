@@ -1,3 +1,4 @@
+import API_BASE_URL from '../../config';
 import { useState, useEffect } from 'react';
 
 import axios from 'axios';
@@ -7,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import '@fontsource/bai-jamjuree';
 import MenuBar from '../MenuBar/MenuBar.jsx';
 
-const URL = "https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api";
+const URL = `${API_BASE_URL}`;
 
 const HomePage = () => {
   const [selectedLocation, setSelectedLocation] = useState("Accom park");

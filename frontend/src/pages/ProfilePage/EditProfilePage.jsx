@@ -1,3 +1,4 @@
+import API_BASE_URL from '../../config';
 import React, { useEffect, useState } from 'react';
 import EditProfileSection from '../../components/EditProfile/EditProfileSection.jsx';
 import { useNavigate } from 'react-router-dom';
@@ -23,7 +24,7 @@ useEffect(() => {
   //  return;
   //}
 
-  fetch(`https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/profile/${userId}`)
+  fetch(`${API_BASE_URL}/profile/${userId}`)
     .then(res => res.json())
     .then(data => setUserData(data))
     .catch(err => {

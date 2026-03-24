@@ -1,3 +1,4 @@
+import API_BASE_URL from '../../config';
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom'; // เพิ่ม useLocation
 import './EditFolder.css';
@@ -20,7 +21,7 @@ const EditFolder = () => {
         description,
       };
       const res = await axios.put(
-        `https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/folder/${userId}/${folderId}`,
+        `${API_BASE_URL}/folder/${userId}/${folderId}`,
         payload
       );
       setFolderName('');
@@ -37,7 +38,7 @@ const EditFolder = () => {
 
     try {
       const respon = await axios.delete(
-        `https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/folder/${userId}/${folderId}`
+        `${API_BASE_URL}/folder/${userId}/${folderId}`
       );
       setFolderName('');
       setDescription('');

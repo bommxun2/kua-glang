@@ -1,3 +1,4 @@
+import API_BASE_URL from '../../config';
 /* 
 
   Create Recipe By FolderID
@@ -108,7 +109,7 @@ const CreateFood = () => {
             }
 
             const { data } = await axios.post(
-                `https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/image/upload-url`,
+                `${API_BASE_URL}/image/upload-url`,
                 img_inform
             );
 
@@ -133,7 +134,7 @@ const CreateFood = () => {
 
 
             const res = await axios.post(
-                `https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/food/folder/${folderId}`,
+                `${API_BASE_URL}/food/folder/${folderId}`,
                 payload
             );
             //alert('เพิ่มอาหารสำเร็จ');

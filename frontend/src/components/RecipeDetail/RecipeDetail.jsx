@@ -1,3 +1,4 @@
+import API_BASE_URL from '../../config';
 import React, { useState } from 'react';
 import './RecipeDetail.css';
 import { FaSearch, FaTimes, FaBell, FaArrowLeft } from 'react-icons/fa';
@@ -31,7 +32,7 @@ const RecipeDetail = () => {
     const fetchData = async () => {
       try {
         const id = folderId || '1';
-        const response = await axios.get(`https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/food/folder/${id}`);
+        const response = await axios.get(`${API_BASE_URL}/food/folder/${id}`);
         const filtered = response.data.filter(item => item.status === 'ยังไม่ใช้');
         setItems(filtered);
       } catch (error) {
@@ -60,7 +61,7 @@ const RecipeDetail = () => {
   const handleFoodStatus = async (id) => {
     try {
       const res = await axios.put(
-        `https://8i2v8q86ld.execute-api.us-east-1.amazonaws.com/kua-api/food/${id}`
+        `${API_BASE_URL}/food/${id}`
       );
       if (res.message == 'update food success') {
         navigate(`/recipe/${folderId}`);

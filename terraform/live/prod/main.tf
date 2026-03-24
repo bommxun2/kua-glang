@@ -27,8 +27,8 @@ module "vpc" {
   azs             = ["${var.aws_region}a", "${var.aws_region}b"]
 }
 
-module "s3_cloudfront" {
-  source       = "../../modules/s3_cloudfront"
+module "s3" {
+  source       = "../../modules/s3"
   project_name = var.project_name
   environment  = var.environment
 }

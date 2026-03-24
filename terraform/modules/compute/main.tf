@@ -95,19 +95,10 @@ resource "aws_lb_listener" "http" {
   }
 }
 
-resource "aws_iam_instance_profile" "ec2" {
-  name = "${var.project_name}-${var.environment}-ec2-profile"
-  role = "LabRole"
-}
-
 resource "aws_launch_template" "this" {
   name_prefix   = "${var.project_name}-${var.environment}-lt-"
   image_id      = var.ami_id
   instance_type = var.instance_type
-
-  iam_instance_profile {
-    name = aws_iam_instance_profile.ec2.name
-  }
 
   vpc_security_group_ids = [aws_security_group.ec2.id]
 
@@ -115,7 +106,7 @@ resource "aws_launch_template" "this" {
               #!/bin/bash
               echo "Starting up..."
               # Normally we would pull docker image from ECR and run the container here.
-              # Docker run with port 5000 mapped.
+              # Docker run with port 3000 mapped.
               EOF
   )
 

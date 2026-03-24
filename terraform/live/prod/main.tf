@@ -49,14 +49,15 @@ module "alb" {
 }
 
 module "asg" {
-  source             = "../../modules/asg"
-  project_name       = var.project_name
-  environment        = var.environment
-  vpc_id             = module.vpc.vpc_id
-  private_subnet_ids = module.vpc.private_subnet_ids
-  instance_type      = "t3.micro"
-  ami_id             = var.ami_id
-  aws_lb_arn         = module.alb.alb_arn
+  source               = "../../modules/asg"
+  project_name         = var.project_name
+  environment          = var.environment
+  vpc_id               = module.vpc.vpc_id
+  private_subnet_ids   = module.vpc.private_subnet_ids
+  instance_type        = "t3.micro"
+  ami_id               = var.ami_id
+  alb_target_group_arn = module.alb.alb_target_group_arn
+  alb_sg_id            = module.alb.alb_sg_id
 }
 
 module "apigateway" {

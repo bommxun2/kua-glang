@@ -7,7 +7,7 @@ resource "aws_security_group" "ec2" {
     from_port       = 3000
     to_port         = 3000
     protocol        = "tcp"
-    security_groups = [aws_security_group.alb.id]
+    security_groups = [var.alb_sg_id]
   }
 
   egress {
@@ -36,7 +36,7 @@ resource "aws_launch_template" "backend_app" {
 resource "aws_autoscaling_group" "backend_app" {
   name                = "${var.project_name}-${var.environment}-asg"
   vpc_zone_identifier = var.private_subnet_ids
-  target_group_arns   = [var.aws_lb_arn]
+  target_group_arns   = [var.alb_target_group_arn]
 
   min_size         = 1
   max_size         = 3

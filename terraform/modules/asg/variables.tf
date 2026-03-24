@@ -29,7 +29,12 @@ variable "ami_id" {
   type        = string
 }
 
-variable "aws_lb_arn" {
-  description = "Application load balancer arn"
+variable "alb_target_group_arn" {
+  description = "Application load balancer target group arn"
+  type = string
+}
+
+variable "alb_sg_id" {
+  description = "Application load balancer security group id"
   type = string
 }

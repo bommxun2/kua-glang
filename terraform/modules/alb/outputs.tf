@@ -1,6 +1,6 @@
-output "alb_arn" {
+output "alb_target_group_arn" {
   description = "ARN of the ALB"
-  value       = aws_lb.backend_app.arn
+  value       = aws_lb_target_group.this.arn
 }
 
 output "alb_dns_name" {

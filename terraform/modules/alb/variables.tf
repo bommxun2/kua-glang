@@ -18,15 +18,7 @@ variable "private_subnet_ids" {
   type        = list(string)
 }
 
-variable "instance_type" {
-  description = "EC2 instance type"
-  type        = string
-  default     = "t3.micro"
-}
-
-variable "ami_id" {
-  description = "AMI ID for EC2 instances (e.g. Amazon Linux 2 or ECS optimized)"
-  type        = string
-  # A placeholder for Amazon Linux 2023 or similar
-  default     = "ami-0c55b159cbfafe1f0" 
+variable "vpc_link_id" {
+  description = "VPC LINK ID"
+  type = string
 }

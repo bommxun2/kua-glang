@@ -46,6 +46,10 @@ build {
   }
 
   provisioner "shell" {
+    environment_vars = [
+      "ECR_REPO_URL=${var.ecr_repo_url}",
+      "IMAGE_TAG=${var.image_tag}"
+    ]
     script       = "install-node.sh"
     pause_before = "30s"
   }

@@ -1,10 +1,11 @@
 #!/bin/bash
 set -e
 
-AWS_REGION=${1:-"us-east-1"}
-ECR_REPO_URL=${2:-"<YOUR_ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/backend"}
-IMAGE_TAG=${3:-"latest"}
-CONTAINER_PORT=${4:-"3000"}
+echo "ECR URL: $ECR_REPO_URL"
+echo "Image Tag: $IMAGE_TAG"
+
+AWS_REGION="us-east-1"
+CONTAINER_PORT="3000"
 HOST_PORT=3000
 
 echo "Updating system packages"

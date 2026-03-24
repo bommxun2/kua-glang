@@ -61,8 +61,6 @@ jobs:
         env:
           PKR_VAR_ecr_repo_url: ${{ needs.build-push-ecr.outputs.registry }}/${{ github.repository }}
           PKR_VAR_image_tag: ${{ github.sha }}
-          PKR_VAR_aws_region: us-east-1
-          PKR_VAR_container_port: 3000
         working-directory: packer
         run: |
           curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -

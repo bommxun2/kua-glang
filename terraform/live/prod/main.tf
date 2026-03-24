@@ -6,6 +6,11 @@ terraform {
       version = "~> 5.0"
     }
   }
+  backend "s3" {
+    bucket = "kuaglang-terraform-state"
+    key    = "prod/terraform.tfstate"
+    region = "us-east-1"
+  }
 }
 
 provider "aws" {

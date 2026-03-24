@@ -63,13 +63,14 @@ jobs:
           PKR_VAR_image_tag: ${{ github.sha }}
           PKR_VAR_aws_region: us-east-1
           PKR_VAR_container_port: 3000
+        working-directory: packer
         run: |
           curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
           sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
           sudo apt-get update && sudo apt-get install packer
           
-          packer init template.pkr.hcl
-          packer build template.pkr.hcl
+          packer init backend.pkr.hcl
+          packer build backend.pkr.hcl
 
           EXTRACTED_AMI_ID=$(jq -r '.builds[-1].artifact_id' manifest.json | cut -d ":" -f2)
           echo "ami_id=$EXTRACTED_AMI_ID" >> $GITHUB_OUTPUT

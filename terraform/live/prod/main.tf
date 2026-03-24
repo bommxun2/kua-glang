@@ -39,13 +39,24 @@ module "dynamodb" {
   environment  = var.environment
 }
 
-module "compute" {
-  source             = "../../modules/compute"
+module "alb" {
+  source             = "../../modules/alb"
   project_name       = var.project_name
   environment        = var.environment
   vpc_id             = module.vpc.vpc_id
   private_subnet_ids = module.vpc.private_subnet_ids
+  vpc_link_id        = module.vpc.vpc_link
+}
+
+module "asg" {
+  source             = "../../modules/asg"
+  project_name       = var.project_name
+  environment        = var.environment
+  vpc_id             = module.vpc.vpc_id
+  private_subnet_ids = module.vpc.private_subnet_ids
+  instance_type      = "t3.micro"
   ami_id             = var.ami_id
+  aws_lb_arn         = module.alb.alb_arn
 }
 
 module "apigateway" {
@@ -54,6 +65,7 @@ module "apigateway" {
   environment        = var.environment
   vpc_id             = module.vpc.vpc_id
   private_subnet_ids = module.vpc.private_subnet_ids
-  alb_arn            = module.compute.alb_arn
-  alb_sg_id          = module.compute.alb_sg_id
+  alb_listener_arn   = module.alb.alb_listener_arn
+  alb_sg_id          = module.alb.alb_sg_id
+  vpc_link_id        = module.vpc.vpc_link
 }

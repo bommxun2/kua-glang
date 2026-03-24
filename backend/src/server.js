@@ -1,5 +1,4 @@
 const express = require("express");
-const serverless = require("serverless-http");
 const dotenv = require("dotenv");
 const cors = require("cors");
 
@@ -33,12 +32,13 @@ app.use("/food", require("./routes/food.route"));
 app.get("/", (req, res) => {
   res.json({
     status: "ok",
-    message: "Backend service Lambda Express on.",
+    message: "Backend service on.",
     serviceName: "KuaGlangAPI",
     timestamp: new Date().toISOString(),
   });
 });
 
-module.exports.handler = serverless(app, {
-  basePath: "/kua-api",
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
